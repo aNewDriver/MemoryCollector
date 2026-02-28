@@ -1,396 +1,318 @@
 /**
- * 新手引导系统
- * 引导新玩家了解游戏核心玩法
+ * 新手教程系统
+ * 引导玩家学习游戏
  */
+
+export enum TutorialType {
+    BATTLE = 'battle',           // 战斗教程
+    CARD = 'card',               // 卡牌系统
+    GACHA = 'gacha',             // 抽卡
+    EQUIPMENT = 'equipment',     // 装备
+    GUILD = 'guild',             // 公会
+    TOWER = 'tower',             // 爬塔
+    SHOP = 'shop'                // 商店
+}
 
 export interface TutorialStep {
     id: string;
     order: number;
-    type: 'dialog' | 'highlight' | 'action' | 'battle';
-    content: {
-        title?: string;
-        text: string;
-        speaker?: string;
-        speakerImage?: string;
+    
+    // 显示内容
+    title: string;
+    description: string;
+    highlightTarget?: string;  // 高亮UI元素ID
+    
+    // 触发条件
+    trigger: {
+        type: 'auto' | 'click' | 'action';
+        target?: string;
     };
-    target?: string;  // 高亮目标UI元素
-    requiredAction?: string;  // 需要的操作
-    canSkip: boolean;
+    
+    // 奖励
     reward?: {
         gold?: number;
         soulCrystal?: number;
-        cards?: string[];
         items?: { itemId: string; count: number }[];
     };
 }
 
-export interface TutorialChapter {
+export interface Tutorial {
     id: string;
+    type: TutorialType;
     name: string;
     description: string;
     steps: TutorialStep[];
+    
+    // 解锁条件
     unlockCondition?: {
-        playerLevel?: number;
-        completeChapter?: string;
+        level?: number;
+        completedTutorial?: string;
     };
-    completionReward: {
-        gold: number;
-        soulCrystal: number;
-        specialCard?: string;
-    };
+    
+    // 是否强制
+    isMandatory: boolean;
+    
+    // 完成后是否显示
+    showAfterComplete: boolean;
 }
 
-// 新手引导章节配置
-export const TUTORIAL_CHAPTERS: TutorialChapter[] = [
-    {
-        id: 'chapter_0',
-        name: '初识记忆',
-        description: '了解游戏的基本操作和世界观',
-        completionReward: { gold: 5000, soulCrystal: 300 },
-        steps: [
-            {
-                id: 'tutorial_001',
-                order: 1,
-                type: 'dialog',
-                content: {
-                    title: '欢迎',
-                    text: '你好，回收者。我是你的向导。在这个世界，记忆不再消逝，而是凝结成实体。你的使命是收集这些记忆碎片，还原逝者的故事。',
-                    speaker: '向导',
-                    speakerImage: 'images/npc/guide.png'
-                },
-                canSkip: false
-            },
-            {
-                id: 'tutorial_002',
-                order: 2,
-                type: 'highlight',
-                content: {
-                    text: '点击这里查看你的第一张记忆卡牌。'
-                },
-                target: 'ui/card_slot_1',
-                requiredAction: 'click_card',
-                canSkip: false
-            },
-            {
-                id: 'tutorial_003',
-                order: 3,
-                type: 'dialog',
-                content: {
-                    text: '这是【烬羽】，一位守护村庄直到最后的武士。每张卡牌都有独特的技能和背景故事。点击卡牌查看详情。',
-                    speaker: '向导'
-                },
-                canSkip: true
-            },
-            {
-                id: 'tutorial_004',
-                order: 4,
-                type: 'highlight',
-                content: {
-                    text: '现在让我们开始第一场战斗。点击"探险"进入关卡选择。'
-                },
-                target: 'ui/bottom_nav/adventure',
-                requiredAction: 'click_adventure',
-                canSkip: false
-            },
-            {
-                id: 'tutorial_005',
-                order: 5,
-                type: 'battle',
-                content: {
-                    text: '这是战斗界面。上方是敌人，下方是你的队伍。点击技能按钮释放技能。'
-                },
-                requiredAction: 'win_battle',
-                canSkip: false,
-                reward: {
-                    gold: 1000,
-                    cards: ['blacksmith_zhang']
-                }
-            },
-            {
-                id: 'tutorial_006',
-                order: 6,
-                type: 'dialog',
-                content: {
-                    text: '恭喜！你完成了第一场战斗。这是你的奖励。随着战斗进行，卡牌会获得经验并升级。',
-                    speaker: '向导'
-                },
-                canSkip: true,
-                reward: {
-                    gold: 2000,
-                    items: [{ itemId: 'memory_dust', count: 10 }]
-                }
-            },
-            {
-                id: 'tutorial_007',
-                order: 7,
-                type: 'highlight',
-                content: {
-                    text: '点击"角色"查看并强化你的卡牌。'
-                },
-                target: 'ui/bottom_nav/character',
-                requiredAction: 'click_character',
-                canSkip: false
-            },
-            {
-                id: 'tutorial_008',
-                order: 8,
-                type: 'dialog',
-                content: {
-                    text: '在这里你可以升级卡牌、提升技能、装备道具。养成强大的队伍是通关的关键。',
-                    speaker: '向导'
-                },
-                canSkip: true
-            }
-        ]
-    },
-    {
-        id: 'chapter_1',
-        name: '深入探索',
-        description: '学习抽卡和装备系统',
-        completionReward: { gold: 10000, soulCrystal: 500 },
-        unlockCondition: { completeChapter: 'chapter_0' },
-        steps: [
-            {
-                id: 'tutorial_101',
-                order: 1,
-                type: 'highlight',
-                content: {
-                    text: '点击主城中的酒馆，进行第一次召唤。'
-                },
-                target: 'ui/city/tavern',
-                requiredAction: 'open_gacha',
-                canSkip: false
-            },
-            {
-                id: 'tutorial_102',
-                order: 2,
-                type: 'dialog',
-                content: {
-                    text: '召唤可以获得新的记忆卡牌。每天有一次免费召唤机会。累计召唤30次必得史诗级以上卡牌。',
-                    speaker: '向导'
-                },
-                canSkip: true,
-                reward: {
-                    soulCrystal: 300
-                }
-            },
-            {
-                id: 'tutorial_103',
-                order: 3,
-                type: 'highlight',
-                content: {
-                    text: '点击铁匠铺，为卡牌装备武器和防具。'
-                },
-                target: 'ui/city/forge',
-                requiredAction: 'open_forge',
-                canSkip: false
-            },
-            {
-                id: 'tutorial_104',
-                order: 4,
-                type: 'dialog',
-                content: {
-                    text: '装备可以大幅提升卡牌属性。收集同一套装的装备还能激活额外的套装效果。',
-                    speaker: '向导'
-                },
-                canSkip: true,
-                reward: {
-                    items: [
-                        { itemId: 'eq_weapon_common', count: 1 },
-                        { itemId: 'eq_armor_common', count: 1 }
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        id: 'chapter_2',
-        name: '挑战极限',
-        description: '了解爬塔和试炼玩法',
-        completionReward: { gold: 15000, soulCrystal: 800, specialCard: 'qing_yi' },
-        unlockCondition: { playerLevel: 10, completeChapter: 'chapter_1' },
-        steps: [
-            {
-                id: 'tutorial_201',
-                order: 1,
-                type: 'dialog',
-                content: {
-                    text: '当你感到实力足够时，可以尝试挑战爬塔。每一层都比上一层更难，但奖励也更丰厚。',
-                    speaker: '向导'
-                },
-                canSkip: true
-            },
-            {
-                id: 'tutorial_202',
-                order: 2,
-                type: 'highlight',
-                content: {
-                    text: '点击爬塔按钮，挑战第一层。'
-                },
-                target: 'ui/bottom_nav/tower',
-                requiredAction: 'click_tower',
-                canSkip: false
-            },
-            {
-                id: 'tutorial_203',
-                order: 3,
-                type: 'dialog',
-                content: {
-                    text: '无尽试炼是更高难度的挑战，有限制条件，但奖励极其丰厚。建议有一定实力后再尝试。',
-                    speaker: '向导'
-                },
-                canSkip: true
-            }
-        ]
-    }
-];
-
 export class TutorialSystem {
-    private completedSteps: Set<string> = new Set();
-    private completedChapters: Set<string> = new Set();
-    private currentStep: string | null = null;
-    private isInTutorial: boolean = false;
+    private tutorials: Map<string, Tutorial> = new Map();
+    private playerProgress: Map<string, {
+        completedTutorials: string[];
+        currentTutorial: string | null;
+        currentStep: number;
+        skippedTutorials: string[];
+    }> = new Map();
     
-    // 检查是否应该显示新手引导
-    public shouldShowTutorial(playerLevel: number, isNewPlayer: boolean): boolean {
-        if (!isNewPlayer) return false;
-        
-        // 检查是否有未完成的引导章节
-        for (const chapter of TUTORIAL_CHAPTERS) {
-            if (this.isChapterUnlocked(chapter, playerLevel) && 
-                !this.completedChapters.has(chapter.id)) {
-                return true;
-            }
-        }
-        return false;
+    constructor() {
+        this.initializeTutorials();
     }
     
-    // 检查章节是否解锁
-    private isChapterUnlocked(chapter: TutorialChapter, playerLevel: number): boolean {
-        if (!chapter.unlockCondition) return true;
+    private initializeTutorials(): void {
+        // 战斗基础教程
+        const battleTutorial: Tutorial = {
+            id: 'tutorial_battle_basic',
+            type: TutorialType.BATTLE,
+            name: '战斗基础',
+            description: '学习战斗的基本操作',
+            isMandatory: true,
+            showAfterComplete: false,
+            steps: [
+                {
+                    id: 'step_1',
+                    order: 1,
+                    title: '回合制战斗',
+                    description: '战斗采用回合制，双方轮流行动。',
+                    trigger: { type: 'auto' }
+                },
+                {
+                    id: 'step_2',
+                    order: 2,
+                    title: '选择技能',
+                    description: '点击技能图标选择要使用的技能。',
+                    highlightTarget: 'skill_panel',
+                    trigger: { type: 'click', target: 'skill_button' }
+                },
+                {
+                    id: 'step_3',
+                    order: 3,
+                    title: '选择目标',
+                    description: '选择技能后，点击敌方目标进行攻击。',
+                    highlightTarget: 'enemy_area',
+                    trigger: { type: 'click', target: 'enemy_card' }
+                },
+                {
+                    id: 'step_4',
+                    order: 4,
+                    title: '元素克制',
+                    description: '注意元素克制关系，克制可以造成额外30%伤害！',
+                    highlightTarget: 'element_indicator',
+                    trigger: { type: 'auto' },
+                    reward: { gold: 1000, soulCrystal: 100 }
+                }
+            ]
+        };
         
-        if (chapter.unlockCondition.playerLevel && 
-            playerLevel < chapter.unlockCondition.playerLevel) {
+        // 卡牌养成教程
+        const cardTutorial: Tutorial = {
+            id: 'tutorial_card_upgrade',
+            type: TutorialType.CARD,
+            name: '卡牌养成',
+            description: '学习如何强化你的卡牌',
+            isMandatory: false,
+            showAfterComplete: true,
+            unlockCondition: { completedTutorial: 'tutorial_battle_basic' },
+            steps: [
+                {
+                    id: 'step_1',
+                    order: 1,
+                    title: '升级卡牌',
+                    description: '消耗记忆尘埃可以提升卡牌等级。',
+                    highlightTarget: 'upgrade_button',
+                    trigger: { type: 'click' }
+                },
+                {
+                    id: 'step_2',
+                    order: 2,
+                    title: '突破极限',
+                    description: '等级达到上限后，需要突破才能继续成长。',
+                    highlightTarget: 'ascension_button',
+                    trigger: { type: 'click' },
+                    reward: { gold: 2000 }
+                }
+            ]
+        };
+        
+        // 抽卡教程
+        const gachaTutorial: Tutorial = {
+            id: 'tutorial_gacha',
+            type: TutorialType.GACHA,
+            name: '记忆召唤',
+            description: '学习如何召唤新卡牌',
+            isMandatory: false,
+            showAfterComplete: true,
+            unlockCondition: { level: 3 },
+            steps: [
+                {
+                    id: 'step_1',
+                    order: 1,
+                    title: '前往召唤',
+                    description: '在主城点击召唤建筑进入召唤界面。',
+                    highlightTarget: 'gacha_building',
+                    trigger: { type: 'click' }
+                },
+                {
+                    id: 'step_2',
+                    order: 2,
+                    title: '单次召唤',
+                    description: '消耗1张召唤券或280魂晶进行单次召唤。',
+                    highlightTarget: 'summon_single',
+                    trigger: { type: 'click' }
+                },
+                {
+                    id: 'step_3',
+                    order: 3,
+                    title: '十连召唤',
+                    description: '十连召唤必出SR以上卡牌！',
+                    highlightTarget: 'summon_ten',
+                    trigger: { type: 'click' },
+                    reward: { items: [{ itemId: 'gacha_ticket', count: 3 }] }
+                }
+            ]
+        };
+        
+        this.tutorials.set(battleTutorial.id, battleTutorial);
+        this.tutorials.set(cardTutorial.id, cardTutorial);
+        this.tutorials.set(gachaTutorial.id, gachaTutorial);
+    }
+    
+    // 获取教程
+    public getTutorial(tutorialId: string): Tutorial | null {
+        return this.tutorials.get(tutorialId) || null;
+    }
+    
+    // 获取所有教程
+    public getAllTutorials(): Tutorial[] {
+        return Array.from(this.tutorials.values());
+    }
+    
+    // 检查教程是否解锁
+    public isTutorialUnlocked(
+        playerId: string,
+        tutorialId: string,
+        playerLevel: number
+    ): boolean {
+        const tutorial = this.tutorials.get(tutorialId);
+        if (!tutorial) return false;
+        if (!tutorial.unlockCondition) return true;
+        
+        const progress = this.getPlayerProgress(playerId);
+        
+        if (tutorial.unlockCondition.level && playerLevel < tutorial.unlockCondition.level) {
             return false;
         }
         
-        if (chapter.unlockCondition.completeChapter && 
-            !this.completedChapters.has(chapter.unlockCondition.completeChapter)) {
+        if (tutorial.unlockCondition.completedTutorial &&
+            !progress.completedTutorials.includes(tutorial.unlockCondition.completedTutorial)) {
             return false;
         }
         
         return true;
     }
     
-    // 开始引导章节
-    public startChapter(chapterId: string): TutorialChapter | null {
-        const chapter = TUTORIAL_CHAPTERS.find(c => c.id === chapterId);
-        if (!chapter) return null;
+    // 开始教程
+    public startTutorial(playerId: string, tutorialId: string): {
+        success: boolean;
+        step?: TutorialStep;
+        error?: string;
+    } {
+        const tutorial = this.tutorials.get(tutorialId);
+        if (!tutorial) return { success: false, error: '教程不存在' };
         
-        this.isInTutorial = true;
-        this.currentStep = chapter.steps[0]?.id || null;
+        const progress = this.getPlayerProgress(playerId);
         
-        return chapter;
-    }
-    
-    // 获取当前步骤
-    public getCurrentStep(): TutorialStep | null {
-        if (!this.currentStep) return null;
-        
-        for (const chapter of TUTORIAL_CHAPTERS) {
-            const step = chapter.steps.find(s => s.id === this.currentStep);
-            if (step) return step;
+        if (progress.completedTutorials.includes(tutorialId)) {
+            return { success: false, error: '教程已完成' };
         }
-        return null;
+        
+        progress.currentTutorial = tutorialId;
+        progress.currentStep = 0;
+        
+        return {
+            success: true,
+            step: tutorial.steps[0]
+        };
     }
     
-    // 完成当前步骤
-    public completeStep(stepId: string): { 
-        success: boolean; 
-        nextStep?: TutorialStep; 
-        chapterComplete?: boolean;
+    // 推进到下一步
+    public nextStep(playerId: string): {
+        hasMore: boolean;
+        step?: TutorialStep;
         reward?: any;
     } {
-        const step = this.getCurrentStep();
-        if (!step || step.id !== stepId) {
-            return { success: false };
+        const progress = this.getPlayerProgress(playerId);
+        if (!progress.currentTutorial) return { hasMore: false };
+        
+        const tutorial = this.tutorials.get(progress.currentTutorial)!;
+        
+        progress.currentStep++;
+        
+        if (progress.currentStep >= tutorial.steps.length) {
+            // 教程完成
+            this.completeTutorial(playerId, progress.currentTutorial);
+            return { hasMore: false };
         }
         
-        this.completedSteps.add(stepId);
-        
-        // 找到当前章节和下一步
-        let currentChapter: TutorialChapter | null = null;
-        let nextStep: TutorialStep | null = null;
-        
-        for (const chapter of TUTORIAL_CHAPTERS) {
-            const stepIndex = chapter.steps.findIndex(s => s.id === stepId);
-            if (stepIndex !== -1) {
-                currentChapter = chapter;
-                nextStep = chapter.steps[stepIndex + 1] || null;
-                break;
-            }
-        }
-        
-        if (!currentChapter) return { success: false };
-        
-        // 检查章节是否完成
-        const chapterComplete = currentChapter.steps.every(s => 
-            this.completedSteps.has(s.id)
-        );
-        
-        if (chapterComplete) {
-            this.completedChapters.add(currentChapter.id);
-            this.isInTutorial = false;
-            this.currentStep = null;
-            
-            return {
-                success: true,
-                chapterComplete: true,
-                reward: currentChapter.completionReward
-            };
-        } else if (nextStep) {
-            this.currentStep = nextStep.id;
-            return {
-                success: true,
-                nextStep
-            };
-        }
-        
-        return { success: true };
+        return {
+            hasMore: true,
+            step: tutorial.steps[progress.currentStep]
+        };
     }
     
-    // 跳过当前引导
-    public skipTutorial(): void {
-        this.isInTutorial = false;
-        this.currentStep = null;
-        // 标记当前章节为已完成但不给奖励
-        const currentStep = this.getCurrentStep();
-        if (currentStep) {
-            for (const chapter of TUTORIAL_CHAPTERS) {
-                if (chapter.steps.some(s => s.id === currentStep.id)) {
-                    this.completedChapters.add(chapter.id);
-                    break;
-                }
-            }
+    // 完成教程
+    private completeTutorial(playerId: string, tutorialId: string): void {
+        const progress = this.getPlayerProgress(playerId);
+        progress.completedTutorials.push(tutorialId);
+        progress.currentTutorial = null;
+        progress.currentStep = 0;
+        
+        const tutorial = this.tutorials.get(tutorialId);
+        if (tutorial) {
+            console.log(`教程完成: ${tutorial.name}`);
         }
     }
     
-    // 检查引导是否进行中
-    public isTutorialActive(): boolean {
-        return this.isInTutorial;
+    // 跳过教程
+    public skipTutorial(playerId: string, tutorialId: string): void {
+        const progress = this.getPlayerProgress(playerId);
+        progress.skippedTutorials.push(tutorialId);
+        
+        if (progress.currentTutorial === tutorialId) {
+            progress.currentTutorial = null;
+            progress.currentStep = 0;
+        }
     }
     
-    // 获取已完成的章节
-    public getCompletedChapters(): string[] {
-        return Array.from(this.completedChapters);
+    // 获取玩家进度
+    private getPlayerProgress(playerId: string) {
+        if (!this.playerProgress.has(playerId)) {
+            this.playerProgress.set(playerId, {
+                completedTutorials: [],
+                currentTutorial: null,
+                currentStep: 0,
+                skippedTutorials: []
+            });
+        }
+        return this.playerProgress.get(playerId)!;
     }
     
-    // 重置引导（用于测试）
-    public resetTutorial(): void {
-        this.completedSteps.clear();
-        this.completedChapters.clear();
-        this.currentStep = null;
-        this.isInTutorial = false;
+    // 获取玩家已完成的教程
+    public getCompletedTutorials(playerId: string): Tutorial[] {
+        const progress = this.getPlayerProgress(playerId);
+        return progress.completedTutorials
+            .map(id => this.tutorials.get(id))
+            .filter((t): t is Tutorial => t !== undefined);
     }
 }
 
