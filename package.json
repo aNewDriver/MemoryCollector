@@ -1,0 +1,21 @@
+{
+  "name": "memory-collector",
+  "version": "1.0.0",
+  "lock": false,
+  "private": true,
+  "creator": {
+    "version": "3.8.0"
+  },
+  "description": "记忆回收者 - 卡牌养成RPG游戏",
+  "scripts": {
+    "build": "cc build",
+    "preview": "cc preview"
+  },
+  "dependencies": {
+    "@cocos/cannon": "^1.0.3"
+  },
+  "devDependencies": {
+    "@cocos/build-engine": "^4.4.0",
+    "typescript": "^4.9.5"
+  }
+}

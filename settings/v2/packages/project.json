@@ -1,0 +1,13 @@
+{
+  "name": "memory-collector",
+  "uuid": "memory-collector-2024",
+  "creator": {
+    "version": "3.8.0"
+  },
+  "dependencies": {
+    "@cocos/cannon": "^1.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}

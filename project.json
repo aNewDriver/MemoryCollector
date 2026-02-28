@@ -1,0 +1,49 @@
+{
+  "projectId": "memory-collector-2024",
+  "projectName": "记忆回收者",
+  "version": "3.8.0",
+  "engineVersion": "3.8.0",
+  "engineName": "cocos-creator",
+  "useCustomEngine": false,
+  "useBuiltinServer": true,
+  "packages": "packages",
+  "designResolution": {
+    "width": 750,
+    "height": 1334,
+    "policy": "FIXED_WIDTH"
+  },
+  "screenOrientation": "portrait",
+  "fitWidth": true,
+  "fitHeight": false,
+  "useIosDialog": false,
+  "platforms": {
+    "web-desktop": {
+      "displayName": "Web Desktop",
+      "textureCompression": "normal",
+      "screenOrientation": "portrait"
+    },
+    "web-mobile": {
+      "displayName": "Web Mobile",
+      "textureCompression": "normal",
+      "screenOrientation": "portrait"
+    },
+    "wechatgame": {
+      "displayName": "微信小游戏",
+      "textureCompression": "normal",
+      "screenOrientation": "portrait",
+      "appid": "wx",
+      "remoteServerAddress": "",
+      "subContext": ""
+    },
+    "android": {
+      "displayName": "Android",
+      "textureCompression": "normal",
+      "screenOrientation": "portrait"
+    },
+    "ios": {
+      "displayName": "iOS",
+      "textureCompression": "normal",
+      "screenOrientation": "portrait"
+    }
+  }
+}

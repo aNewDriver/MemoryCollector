@@ -1,0 +1,36 @@
+# Cocos Creator
+library/
+temp/
+local/
+build/
+profiles/
+
+# Native
+native/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Dependencies
+node_modules/
+
+# Build outputs
+builds/
+*.ipa
+*.apk
+
+# Sensitive
+.env
+*.keystore
