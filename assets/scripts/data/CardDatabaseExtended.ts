@@ -14,7 +14,7 @@ export const EXTENDED_CARD_DATABASE: Record<string, CardData> = {
         id: 'lie_yan',
         name: '烈焰',
         title: '森林守卫者',
-        rarity: Rarity.EPIC,
+        rarity: Rarity.PURPLE,
         element: ElementType.FIRE,
         art: {
             portrait: 'images/cards/lie_yan_portrait.bmp',
@@ -99,7 +99,7 @@ export const EXTENDED_CARD_DATABASE: Record<string, CardData> = {
         id: 'xuan_bing',
         name: '玄冰',
         title: '冰封的记忆',
-        rarity: Rarity.RARE,
+        rarity: Rarity.BLUE,
         element: ElementType.WATER,
         art: {
             portrait: 'images/cards/xuan_bing_portrait.bmp',
@@ -171,8 +171,8 @@ export const EXTENDED_CARD_DATABASE: Record<string, CardData> = {
         id: 'fei_yu',
         name: '飞羽',
         title: '林间的信使',
-        rarity: Rarity.COMMON,
-        element: ElementType.WIND,
+        rarity: Rarity.GREEN,
+        element: ElementType.WOOD,
         art: {
             portrait: 'images/cards/fei_yu_portrait.bmp',
             fullbody: 'images/cards/fei_yu_full.bmp'
@@ -233,7 +233,7 @@ export const EXTENDED_CARD_DATABASE: Record<string, CardData> = {
         id: 'gu_teng',
         name: '古藤',
         title: '千年树灵',
-        rarity: Rarity.EPIC,
+        rarity: Rarity.PURPLE,
         element: ElementType.EARTH,
         art: {
             portrait: 'images/cards/gu_teng_portrait.bmp',
@@ -322,7 +322,7 @@ export const EXTENDED_CARD_DATABASE: Record<string, CardData> = {
         id: 'chen_guang',
         title: '破晓者',
         name: '晨光',
-        rarity: Rarity.RARE,
+        rarity: Rarity.BLUE,
         element: ElementType.LIGHT,
         art: {
             portrait: 'images/cards/chen_guang_portrait.bmp',
@@ -387,7 +387,7 @@ export const EXTENDED_CARD_DATABASE: Record<string, CardData> = {
         id: 'ye_ying',
         name: '夜影',
         title: '森林的暗面',
-        rarity: Rarity.RARE,
+        rarity: Rarity.BLUE,
         element: ElementType.DARK,
         art: {
             portrait: 'images/cards/ye_ying_portrait.bmp',

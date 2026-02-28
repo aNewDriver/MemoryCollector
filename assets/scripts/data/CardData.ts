@@ -3,22 +3,25 @@
  * 所有卡牌的基础数据结构
  */
 
-// 属性枚举
+// 属性枚举 - 五行 + 光暗体系
 export enum ElementType {
-    FIRE = 'fire',      // 火
+    METAL = 'metal',    // 金
+    WOOD = 'wood',      // 木
     WATER = 'water',    // 水
-    WIND = 'wind',      // 风
+    FIRE = 'fire',      // 火
     EARTH = 'earth',    // 土
     LIGHT = 'light',    // 光
     DARK = 'dark'       // 暗
 }
 
+// 稀有度枚举 - 扩展为6级
 export enum Rarity {
-    COMMON = 1,     // 普通 - 灰
-    RARE = 2,       // 稀有 - 蓝
-    EPIC = 3,       // 史诗 - 紫
-    LEGEND = 4,     // 传说 - 金
-    MYTH = 5        // 神话 - 红
+    GREEN = 1,      // 绿色 - 普通
+    BLUE = 2,       // 蓝色 - 优秀
+    PURPLE = 3,     // 紫色 - 史诗
+    GOLD = 4,       // 金色 - 传说
+    RED = 5,        // 红色 - 神话
+    RAINBOW = 6     // 彩色 - 传说+
 }
 
 // 卡牌基础数据（静态配置）
@@ -172,4 +175,165 @@ export interface BondData {
     cardIds: string[];      // 触发羁绊的卡牌
     description: string;
     effect: EffectData;
+}
+
+// ============ 元素克制系统 ============
+
+/**
+ * 检查元素克制关系
+ * 五行相克：金→木→土→水→火→金
+ * 光暗克制所有五行，光暗之间不相克
+ * @returns 1: 克制对方, -1: 被克制, 0: 无克制关系
+ */
+export function checkElementAdvantage(
+    attackerElement: ElementType,
+    defenderElement: ElementType
+): number {
+    // 相同元素无克制
+    if (attackerElement === defenderElement) return 0;
+    
+    // 光暗之间不相克
+    if ((attackerElement === ElementType.LIGHT && defenderElement === ElementType.DARK) ||
+        (attackerElement === ElementType.DARK && defenderElement === ElementType.LIGHT)) {
+        return 0;
+    }
+    
+    // 光暗克制所有五行
+    const fiveElements = [ElementType.METAL, ElementType.WOOD, ElementType.WATER, ElementType.FIRE, ElementType.EARTH];
+    if (fiveElements.includes(attackerElement)) {
+        // 五行攻击光暗，被克制
+        if (defenderElement === ElementType.LIGHT || defenderElement === ElementType.DARK) {
+            return -1;
+        }
+    }
+    if (attackerElement === ElementType.LIGHT || attackerElement === ElementType.DARK) {
+        // 光暗攻击五行，克制
+        if (fiveElements.includes(defenderElement)) {
+            return 1;
+        }
+    }
+    
+    // 五行相克关系
+    const advantageMap: { [key in ElementType]?: ElementType } = {
+        [ElementType.METAL]: ElementType.WOOD,  // 金克木
+        [ElementType.WOOD]: ElementType.EARTH,  // 木克土
+        [ElementType.EARTH]: ElementType.WATER, // 土克水
+        [ElementType.WATER]: ElementType.FIRE,  // 水克火
+        [ElementType.FIRE]: ElementType.METAL   // 火克金
+    };
+    
+    if (advantageMap[attackerElement] === defenderElement) {
+        return 1;  // 克制
+    }
+    
+    // 检查是否被克制
+    if (advantageMap[defenderElement] === attackerElement) {
+        return -1;  // 被克制
+    }
+    
+    return 0;  // 无克制
+}
+
+/**
+ * 获取阵容元素克制加成
+ * 如果己方阵容主要元素克制对方，返回加成系数
+ */
+export function getTeamElementBonus(
+    teamElements: ElementType[],
+    enemyElements: ElementType[]
+): { atkBonus: number; defBonus: number } {
+    if (teamElements.length === 0 || enemyElements.length === 0) {
+        return { atkBonus: 0, defBonus: 0 };
+    }
+    
+    // 统计己方主要元素（数量最多的元素）
+    const elementCount = new Map<ElementType, number>();
+    teamElements.forEach(el => {
+        elementCount.set(el, (elementCount.get(el) || 0) + 1);
+    });
+    
+    // 找出主要元素
+    let mainElement = teamElements[0];
+    let maxCount = 0;
+    elementCount.forEach((count, el) => {
+        if (count > maxCount) {
+            maxCount = count;
+            mainElement = el;
+        }
+    });
+    
+    // 检查是否克制敌方主要元素
+    const enemyElementCount = new Map<ElementType, number>();
+    enemyElements.forEach(el => {
+        enemyElementCount.set(el, (enemyElementCount.get(el) || 0) + 1);
+    });
+    
+    let enemyMainElement = enemyElements[0];
+    let enemyMaxCount = 0;
+    enemyElementCount.forEach((count, el) => {
+        if (count > enemyMaxCount) {
+            enemyMaxCount = count;
+            enemyMainElement = el;
+        }
+    });
+    
+    const advantage = checkElementAdvantage(mainElement, enemyMainElement);
+    
+    // 克制时 +20% 攻击和防御
+    if (advantage === 1) {
+        return { atkBonus: 0.2, defBonus: 0.2 };
+    }
+    
+    // 被克制时 -10% 攻击和防御
+    if (advantage === -1) {
+        return { atkBonus: -0.1, defBonus: -0.1 };
+    }
+    
+    return { atkBonus: 0, defBonus: 0 };
+}
+
+/**
+ * 获取稀有度显示名称
+ */
+export function getRarityName(rarity: Rarity): string {
+    const names = {
+        [Rarity.GREEN]: '绿色',
+        [Rarity.BLUE]: '蓝色',
+        [Rarity.PURPLE]: '紫色',
+        [Rarity.GOLD]: '金色',
+        [Rarity.RED]: '红色',
+        [Rarity.RAINBOW]: '彩色'
+    };
+    return names[rarity] || '未知';
+}
+
+/**
+ * 获取稀有度颜色
+ */
+export function getRarityColor(rarity: Rarity): { r: number; g: number; b: number } {
+    const colors = {
+        [Rarity.GREEN]: { r: 50, g: 205, b: 50 },      // 绿
+        [Rarity.BLUE]: { r: 30, g: 144, b: 255 },      // 蓝
+        [Rarity.PURPLE]: { r: 147, g: 0, b: 211 },     // 紫
+        [Rarity.GOLD]: { r: 255, g: 215, b: 0 },       // 金
+        [Rarity.RED]: { r: 220, g: 20, b: 60 },        // 红
+        [Rarity.RAINBOW]: { r: 255, g: 0, b: 255 }     // 彩(品红)
+    };
+    return colors[rarity] || { r: 128, g: 128, b: 128 };
+}
+
+/**
+ * 获取元素显示名称
+ */
+export function getElementName(element: ElementType): string {
+    const names = {
+        [ElementType.METAL]: '金',
+        [ElementType.WOOD]: '木',
+        [ElementType.WATER]: '水',
+        [ElementType.FIRE]: '火',
+        [ElementType.EARTH]: '土',
+        [ElementType.LIGHT]: '光',
+        [ElementType.DARK]: '暗'
+    };
+    return names[element] || '未知';
 }

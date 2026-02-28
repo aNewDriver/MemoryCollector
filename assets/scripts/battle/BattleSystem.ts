@@ -3,7 +3,7 @@
  * 回合制战斗逻辑
  */
 
-import { CardInstance, Stats, EffectType, TargetType } from '../data/CardData';
+import { CardInstance, Stats, EffectType, TargetType, checkElementAdvantage, getTeamElementBonus, ElementType } from '../data/CardData';
 
 // 战斗单位（运行时的卡牌实例）
 export interface BattleUnit {
@@ -11,6 +11,8 @@ export interface BattleUnit {
     cardId: string;
     team: TeamType;
     position: number;  // 0-4 站位
+    element: ElementType;  // 元素属性
+    rarity: number;        // 稀有度
     
     // 当前状态
     currentHp: number;
@@ -120,11 +122,16 @@ export class BattleSystem {
     
     private createBattleUnit(card: CardInstance, team: TeamType, position: number): BattleUnit {
         const stats = card.currentStats;
+        const { getCardData } = require('../data/CardDatabase');
+        const cardData = getCardData(card.cardId);
+        
         return {
             instanceId: card.instanceId,
             cardId: card.cardId,
             team,
             position,
+            element: cardData?.element || 'earth',
+            rarity: cardData?.rarity || 1,
             currentHp: stats.hp,
             maxHp: stats.hp,
             currentEnergy: 0,
@@ -270,8 +277,13 @@ export class BattleSystem {
             damage *= (attacker.stats.cdmg / 100);
         }
         
-        // 属性克制
-        // TODO: 实现属性克制加成
+        // 元素克制加成
+        const elementAdvantage = checkElementAdvantage(attacker.element, defender.element);
+        if (elementAdvantage === 1) {
+            damage *= 1.3;  // 克制 +30% 伤害
+        } else if (elementAdvantage === -1) {
+            damage *= 0.7;  // 被克制 -30% 伤害
+        }
         
         // buff/debuff影响
         const atkBuff = attacker.buffs.find(b => b.type === EffectType.BUFF_ATK);

@@ -11,7 +11,7 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'jin_yu',
         name: '烬羽',
         title: '最后的武士',
-        rarity: Rarity.RARE,
+        rarity: Rarity.BLUE,
         element: ElementType.FIRE,
         art: {
             portrait: 'images/cards/jin_yu_portrait.bmp',
@@ -100,8 +100,8 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'blacksmith_zhang',
         name: '老张',
         title: '老铁匠',
-        rarity: Rarity.COMMON,
-        element: ElementType.FIRE,
+        rarity: Rarity.GREEN,
+        element: ElementType.METAL,
         art: {
             portrait: 'images/cards/blacksmith_portrait.bmp',
             fullbody: 'images/cards/blacksmith_full.bmp'
@@ -162,7 +162,7 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'qing_yi',
         name: '青漪',
         title: '抚琴者',
-        rarity: Rarity.EPIC,
+        rarity: Rarity.PURPLE,
         element: ElementType.WATER,
         art: {
             portrait: 'images/cards/qing_yi_portrait.bmp',
@@ -244,8 +244,8 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'zhu_feng',
         name: '逐风',
         title: '无影刺客',
-        rarity: Rarity.EPIC,
-        element: ElementType.WIND,
+        rarity: Rarity.PURPLE,
+        element: ElementType.WOOD,
         art: {
             portrait: 'images/cards/zhu_feng_portrait.bmp',
             fullbody: 'images/cards/zhu_feng_full.bmp',
@@ -319,7 +319,7 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'yan_xin',
         name: '岩心',
         title: '护城者',
-        rarity: Rarity.RARE,
+        rarity: Rarity.BLUE,
         element: ElementType.EARTH,
         art: {
             portrait: 'images/cards/yan_xin_portrait.bmp',
@@ -391,7 +391,7 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'ming_zhu',
         name: '明烛',
         title: '持灯人',
-        rarity: Rarity.LEGEND,
+        rarity: Rarity.GOLD,
         element: ElementType.LIGHT,
         art: {
             portrait: 'images/cards/ming_zhu_portrait.bmp',
@@ -473,7 +473,7 @@ export const CARD_DATABASE: Record<string, CardData> = {
         id: 'can_ying',
         name: '残影',
         title: '？？？',
-        rarity: Rarity.MYTH,
+        rarity: Rarity.RED,
         element: ElementType.DARK,
         art: {
             portrait: 'images/cards/can_ying_portrait.bmp',
