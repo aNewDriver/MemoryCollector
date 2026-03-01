@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="750" height="1334" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2C3E50"/>
+            <stop offset="100%" style="stop-color:#34495E"/>
+        </linearGradient>
+        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="white" stroke-width="0.5" opacity="0.05"/>
+        </pattern>
+    </defs>
+    
+    <!-- 背景 -->
+    <rect width="750" height="1334" fill="url(#bgGrad)"/>
+    <rect width="750" height="1334" fill="url(#grid)"/>
+    
+    <!-- 装饰元素 -->
+    <circle cx="375" cy="200" r="150" fill="white" opacity="0.05"/>
+    <circle cx="100" cy="800" r="200" fill="white" opacity="0.03"/>
+    <circle cx="650" cy="1000" r="180" fill="white" opacity="0.04"/>
+    
+    <!-- 场景名称 -->
+    <text x="375" y="667" font-family="Arial, sans-serif" font-size="48" 
+          fill="white" text-anchor="middle" opacity="0.6">
+        主城
+    </text>
+    <text x="375" y="720" font-family="Arial, sans-serif" font-size="24" 
+          fill="white" text-anchor="middle" opacity="0.4">
+        背景占位图
+    </text>
+</svg>

@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@cocos/build-engine": "^4.4.0",
+    "sharp": "^0.34.5",
     "typescript": "^4.9.5"
   }
 }

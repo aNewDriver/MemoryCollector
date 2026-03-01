@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-03-01T00:55:51.217Z",
+  "resources": {
+    "characters": [
+      {
+        "id": "jin_yu",
+        "files": [
+          "jin_yu_portrait.bmp",
+          "jin_yu_full.bmp",
+          "jin_yu_awaken.bmp"
+        ]
+      },
+      {
+        "id": "qing_yi",
+        "files": [
+          "qing_yi_portrait.bmp",
+          "qing_yi_full.bmp",
+          "qing_yi_awaken.bmp"
+        ]
+      },
+      {
+        "id": "zhu_feng",
+        "files": [
+          "zhu_feng_portrait.bmp",
+          "zhu_feng_full.bmp",
+          "zhu_feng_awaken.bmp"
+        ]
+      },
+      {
+        "id": "yan_xin",
+        "files": [
+          "yan_xin_portrait.bmp",
+          "yan_xin_full.bmp",
+          "yan_xin_awaken.bmp"
+        ]
+      },
+      {
+        "id": "ming_zhu",
+        "files": [
+          "ming_zhu_portrait.bmp",
+          "ming_zhu_full.bmp",
+          "ming_zhu_awaken.bmp"
+        ]
+      },
+      {
+        "id": "can_ying",
+        "files": [
+          "can_ying_portrait.bmp",
+          "can_ying_full.bmp",
+          "can_ying_awaken.bmp"
+        ]
+      }
+    ],
+    "skills": 12,
+    "buttons": 6,
+    "backgrounds": 5,
+    "icons": 14,
+    "equipment": 24
+  },
+  "total": 79
+}
