@@ -1,0 +1,111 @@
+# Stable Diffusion 角色立绘生成提示词
+# 生成时间: 3/1/2026, 5:39:31 PM
+
+
+# 烬羽 (焚天剑姬)
+## 正面提示词 (Prompt)
+(masterpiece, best quality, ultra-detailed:1.2), female warrior, phoenix armor, flame patterns, katana, 1girl, solo, black hair with red tips, golden eyes, red and black armor, phoenix shoulder wings, damaged cape, lava patterned katana, determined expression, burning village background, sunset, embers, dramatic lighting, warm colors, anime style, cinematic, full body
+
+## 负面提示词 (Negative Prompt)
+worst quality, low quality, normal quality, bad anatomy, bad hands, signature, watermark, username, blurry, artist name, bright colors, happy, smiling
+
+## 推荐参数
+- 分辨率: 1024 x 1820
+- 步数: 30
+- CFG: 7
+- 采样器: DPM++ 2M Karras
+- 模型: AnythingV5/NovelAI/CounterfeitV3
+
+---
+
+
+# 青漪 (流水琴仙)
+## 正面提示词 (Prompt)
+(masterpiece, best quality, ultra-detailed:1.2), female musician, ancient guqin, 1girl, solo, long cyan hair, blue eyes, flowing cyan dress, white silk sleeves, pearl ornaments, barefoot, ankle bells, melancholic expression, playing instrument, bamboo forest, moonlight, mist, blue particles, cool colors, chinese style, ethereal, full body
+
+## 负面提示词 (Negative Prompt)
+warm tones, bright colors, aggressive pose, modern clothing, worst quality, low quality, blurry
+
+## 推荐参数
+- 分辨率: 1024 x 1820
+- 步数: 30
+- CFG: 7
+- 采样器: DPM++ 2M Karras
+- 模型: AnythingV5/NovelAI/CounterfeitV3
+
+---
+
+
+# 逐风 (影杀)
+## 正面提示词 (Prompt)
+(masterpiece, best quality, ultra-detailed:1.2), masked assassin, dual blades, 1boy, solo, black mask, green eyes, black hair, dark green outfit, leather armor, weapon pouches, bandages, short cape, glowing daggers, cold expression, crouching pose, stormy background, wind effects, leaves swirling, dark fantasy, dynamic pose
+
+## 负面提示词 (Negative Prompt)
+bright colors, happy expression, static pose, armor too heavy, exposed face, low quality
+
+## 推荐参数
+- 分辨率: 1024 x 1820
+- 步数: 30
+- CFG: 7
+- 采样器: DPM++ 2M Karras
+- 模型: AnythingV5/NovelAI/CounterfeitV3
+
+---
+
+
+# 岩心 (铁壁)
+## 正面提示词 (Prompt)
+(masterpiece, best quality, ultra-detailed:1.2), armored knight, tower shield, 1boy, solo, muscular, tall, short hair, facial scar, determined expression, heavy plate armor, rock texture, mountain shoulders, brown cape, massive shield, war hammer, standing pose, fortress background, dusty, earth tones, realistic, grounded
+
+## 负面提示词 (Negative Prompt)
+slim build, bright colors, smiling, dynamic pose, modern elements, low quality
+
+## 推荐参数
+- 分辨率: 1024 x 1820
+- 步数: 30
+- CFG: 7
+- 采样器: DPM++ 2M Karras
+- 模型: AnythingV5/NovelAI/CounterfeitV3
+
+---
+
+
+# 明烛 (圣光祭司)
+## 正面提示词 (Prompt)
+(masterpiece, best quality, ultra-detailed:1.2), holy priestess, divine staff, 1girl, solo, golden hair, crown, amber eyes, white and gold robes, sun embroidery, golden accessories, sacred staff, glowing lantern, compassionate smile, floating pose, temple background, golden light rays, light particles, divine atmosphere, fantasy art, ethereal
+
+## 负面提示词 (Negative Prompt)
+dark colors, shadows, evil, dark background, low quality, worst quality
+
+## 推荐参数
+- 分辨率: 1024 x 1820
+- 步数: 30
+- CFG: 7
+- 采样器: DPM++ 2M Karras
+- 模型: AnythingV5/NovelAI/CounterfeitV3
+
+---
+
+
+# 残影 (记忆碎片)
+## 正面提示词 (Prompt)
+(masterpiece, best quality, ultra-detailed:1.2), mysterious silhouette, memory fragments, void entity, 1other, solo, form made of fragments, blue glow, obscured face, complex eyes, translucent body, shadow blades, reaching pose, void space background, nebula, floating fragments, dark blue, cyan highlights, surreal, mysterious
+
+## 负面提示词 (Negative Prompt)
+solid form, bright colors, defined features, happy, simple background, low quality
+
+## 推荐参数
+- 分辨率: 1024 x 1820
+- 步数: 30
+- CFG: 7
+- 采样器: DPM++ 2M Karras
+- 模型: AnythingV5/NovelAI/CounterfeitV3
+
+---
+
+
+# 使用建议:
+# 1. 使用 ControlNet 保持角色姿势一致性
+# 2. 可以用 ADetailer 修复面部细节
+# 3. Hires.fix 可以提升图像质量
+# 4. 使用相同的 Seed 可以保持角色一致性

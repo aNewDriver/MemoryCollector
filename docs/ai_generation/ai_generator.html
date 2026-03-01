@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>记忆回收者 - AI立绘生成工具</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { color: #333; }
+        .character { border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .character h2 { margin-top: 0; color: #666; }
+        .prompt-box { background: #f5f5f5; padding: 15px; border-radius: 4px; margin: 10px 0; }
+        .prompt-box h3 { margin-top: 0; font-size: 14px; color: #999; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 4px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #45a049; }
+        .copy-btn { background: #2196F3; }
+        .copy-btn:hover { background: #1976D2; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { padding: 10px 20px; background: #e0e0e0; border: none; cursor: pointer; }
+        .tab.active { background: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+    <h1>🎨 记忆回收者 - AI立绘生成工具</h1>
+    <p>点击下方按钮复制Prompt，粘贴到 Midjourney / Stable Diffusion 中生成角色立绘。生成的图片请按 naming_guide.md 中的规范命名并存放到 assets/resources/images/cards/ 目录。</p>
+    
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('midjourney')">Midjourney</button>
+        <button class="tab" onclick="showTab('sd')">Stable Diffusion</button>
+    </div>
+    
+    <div id="midjourney-tab">
+        
+        <div class="character">
+            <h2>烬羽 (焚天剑姬) - fire</h2>            
+            <div class="prompt-box">
+                <h3>普通版本</h3>
+                <pre id="mj-jin_yu-normal">female warrior, phoenix themed armor, flame patterns, katana, elegant but fierce, 20 years old, black hair with red highlights, golden eyes, crimson and black light armor, phoenix wing shoulder guards, flowing damaged cape, holding katana with lava-like patterns, determined and sorrowful expression, side stance ready to draw, burning village ruins at sunset, embers floating, dramatic golden hour lighting, warm orange-red dominant, deep black shadows, anime style, highly detailed, cinematic, concept art, full body, dynamic pose, vertical composition --ar 9:16 --style raw --s 250</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-jin_yu-normal')">复制普通版Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>觉醒版本</h3>
+                <pre id="mj-jin_yu-awaken">female warrior surrounded by intense flames, armor transforming into phoenix wings manifesting, eyes glowing with fire, hair floating weightless, phoenix rising in background, golden flames everywhere, transcendent power, ultimate form, golden aura, anime style, highly detailed, cinematic lighting --ar 9:16 --style raw --s 750 --niji 5</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-jin_yu-awaken')">复制觉醒版Prompt</button>
+            </div>
+        </div>
+        
+        <div class="character">
+            <h2>青漪 (流水琴仙) - water</h2>            
+            <div class="prompt-box">
+                <h3>普通版本</h3>
+                <pre id="mj-qing_yi-normal">elegant female musician, flowing cyan dress, ancient guqin, ethereal beauty, water magic, 22 years old, long cyan hair like waterfall, pearl hair ornaments, clear blue eyes, white silk upper garment, flowing sleeves, ankle bells, barefoot, serene and melancholic expression, kneeling playing guqin, bamboo forest at moonlight, mist and blue light particles, soft moonlight, cool blue tones, bioluminescent particles, chinese ink painting mixed with anime, ethereal, dreamy, full body seated pose --ar 9:16 --style raw --s 250</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-qing_yi-normal')">复制普通版Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>觉醒版本</h3>
+                <pre id="mj-qing_yi-awaken">celestial musician floating in air, surrounded by water dragons, dress transforming into liquid water, hair flowing like waterfall, playing music creating visible water ripples, massive tidal wave and water dragon in background, transcendent beauty, divine water spirit, cyan and silver glow, ethereal atmosphere --ar 9:16 --style raw --s 750 --niji 5</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-qing_yi-awaken')">复制觉醒版Prompt</button>
+            </div>
+        </div>
+        
+        <div class="character">
+            <h2>逐风 (影杀) - wind</h2>            
+            <div class="prompt-box">
+                <h3>普通版本</h3>
+                <pre id="mj-zhu_feng-normal">mysterious masked assassin, dark fitted outfit, dual short blades, wind effects, stealthy pose, unknown age, black face mask covering lower face, sharp emerald green eyes, black short hair, dark green and black outfit, leather armor, multiple weapon pouches, fingerless gloves, bandaged arms, short cape, holding twin daggers with green glow, cold sharp killer eyes, crouching on building edge like hunting panther, ruined city in storm, wind and leaves swirling, dark storm clouds, dynamic composition --ar 9:16 --style raw --s 250</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-zhu_feng-normal')">复制普通版Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>觉醒版本</h3>
+                <pre id="mj-zhu_feng-awaken">assassin moving at impossible speed leaving afterimages, surrounded by tornado, blades glowing with green wind energy, mask partially revealing intense expression, storm completely consuming background, ultimate wind technique, invisible speed, green lightning, transcendent assassin --ar 9:16 --style raw --s 750 --niji 5</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-zhu_feng-awaken')">复制觉醒版Prompt</button>
+            </div>
+        </div>
+        
+        <div class="character">
+            <h2>岩心 (铁壁) - earth</h2>            
+            <div class="prompt-box">
+                <h3>普通版本</h3>
+                <pre id="mj-yan_xin-normal">bulky armored knight, tower shield, earth armor, stalwart defender, 30 years old, tall muscular build, short spiky hair, facial scars, determined eyes, full heavy rock-textured plate armor, mountain-shaped shoulder guards, earth gem on chest, removable face helmet, tattered brown cape, massive tower shield with crack patterns, one-handed war hammer, firm grounded stance, broken wall or mountain fortress background, dusty atmosphere, earthy tones, realistic anime, solid composition --ar 9:16 --style raw --s 250</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-yan_xin-normal')">复制普通版Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>觉醒版本</h3>
+                <pre id="mj-yan_xin-awaken">armor covered in living rock and crystals, body partially merged with stone, shield transformed into massive earth wall, creating earthquake just by standing, mountains rising in background, earth titan form, indestructible fortress, brown and gold glow, ultimate defense --ar 9:16 --style raw --s 750 --niji 5</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-yan_xin-awaken')">复制觉醒版Prompt</button>
+            </div>
+        </div>
+        
+        <div class="character">
+            <h2>明烛 (圣光祭司) - light</h2>            
+            <div class="prompt-box">
+                <h3>普通版本</h3>
+                <pre id="mj-ming_zhu-normal">holy priestess, golden light, white robes, divine staff, compassionate, 25 years old, golden braided hair, golden crown, warm amber eyes, white and gold holy robes, sun embroidery, golden belt with cross, golden accessories, holding sacred staff with glowing lantern, kind and compassionate expression, gentle smile, standing or floating gracefully, radiant temple or cloud sanctuary, golden light rays, floating light particles, angelic symbols, warm divine atmosphere, divine fantasy art --ar 9:16 --style raw --s 250</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-ming_zhu-normal')">复制普通版Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>觉醒版本</h3>
+                <pre id="mj-ming_zhu-awaken">fully transformed angelic form with wings of pure light, floating high above, radiating intense golden aura that dispels all darkness, eyes glowing white, heavenly gates opening in background, divine ascension, ultimate holy form, transcendent light, gold and white explosion of holy power --ar 9:16 --style raw --s 750 --niji 5</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-ming_zhu-awaken')">复制觉醒版Prompt</button>
+            </div>
+        </div>
+        
+        <div class="character">
+            <h2>残影 (记忆碎片) - dark</h2>            
+            <div class="prompt-box">
+                <h3>普通版本</h3>
+                <pre id="mj-can_ying-normal">mysterious silhouette, memory fragments, void entity, fragmented reality, ethereal, slender form made of memory fragments, blue void glow between fragments, face obscured shadow, complex emotional eyes, translucent body showing glimpses of different scenes, shadow blades with blue light, mysterious pose reaching toward viewer, pure void or starry space background, distant nebula, floating memory fragments, dark blue and black, cyan highlights, abstract surreal, mysterious --ar 9:16 --style raw --s 250</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-can_ying-normal')">复制普通版Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>觉醒版本</h3>
+                <pre id="mj-can_ying-awaken">memory fragments coalescing into more defined but still ethereal form, revealing glimpses of true identity through fragments, surrounded by vortex of memories and shadows, eyes showing full range of human emotions, multiple timelines converging in background, transcendence through memories, ultimate void form --ar 9:16 --style raw --s 750 --niji 5</pre>
+                <button class="copy-btn" onclick="copyToClipboard('mj-can_ying-awaken')">复制觉醒版Prompt</button>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div id="sd-tab" style="display:none">
+        
+        <div class="character">
+            <h2>烬羽 (焚天剑姬) - fire</h2>            
+            <div class="prompt-box">
+                <h3>正面提示词 (Prompt)</h3>
+                <pre id="sd-jin_yu-prompt">(masterpiece, best quality, ultra-detailed:1.2), female warrior, phoenix armor, flame patterns, katana, 1girl, solo, black hair with red tips, golden eyes, red and black armor, phoenix shoulder wings, damaged cape, lava patterned katana, determined expression, burning village background, sunset, embers, dramatic lighting, warm colors, anime style, cinematic, full body</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-jin_yu-prompt')">复制Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>负面提示词 (Negative Prompt)</h3>
+                <pre id="sd-jin_yu-neg">worst quality, low quality, normal quality, bad anatomy, bad hands, signature, watermark, username, blurry, artist name, bright colors, happy, smiling</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-jin_yu-neg')">复制Negative</button>
+            </div>            
+            <p><strong>推荐参数：</strong> 分辨率 1024x1820, 步数 30, CFG 7, DPM++ 2M Karras</p>
+        </div>
+        
+        <div class="character">
+            <h2>青漪 (流水琴仙) - water</h2>            
+            <div class="prompt-box">
+                <h3>正面提示词 (Prompt)</h3>
+                <pre id="sd-qing_yi-prompt">(masterpiece, best quality, ultra-detailed:1.2), female musician, ancient guqin, 1girl, solo, long cyan hair, blue eyes, flowing cyan dress, white silk sleeves, pearl ornaments, barefoot, ankle bells, melancholic expression, playing instrument, bamboo forest, moonlight, mist, blue particles, cool colors, chinese style, ethereal, full body</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-qing_yi-prompt')">复制Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>负面提示词 (Negative Prompt)</h3>
+                <pre id="sd-qing_yi-neg">warm tones, bright colors, aggressive pose, modern clothing, worst quality, low quality, blurry</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-qing_yi-neg')">复制Negative</button>
+            </div>            
+            <p><strong>推荐参数：</strong> 分辨率 1024x1820, 步数 30, CFG 7, DPM++ 2M Karras</p>
+        </div>
+        
+        <div class="character">
+            <h2>逐风 (影杀) - wind</h2>            
+            <div class="prompt-box">
+                <h3>正面提示词 (Prompt)</h3>
+                <pre id="sd-zhu_feng-prompt">(masterpiece, best quality, ultra-detailed:1.2), masked assassin, dual blades, 1boy, solo, black mask, green eyes, black hair, dark green outfit, leather armor, weapon pouches, bandages, short cape, glowing daggers, cold expression, crouching pose, stormy background, wind effects, leaves swirling, dark fantasy, dynamic pose</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-zhu_feng-prompt')">复制Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>负面提示词 (Negative Prompt)</h3>
+                <pre id="sd-zhu_feng-neg">bright colors, happy expression, static pose, armor too heavy, exposed face, low quality</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-zhu_feng-neg')">复制Negative</button>
+            </div>            
+            <p><strong>推荐参数：</strong> 分辨率 1024x1820, 步数 30, CFG 7, DPM++ 2M Karras</p>
+        </div>
+        
+        <div class="character">
+            <h2>岩心 (铁壁) - earth</h2>            
+            <div class="prompt-box">
+                <h3>正面提示词 (Prompt)</h3>
+                <pre id="sd-yan_xin-prompt">(masterpiece, best quality, ultra-detailed:1.2), armored knight, tower shield, 1boy, solo, muscular, tall, short hair, facial scar, determined expression, heavy plate armor, rock texture, mountain shoulders, brown cape, massive shield, war hammer, standing pose, fortress background, dusty, earth tones, realistic, grounded</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-yan_xin-prompt')">复制Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>负面提示词 (Negative Prompt)</h3>
+                <pre id="sd-yan_xin-neg">slim build, bright colors, smiling, dynamic pose, modern elements, low quality</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-yan_xin-neg')">复制Negative</button>
+            </div>            
+            <p><strong>推荐参数：</strong> 分辨率 1024x1820, 步数 30, CFG 7, DPM++ 2M Karras</p>
+        </div>
+        
+        <div class="character">
+            <h2>明烛 (圣光祭司) - light</h2>            
+            <div class="prompt-box">
+                <h3>正面提示词 (Prompt)</h3>
+                <pre id="sd-ming_zhu-prompt">(masterpiece, best quality, ultra-detailed:1.2), holy priestess, divine staff, 1girl, solo, golden hair, crown, amber eyes, white and gold robes, sun embroidery, golden accessories, sacred staff, glowing lantern, compassionate smile, floating pose, temple background, golden light rays, light particles, divine atmosphere, fantasy art, ethereal</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-ming_zhu-prompt')">复制Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>负面提示词 (Negative Prompt)</h3>
+                <pre id="sd-ming_zhu-neg">dark colors, shadows, evil, dark background, low quality, worst quality</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-ming_zhu-neg')">复制Negative</button>
+            </div>            
+            <p><strong>推荐参数：</strong> 分辨率 1024x1820, 步数 30, CFG 7, DPM++ 2M Karras</p>
+        </div>
+        
+        <div class="character">
+            <h2>残影 (记忆碎片) - dark</h2>            
+            <div class="prompt-box">
+                <h3>正面提示词 (Prompt)</h3>
+                <pre id="sd-can_ying-prompt">(masterpiece, best quality, ultra-detailed:1.2), mysterious silhouette, memory fragments, void entity, 1other, solo, form made of fragments, blue glow, obscured face, complex eyes, translucent body, shadow blades, reaching pose, void space background, nebula, floating fragments, dark blue, cyan highlights, surreal, mysterious</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-can_ying-prompt')">复制Prompt</button>
+            </div>            
+            <div class="prompt-box">
+                <h3>负面提示词 (Negative Prompt)</h3>
+                <pre id="sd-can_ying-neg">solid form, bright colors, defined features, happy, simple background, low quality</pre>
+                <button class="copy-btn" onclick="copyToClipboard('sd-can_ying-neg')">复制Negative</button>
+            </div>            
+            <p><strong>推荐参数：</strong> 分辨率 1024x1820, 步数 30, CFG 7, DPM++ 2M Karras</p>
+        </div>
+        
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        function showTab(tab) {
+            document.getElementById('midjourney-tab').style.display = tab === 'midjourney' ? 'block' : 'none';
+            document.getElementById('sd-tab').style.display = tab === 'sd' ? 'block' : 'none';
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

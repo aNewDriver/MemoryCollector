@@ -1,0 +1,173 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 14,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CLIPTextEncode",
+      "pos": [
+        100,
+        100
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "inputs": {
+        "clip": [
+          "4",
+          0
+        ]
+      },
+      "widgets_values": [
+        "(masterpiece, best quality, ultra-detailed:1.2), female warrior, phoenix armor, flame patterns, katana, 1girl, solo, black hair with red tips, golden eyes, red and black armor, phoenix shoulder wings, damaged cape, lava patterned katana, determined expression, burning village background, sunset, embers, dramatic lighting, warm colors, anime style, cinematic, full body"
+      ],
+      "outputs": [
+        [
+          "3",
+          0
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        100,
+        300
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "inputs": {
+        "clip": [
+          "4",
+          0
+        ]
+      },
+      "widgets_values": [
+        "(masterpiece, best quality, ultra-detailed:1.2), female musician, ancient guqin, 1girl, solo, long cyan hair, blue eyes, flowing cyan dress, white silk sleeves, pearl ornaments, barefoot, ankle bells, melancholic expression, playing instrument, bamboo forest, moonlight, mist, blue particles, cool colors, chinese style, ethereal, full body"
+      ],
+      "outputs": [
+        [
+          "3",
+          0
+        ]
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        100,
+        500
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "inputs": {
+        "clip": [
+          "4",
+          0
+        ]
+      },
+      "widgets_values": [
+        "(masterpiece, best quality, ultra-detailed:1.2), masked assassin, dual blades, 1boy, solo, black mask, green eyes, black hair, dark green outfit, leather armor, weapon pouches, bandages, short cape, glowing daggers, cold expression, crouching pose, stormy background, wind effects, leaves swirling, dark fantasy, dynamic pose"
+      ],
+      "outputs": [
+        [
+          "3",
+          0
+        ]
+      ]
+    },
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        100,
+        700
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "inputs": {
+        "clip": [
+          "4",
+          0
+        ]
+      },
+      "widgets_values": [
+        "(masterpiece, best quality, ultra-detailed:1.2), armored knight, tower shield, 1boy, solo, muscular, tall, short hair, facial scar, determined expression, heavy plate armor, rock texture, mountain shoulders, brown cape, massive shield, war hammer, standing pose, fortress background, dusty, earth tones, realistic, grounded"
+      ],
+      "outputs": [
+        [
+          "3",
+          0
+        ]
+      ]
+    },
+    {
+      "id": 13,
+      "type": "CLIPTextEncode",
+      "pos": [
+        100,
+        900
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "inputs": {
+        "clip": [
+          "4",
+          0
+        ]
+      },
+      "widgets_values": [
+        "(masterpiece, best quality, ultra-detailed:1.2), holy priestess, divine staff, 1girl, solo, golden hair, crown, amber eyes, white and gold robes, sun embroidery, golden accessories, sacred staff, glowing lantern, compassionate smile, floating pose, temple background, golden light rays, light particles, divine atmosphere, fantasy art, ethereal"
+      ],
+      "outputs": [
+        [
+          "3",
+          0
+        ]
+      ]
+    },
+    {
+      "id": 16,
+      "type": "CLIPTextEncode",
+      "pos": [
+        100,
+        1100
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "inputs": {
+        "clip": [
+          "4",
+          0
+        ]
+      },
+      "widgets_values": [
+        "(masterpiece, best quality, ultra-detailed:1.2), mysterious silhouette, memory fragments, void entity, 1other, solo, form made of fragments, blue glow, obscured face, complex eyes, translucent body, shadow blades, reaching pose, void space background, nebula, floating fragments, dark blue, cyan highlights, surreal, mysterious"
+      ],
+      "outputs": [
+        [
+          "3",
+          0
+        ]
+      ]
+    }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

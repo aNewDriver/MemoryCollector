@@ -1,0 +1,64 @@
+# Midjourney 角色立绘生成提示词
+# 生成时间: 3/1/2026, 5:39:31 PM
+# 使用方法: 复制下面的提示词到 Midjourney Discord 中
+
+
+# 烬羽 (焚天剑姬) - 普通版本
+female warrior, phoenix themed armor, flame patterns, katana, elegant but fierce, 20 years old, black hair with red highlights, golden eyes, crimson and black light armor, phoenix wing shoulder guards, flowing damaged cape, holding katana with lava-like patterns, determined and sorrowful expression, side stance ready to draw, burning village ruins at sunset, embers floating, dramatic golden hour lighting, warm orange-red dominant, deep black shadows, anime style, highly detailed, cinematic, concept art, full body, dynamic pose, vertical composition --ar 9:16 --style raw --s 250
+
+# 烬羽 - 觉醒版本
+female warrior surrounded by intense flames, armor transforming into phoenix wings manifesting, eyes glowing with fire, hair floating weightless, phoenix rising in background, golden flames everywhere, transcendent power, ultimate form, golden aura, anime style, highly detailed, cinematic lighting --ar 9:16 --style raw --s 750 --niji 5
+
+---
+
+
+# 青漪 (流水琴仙) - 普通版本
+elegant female musician, flowing cyan dress, ancient guqin, ethereal beauty, water magic, 22 years old, long cyan hair like waterfall, pearl hair ornaments, clear blue eyes, white silk upper garment, flowing sleeves, ankle bells, barefoot, serene and melancholic expression, kneeling playing guqin, bamboo forest at moonlight, mist and blue light particles, soft moonlight, cool blue tones, bioluminescent particles, chinese ink painting mixed with anime, ethereal, dreamy, full body seated pose --ar 9:16 --style raw --s 250
+
+# 青漪 - 觉醒版本
+celestial musician floating in air, surrounded by water dragons, dress transforming into liquid water, hair flowing like waterfall, playing music creating visible water ripples, massive tidal wave and water dragon in background, transcendent beauty, divine water spirit, cyan and silver glow, ethereal atmosphere --ar 9:16 --style raw --s 750 --niji 5
+
+---
+
+
+# 逐风 (影杀) - 普通版本
+mysterious masked assassin, dark fitted outfit, dual short blades, wind effects, stealthy pose, unknown age, black face mask covering lower face, sharp emerald green eyes, black short hair, dark green and black outfit, leather armor, multiple weapon pouches, fingerless gloves, bandaged arms, short cape, holding twin daggers with green glow, cold sharp killer eyes, crouching on building edge like hunting panther, ruined city in storm, wind and leaves swirling, dark storm clouds, dynamic composition --ar 9:16 --style raw --s 250
+
+# 逐风 - 觉醒版本
+assassin moving at impossible speed leaving afterimages, surrounded by tornado, blades glowing with green wind energy, mask partially revealing intense expression, storm completely consuming background, ultimate wind technique, invisible speed, green lightning, transcendent assassin --ar 9:16 --style raw --s 750 --niji 5
+
+---
+
+
+# 岩心 (铁壁) - 普通版本
+bulky armored knight, tower shield, earth armor, stalwart defender, 30 years old, tall muscular build, short spiky hair, facial scars, determined eyes, full heavy rock-textured plate armor, mountain-shaped shoulder guards, earth gem on chest, removable face helmet, tattered brown cape, massive tower shield with crack patterns, one-handed war hammer, firm grounded stance, broken wall or mountain fortress background, dusty atmosphere, earthy tones, realistic anime, solid composition --ar 9:16 --style raw --s 250
+
+# 岩心 - 觉醒版本
+armor covered in living rock and crystals, body partially merged with stone, shield transformed into massive earth wall, creating earthquake just by standing, mountains rising in background, earth titan form, indestructible fortress, brown and gold glow, ultimate defense --ar 9:16 --style raw --s 750 --niji 5
+
+---
+
+
+# 明烛 (圣光祭司) - 普通版本
+holy priestess, golden light, white robes, divine staff, compassionate, 25 years old, golden braided hair, golden crown, warm amber eyes, white and gold holy robes, sun embroidery, golden belt with cross, golden accessories, holding sacred staff with glowing lantern, kind and compassionate expression, gentle smile, standing or floating gracefully, radiant temple or cloud sanctuary, golden light rays, floating light particles, angelic symbols, warm divine atmosphere, divine fantasy art --ar 9:16 --style raw --s 250
+
+# 明烛 - 觉醒版本
+fully transformed angelic form with wings of pure light, floating high above, radiating intense golden aura that dispels all darkness, eyes glowing white, heavenly gates opening in background, divine ascension, ultimate holy form, transcendent light, gold and white explosion of holy power --ar 9:16 --style raw --s 750 --niji 5
+
+---
+
+
+# 残影 (记忆碎片) - 普通版本
+mysterious silhouette, memory fragments, void entity, fragmented reality, ethereal, slender form made of memory fragments, blue void glow between fragments, face obscured shadow, complex emotional eyes, translucent body showing glimpses of different scenes, shadow blades with blue light, mysterious pose reaching toward viewer, pure void or starry space background, distant nebula, floating memory fragments, dark blue and black, cyan highlights, abstract surreal, mysterious --ar 9:16 --style raw --s 250
+
+# 残影 - 觉醒版本
+memory fragments coalescing into more defined but still ethereal form, revealing glimpses of true identity through fragments, surrounded by vortex of memories and shadows, eyes showing full range of human emotions, multiple timelines converging in background, transcendence through memories, ultimate void form --ar 9:16 --style raw --s 750 --niji 5
+
+---
+
+
+# 提示:
+# 1. 普通版本用于常规立绘
+# 2. 觉醒版本用于觉醒/突破后立绘
+# 3. 建议先用普通版本测试效果，满意后再生成觉醒版本
+# 4. 可以使用 --seed 参数保持角色一致性
