@@ -5,7 +5,7 @@
   "__any__": [
     {
       "__type__": "cc.Scene",
-      "_name": "MainScene",
+      "_name": "CardDetailScene",
       "_objFlags": 0,
       "_parent": null,
       "_children": [
@@ -37,7 +37,7 @@
       },
       "_mobility": 0,
       "_layer": 33554432,
-      "_id": "6d3da0bb-b408-4aa7-be85-8a0a36fe2e6b"
+      "_id": "f7a63866-997a-4bd3-b820-3c76a84cf154"
     },
     {
       "__type__": "cc.Node",
@@ -127,7 +127,7 @@
       },
       "_mobility": 0,
       "_layer": 33554432,
-      "_id": "a1d69db6-b2fc-42be-8891-cc4add554fa8"
+      "_id": "16d546ed-9589-437d-a12e-c07844e45b64"
     },
     {
       "__type__": "cc.Node",
@@ -197,7 +197,7 @@
       },
       "_mobility": 0,
       "_layer": 33554432,
-      "_id": "43fefe0f-d0d9-493c-a748-61a003f6a55e"
+      "_id": "1d7b25c7-e5d0-49a6-a463-c55de15151d0"
     }
   ]
 }

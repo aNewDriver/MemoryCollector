@@ -5,7 +5,7 @@
   "__any__": [
     {
       "__type__": "cc.Scene",
-      "_name": "MainScene",
+      "_name": "BattleScene",
       "_objFlags": 0,
       "_parent": null,
       "_children": [
@@ -37,7 +37,7 @@
       },
       "_mobility": 0,
       "_layer": 33554432,
-      "_id": "6d3da0bb-b408-4aa7-be85-8a0a36fe2e6b"
+      "_id": "d3170538-c36f-4b57-be24-6ce0e8d6c3fa"
     },
     {
       "__type__": "cc.Node",
@@ -127,7 +127,7 @@
       },
       "_mobility": 0,
       "_layer": 33554432,
-      "_id": "a1d69db6-b2fc-42be-8891-cc4add554fa8"
+      "_id": "9c49c516-bd48-49f6-94ce-f45791e8ea0d"
     },
     {
       "__type__": "cc.Node",
@@ -197,7 +197,7 @@
       },
       "_mobility": 0,
       "_layer": 33554432,
-      "_id": "43fefe0f-d0d9-493c-a748-61a003f6a55e"
+      "_id": "5ed61990-39c3-40a5-8fa5-ef31b3e96bd5"
     }
   ]
 }
