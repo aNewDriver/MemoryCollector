@@ -4,7 +4,9 @@
  */
 
 import { LeaderboardType, RankEntry } from './LeaderboardSystem';
-import { Mail, MailPriority } from './MailSystem';
+import { Mail, MailPriority } from '../mail/MailSystem';
+import { mailSender } from '../mail/MailSender';
+import { logSystem } from '../log/LogSystem';
 
 export interface LeaderboardReward {
     rank: number;
@@ -108,19 +110,36 @@ export class LeaderboardRewardDistributor {
         let distributed = 0;
         
         rankings.forEach(entry => {
-            const reward = this.getRewardForRank(rewards, entry.rank);
-            if (!reward) return;
-            
-            const mail = this.createRewardMail(type, entry.rank, reward, season);
-            
-            // TODO: 调用邮件系统发送
-            // mailSystem.sendMail(entry.playerId, mail);
-            
-            console.log(`[LeaderboardReward] Sent ${type} rank ${entry.rank} reward to ${entry.playerId}`);
-            distributed++;
-            
-            // 记录发放历史
-            this.markDistributed(entry.playerId, type);
+            try {
+                const reward = this.getRewardForRank(rewards, entry.rank);
+                if (!reward) return;
+                
+                // 使用邮件发送器发送奖励
+                const mailId = mailSender.sendLeaderboardReward(
+                    entry.playerId,
+                    this.getLeaderboardTypeName(type),
+                    entry.rank,
+                    reward.rewards
+                );
+                
+                logSystem.info('LeaderboardReward', `Reward sent`, {
+                    playerId: entry.playerId,
+                    type,
+                    rank: entry.rank,
+                    mailId
+                });
+                
+                distributed++;
+                
+                // 记录发放历史
+                this.markDistributed(entry.playerId, type);
+            } catch (error) {
+                errors.push(`Failed to send to ${entry.playerId}: ${error}`);
+                logSystem.error('LeaderboardReward', `Failed to send reward`, {
+                    playerId: entry.playerId,
+                    error
+                });
+            }
         });
         
         return { distributed, errors };
@@ -236,6 +255,23 @@ export class LeaderboardRewardDistributor {
     }
     
     /**
+     * 获取排行榜类型名称
+     */
+    private getLeaderboardTypeName(type: LeaderboardType): string {
+        const typeNames: Record<LeaderboardType, string> = {
+            [LeaderboardType.POWER]: '战力榜',
+            [LeaderboardType.ARENA]: '竞技场',
+            [LeaderboardType.GUILD]: '公会榜',
+            [LeaderboardType.TOWER]: '爬塔榜',
+            [LeaderboardType.COLLECTION]: '收集榜',
+            [LeaderboardType.ACHIEVEMENT]: '成就榜',
+            [LeaderboardType.LEVEL]: '关卡榜',
+            [LeaderboardType.ENDLESS]: '无尽试炼'
+        };
+        return typeNames[type] || '排行榜';
+    }
+    
+    /**
      * 手动发放特定排名奖励（用于补偿等）
      */
     public manualGrantReward(
@@ -254,12 +290,20 @@ export class LeaderboardRewardDistributor {
             return { success: false, error: '未找到该排名奖励' };
         }
         
-        const mail = this.createRewardMail(type, rank, reward);
-        mail.title = `[补偿] ${mail.title}`;
-        mail.content = `【${reason}】\n\n${mail.content}`;
+        // 使用邮件发送器发送补偿
+        const mailId = mailSender.sendCompensation(
+            playerId,
+            reason,
+            reward.rewards
+        );
         
-        // TODO: 发送邮件
-        console.log(`[LeaderboardReward] Manual grant to ${playerId}: ${type} rank ${rank}`);
+        logSystem.info('LeaderboardReward', `Manual compensation sent`, {
+            playerId,
+            type,
+            rank,
+            reason,
+            mailId
+        });
         
         return { success: true };
     }

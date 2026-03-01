@@ -4,6 +4,8 @@
  */
 
 import { Mail, MailPriority } from '../mail/MailSystem';
+import { mailSender } from '../mail/MailSender';
+import { logSystem } from '../log/LogSystem';
 
 export interface WorldBossParticipationReward {
     minDamage: number;
@@ -190,44 +192,82 @@ export class WorldBossRewardDistributor {
             try {
                 // 1. 发放击杀奖励
                 if (entry.isKiller) {
-                    const killMail = this.createKillerMail(bossName, entry.damage);
-                    // TODO: 发送邮件 mailSystem.sendMail(entry.playerId, killMail);
-                    console.log(`[WorldBossReward] Killer reward to ${entry.playerId}`);
+                    const mailId = mailSender.sendWorldBossReward(
+                        entry.playerId,
+                        bossName,
+                        entry.damage,
+                        entry.rank,
+                        true,
+                        {
+                            gold: this.killReward.gold,
+                            soulCrystal: this.killReward.soulCrystal,
+                            items: this.killReward.items,
+                            title: this.killReward.title
+                        }
+                    );
+                    logSystem.info('WorldBossReward', `Killer reward sent`, {
+                        playerId: entry.playerId,
+                        bossName,
+                        mailId
+                    });
                     killerCount++;
                 }
                 
                 // 2. 发放排名奖励
                 const rankReward = this.getRankReward(entry.rank, entry.damage);
                 if (rankReward) {
-                    const rankMail = this.createRankMail(
+                    const mailId = mailSender.sendWorldBossReward(
+                        entry.playerId,
                         bossName,
-                        entry.rank,
                         entry.damage,
-                        rankReward,
-                        totalParticipants
+                        entry.rank,
+                        false,
+                        rankReward.rewards
                     );
-                    // TODO: 发送邮件
-                    console.log(`[WorldBossReward] Rank ${entry.rank} reward to ${entry.playerId}`);
+                    logSystem.info('WorldBossReward', `Rank reward sent`, {
+                        playerId: entry.playerId,
+                        bossName,
+                        rank: entry.rank,
+                        mailId
+                    });
                     topRankerCount++;
                 }
                 
-                // 3. 发放参与奖励
-                const participationReward = this.getParticipationReward(entry.damage);
-                if (participationReward) {
-                    const partMail = this.createParticipationMail(
-                        bossName,
-                        entry.damage,
-                        participationReward
-                    );
-                    // TODO: 发送邮件
-                    participantCount++;
+                // 3. 发放参与奖励（如果没有排名奖励）
+                if (!rankReward) {
+                    const participationReward = this.getParticipationReward(entry.damage);
+                    if (participationReward) {
+                        const mailId = mailSender.sendWorldBossReward(
+                            entry.playerId,
+                            bossName,
+                            entry.damage,
+                            0, // 参与奖没有排名
+                            false,
+                            participationReward.rewards
+                        );
+                        logSystem.info('WorldBossReward', `Participation reward sent`, {
+                            playerId: entry.playerId,
+                            bossName,
+                            mailId
+                        });
+                        participantCount++;
+                    }
                 }
             } catch (error) {
                 errors.push(`Failed to send to ${entry.playerId}: ${error}`);
+                logSystem.error('WorldBossReward', `Failed to send reward`, {
+                    playerId: entry.playerId,
+                    error
+                });
             }
         });
         
-        console.log(`[WorldBossReward] Distribution complete for ${bossName}`);
+        logSystem.info('WorldBossReward', `Distribution complete`, {
+            bossName,
+            killerCount,
+            topRankerCount,
+            participantCount
+        });
         
         return {
             success: errors.length === 0,
@@ -399,16 +439,22 @@ export class WorldBossRewardDistributor {
         playerId: string,
         bossName: string,
         reason: string,
-        compensation: { gold?: number; soulCrystal?: number; items?: any[] }
-    ): void {
-        const content = `【${bossName} 补偿】\n\n` +
-            `补偿原因：${reason}\n\n` +
-            `补偿内容：\n` +
-            (compensation.gold ? `💰 金币 × ${compensation.gold.toLocaleString()}\n` : '') +
-            (compensation.soulCrystal ? `💎 魂晶 × ${compensation.soulCrystal.toLocaleString()}\n` : '');
+        compensation: { gold?: number; soulCrystal?: number; items?: { itemId: string; count: number }[] }
+    ): string {
+        const mailId = mailSender.sendCompensation(
+            playerId,
+            `${bossName} - ${reason}`,
+            compensation
+        );
         
-        console.log(`[WorldBossReward] Manual compensation to ${playerId}: ${reason}`);
-        // TODO: 发送补偿邮件
+        logSystem.info('WorldBossReward', `Manual compensation sent`, {
+            playerId,
+            bossName,
+            reason,
+            mailId
+        });
+        
+        return mailId;
     }
 }
 
