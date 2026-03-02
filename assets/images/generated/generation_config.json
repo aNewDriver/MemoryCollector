@@ -1,0 +1,205 @@
+{
+  "project": "记忆回收者",
+  "generation_date": "2026-03-02 20:58:44",
+  "total_characters": 18,
+  "characters": [
+    {
+      "id": "jin_yu_normal",
+      "name": "火系武士-烬羽（普通版）",
+      "prompt": "anime boy, fire samurai warrior, black short hair, orange red armor, flaming katana, battle pose, fire effects, full body, high quality, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "jin_yu_awakened",
+      "name": "火系武士-烬羽（觉醒版）",
+      "prompt": "anime boy, fire samurai AWAKENED form, long red hair flowing, golden fire armor, giant flaming sword, fire wings behind, intense expression, full body, epic quality, divine aura, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "jin_yu_chibi",
+      "name": "火系武士-烬羽（Q版）",
+      "prompt": "chibi anime boy, cute fire samurai, big head small body, orange red armor, tiny flaming sword, smiling expression, full body, kawaii style, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "shuang_ren_normal",
+      "name": "水系刺客-霜刃（普通版）",
+      "prompt": "anime girl, ice assassin ninja, long silver white hair, blue skin tight leather armor, dual ice crystal daggers, agile pose, ice effects, full body, high quality, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "shuang_ren_awakened",
+      "name": "水系刺客-霜刃（觉醒版）",
+      "prompt": "anime girl, ice queen AWAKENED form, long ice blue hair flowing, crystal ice armor, ice wings, giant ice blade, cold expression, full body, epic quality, frost aura, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "shuang_ren_chibi",
+      "name": "水系刺客-霜刃（Q版）",
+      "prompt": "chibi anime girl, cute ice assassin, big head small body, blue leather outfit, tiny ice daggers, winking expression, full body, kawaii style, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "lei_yin_normal",
+      "name": "金系法师-雷音（普通版）",
+      "prompt": "anime male, thunder lightning mage, middle aged, long purple hair, golden robe, thunder staff, majestic pose, lightning effects, full body, high quality, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "lei_yin_awakened",
+      "name": "金系法师-雷音（觉醒版）",
+      "prompt": "anime male, thunder god AWAKENED form, white hair flowing, golden thunder armor, thunder halo behind, thunder staff scepter, majestic expression, full body, epic quality, divine aura, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "lei_yin_chibi",
+      "name": "金系法师-雷音（Q版）",
+      "prompt": "chibi anime male, cute thunder mage, big head small body, purple robe, tiny thunder staff, wise expression, full body, kawaii style, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "qing_lan_normal",
+      "name": "木系射手-青岚（普通版）",
+      "prompt": "anime girl, wind archer ranger, long green hair, forest green cloak, wind elemental bow, aiming pose, wind effects, full body, high quality, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "qing_lan_awakened",
+      "name": "木系射手-青岚（觉醒版）",
+      "prompt": "anime girl, wind goddess AWAKENED form, green hair flowing, nature armor, wind wings, giant wind bow, focused expression, full body, epic quality, nature aura, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "qing_lan_chibi",
+      "name": "木系射手-青岚（Q版）",
+      "prompt": "chibi anime girl, cute wind archer, big head small body, green cloak, tiny bow, cheerful expression, full body, kawaii style, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "yue_chen_normal",
+      "name": "土系坦克-岳尘（普通版）",
+      "prompt": "anime male, earth guardian tank, brown hair, heavy stone armor, giant shield, defensive stance, earth effects, full body, high quality, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "yue_chen_awakened",
+      "name": "土系坦克-岳尘（觉醒版）",
+      "prompt": "anime male, earth titan AWAKENED form, rocky hair, earth elemental armor, mountain shield, fortress stance, full body, epic quality, earth aura, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "yue_chen_chibi",
+      "name": "土系坦克-岳尘（Q版）",
+      "prompt": "chibi anime male, cute earth guardian, big head small body, stone armor, tiny shield, determined expression, full body, kawaii style, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "you_zhu_normal",
+      "name": "暗系牧师-幽烛（普通版）",
+      "prompt": "anime girl, dark light priestess, long black hair with purple highlights, dark elegant robe, shadow staff, mystical pose, dark light effects, full body, high quality, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "you_zhu_awakened",
+      "name": "暗系牧师-幽烛（觉醒版）",
+      "prompt": "anime girl, shadow light goddess AWAKENED form, hair flowing with shadows, dark light armor, shadow wings, dual light shadow orbs, mysterious expression, full body, epic quality, divine aura, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    },
+    {
+      "id": "you_zhu_chibi",
+      "name": "暗系牧师-幽烛（Q版）",
+      "prompt": "chibi anime girl, cute dark priestess, big head small body, dark robe, tiny shadow staff, gentle expression, full body, kawaii style, game character art, transparent background",
+      "negative_prompt": "low quality, blurry, bad anatomy, extra limbs, watermark, signature",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "cfg_scale": 7.5,
+      "seed": -1
+    }
+  ]
+}
