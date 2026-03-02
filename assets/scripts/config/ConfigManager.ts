@@ -153,7 +153,7 @@ export class ConfigManager {
     }
     
     // 更新配置（热更新）
-    public updateConfig(updates: Partial<GameConfig>>): void {
+    public updateConfig(updates: Partial<GameConfig>): void {
         const oldConfig = { ...this.config };
         this.config = this.mergeConfig(this.config, updates);
         this.config.lastUpdate = Date.now();

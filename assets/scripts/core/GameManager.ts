@@ -4,7 +4,7 @@
  */
 
 import { _decorator, Component, Node, director, game } from 'cc';
-import { playerDataManager } from './data/PlayerData';
+import { playerDataManager } from './data/PlayerData.ts';
 import { saveManager, GameSaveData } from './save/SaveManager';
 import { audioManager, BGMType } from './audio/AudioManager';
 import { sceneManager, GameScene } from './core/SceneManager';

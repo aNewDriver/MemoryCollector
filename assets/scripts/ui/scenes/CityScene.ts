@@ -5,7 +5,7 @@
 
 import { _decorator, Component, Node, Label, animation } from 'cc';
 import { GameScene, sceneManager } from '../core/SceneManager';
-import { playerDataManager } from '../data/PlayerData';
+import { playerDataManager } from '../data/PlayerData.ts';
 
 const { ccclass, property } = _decorator;
 

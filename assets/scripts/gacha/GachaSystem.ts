@@ -3,7 +3,8 @@
  * 酒馆抽卡逻辑
  */
 
-import { CardData, Rarity, getAllCards, getCardsByRarity } from './CardData';
+import { CardData, Rarity } from './CardData.ts';
+import { getAllCards, getCardsByRarity } from './CardDatabase.ts';
 
 // 卡池配置
 export interface GachaPool {

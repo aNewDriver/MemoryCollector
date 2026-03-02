@@ -4,8 +4,8 @@
  */
 
 import { _decorator, Component, Node, Label, Sprite } from 'cc';
-import { PlayerData, playerDataManager } from '../data/PlayerData';
-import { CardInstance } from '../data/CardData';
+import { PlayerData, playerDataManager } from '../data/PlayerData.ts';
+import { CardInstance } from '../data/CardData.ts';
 
 const { ccclass, property } = _decorator;
 

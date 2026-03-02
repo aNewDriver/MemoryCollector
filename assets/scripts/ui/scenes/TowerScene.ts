@@ -4,7 +4,7 @@
  */
 
 import { _decorator, Component, Node, Label, ScrollView, Prefab, instantiate } from 'cc';
-import { playerDataManager, TowerFloorData, RewardData } from '../data/PlayerData';
+import { playerDataManager, TowerFloorData, RewardData } from '../data/PlayerData.ts';
 
 const { ccclass, property } = _decorator;
 

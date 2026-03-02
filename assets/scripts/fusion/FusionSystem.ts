@@ -128,8 +128,7 @@ export class FusionSystem {
             return { canEvolve: false, error: '该卡牌无法进化' };
         }
         
-        const availablePaths = paths.filter(p =
-003e 
+        const availablePaths = paths.filter(p =>
             cardLevel >= p.requirements.level &&
             cardAscension >= p.requirements.ascension &&
             cardAffinity >= p.requirements.affinity

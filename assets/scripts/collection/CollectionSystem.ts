@@ -3,7 +3,8 @@
  * 记录已收集的卡牌、敌人、物品等
  */
 
-import { getAllCards, CardData } from '../data/CardData';
+import { CardData } from '../data/CardData.ts';
+import { getAllCards } from '../data/CardDatabase.ts';
 
 export interface CollectionCategory {
     id: string;

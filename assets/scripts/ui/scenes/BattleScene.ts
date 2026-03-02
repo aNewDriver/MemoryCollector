@@ -185,7 +185,9 @@ export class BattleScene extends Component {
     
     private showSkillPanel(unit: BattleUnit) {
         // 显示技能面板
-        this.skillPanel?.active = true;
+        if (this.skillPanel) {
+            this.skillPanel.active = true;
+        }
         
         // 更新能量显示
         this.energyBar!.progress = unit.currentEnergy / unit.maxEnergy;

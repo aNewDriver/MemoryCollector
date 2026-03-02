@@ -9,7 +9,7 @@ import {
     ChapterData, 
     LevelData, 
     LevelType 
-} from '../data/PlayerData';
+} from '../data/PlayerData.ts';
 
 const { ccclass, property } = _decorator;
 
