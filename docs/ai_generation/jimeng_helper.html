@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记忆回收者 - 即梦批量生成助手</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #ffe66d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .guide {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .guide h2 {
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .guide ol {
+            padding-left: 20px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        .character {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+        .character.jin_yu { border-color: #ff6b6b; }
+        .character.qing_yi { border-color: #4ecdc4; }
+        .character.zhu_feng { border-color: #95e1d3; }
+        .character.yan_xin { border-color: #c9b99a; }
+        .character.ming_zhu { border-color: #ffd93d; }
+        .character.can_ying { border-color: #6c5ce7; }
+        
+        .char-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .char-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 12px;
+        }
+        .jin_yu .char-icon { background: #ff6b6b; }
+        .qing_yi .char-icon { background: #4ecdc4; }
+        .zhu_feng .char-icon { background: #95e1d3; }
+        .yan_xin .char-icon { background: #c9b99a; }
+        .ming_zhu .char-icon { background: #ffd93d; color: #333; }
+        .can_ying .char-icon { background: #6c5ce7; }
+        
+        .char-info h3 { font-size: 20px; margin-bottom: 4px; }
+        .char-info .title { color: #888; font-size: 14px; }
+        
+        .version {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .version-name {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+        .filename {
+            font-size: 12px;
+            color: #888;
+            font-family: monospace;
+        }
+        .prompt-box {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #ddd;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+        .copy-btn {
+            background: #4ecdc4;
+            color: #1a1a2e;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: #45b7b8;
+            transform: translateY(-2px);
+        }
+        .copy-btn.copied {
+            background: #2ecc71;
+        }
+        .batch-actions {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .batch-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            transition: all 0.3s;
+        }
+        .batch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.5);
+        }
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    
+    <div class="container">
+        <h1>🎨 记忆回收者 - 即梦批量生成助手</h1>
+        <p class="subtitle">一键复制Prompt，快速生成角色立绘</p>
+        
+        <div class="guide">
+            <h2>📋 使用指南</h2>
+            <ol>
+                <li>访问 <a href="https://jimeng.jianying.com" target="_blank" style="color:#4ecdc4;">即梦官网</a> 并登录</li>
+                <li>进入"文生图"功能，设置比例 9:16</li>
+                <li>点击下方"复制Prompt"按钮</li>
+                <li>粘贴到即梦输入框，点击生成</li>
+                <li>下载图片并重命名，放入项目目录</li>
+            </ol>
+        </div>
+
+        <div class="character jin_yu">
+            <div class="char-header">
+                <div class="char-icon">🔥</div>
+                <div class="char-info">
+                    <h3>烬羽</h3>
+                    <span class="title">焚天剑姬 · 火系</span>
+                </div>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">全身立绘 (1024×1820)</span>
+                    <span class="filename">jin_yu_full.png</span>
+                </div>
+                <div class="prompt-box" id="jin_yu_full">古风女战士，凤凰主题铠甲，火焰纹路，手持长刀，英姿飒爽，20岁，黑色长发带红色挑染，金色眼睛，赤红与黑色相间的轻甲，凤凰翅膀形状的肩甲，破损飘逸的披风，刀刃有熔岩般的纹路，眼神坚定而悲伤，侧身拔刀姿势，黄昏下燃烧的村庄废墟背景，空中漂浮着火星和灰烬，戏剧性金色时光照明，暖橙红色调为主，深邃黑色阴影，国风二次元风格，高精细节，电影感，概念艺术，全身像，动态构图</div>
+                <button class="copy-btn" onclick="copyPrompt('jin_yu_full', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">觉醒立绘 (1024×1820)</span>
+                    <span class="filename">jin_yu_awaken.png</span>
+                </div>
+                <div class="prompt-box" id="jin_yu_awaken">女战士被烈焰包围，铠甲幻化成凤凰翅膀显现，眼睛燃烧着火光，头发无重力飘浮，身后凤凰展翅，到处都是金色火焰，超凡力量，终极形态，金色光环，国风二次元，高精细节，电影级光照</div>
+                <button class="copy-btn" onclick="copyPrompt('jin_yu_awaken', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">头像 (512×512)</span>
+                    <span class="filename">jin_yu_portrait.png</span>
+                </div>
+                <div class="prompt-box" id="jin_yu_portrait">古风女战士，凤凰铠甲，黑发红挑染，金色眼睛，赤黑轻甲，凤凰翅膀肩甲，飘逸披风，熔岩长刀，坚定悲伤表情，半身像，国风二次元</div>
+                <button class="copy-btn" onclick="copyPrompt('jin_yu_portrait', this)">复制Prompt</button>
+            </div>
+        </div>
+
+        <div class="character qing_yi">
+            <div class="char-header">
+                <div class="char-icon">💧</div>
+                <div class="char-info">
+                    <h3>青漪</h3>
+                    <span class="title">流水琴仙 · 水系</span>
+                </div>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">全身立绘</span>
+                    <span class="filename">qing_yi_full.png</span>
+                </div>
+                <div class="prompt-box" id="qing_yi_full">优雅的女琴师，飘逸的青色长裙，怀抱古琴，空灵绝美的气质，水系魔法，22岁，青色长发如瀑布，珍珠发饰，清澈蓝眼，白色丝绸上衣，宽大飘逸袖子，脚系银铃，赤足，宁静忧伤的表情，跪坐抚琴姿势，月光下的竹林背景，薄雾缭绕，蓝色光点漂浮，柔和月光，清冷蓝调，生物发光粒子，中国水墨画融合二次元风格，空灵梦幻，全身坐姿构图</div>
+                <button class="copy-btn" onclick="copyPrompt('qing_yi_full', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">觉醒立绘</span>
+                    <span class="filename">qing_yi_awaken.png</span>
+                </div>
+                <div class="prompt-box" id="qing_yi_awaken">天界琴师空中飘浮，被水龙环绕，长裙化作液态水流，头发如瀑布流淌，弹奏音乐产生可见水波纹，身后巨大浪潮和水龙，超凡脱俗的美貌，神圣水精灵，青色银光，空灵氛围</div>
+                <button class="copy-btn" onclick="copyPrompt('qing_yi_awaken', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">头像</span>
+                    <span class="filename">qing_yi_portrait.png</span>
+                </div>
+                <div class="prompt-box" id="qing_yi_portrait">女琴师，青发瀑布，珍珠发饰，清澈蓝眼，飘逸青裙，白丝宽袖，怀抱古琴，宁静忧伤，半身像，国风二次元</div>
+                <button class="copy-btn" onclick="copyPrompt('qing_yi_portrait', this)">复制Prompt</button>
+            </div>
+        </div>
+
+        <div class="character zhu_feng">
+            <div class="char-header">
+                <div class="char-icon">🌪️</div>
+                <div class="char-info">
+                    <h3>逐风</h3>
+                    <span class="title">影杀 · 风系</span>
+                </div>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">全身立绘</span>
+                    <span class="filename">zhu_feng_full.png</span>
+                </div>
+                <div class="prompt-box" id="zhu_feng_full">神秘蒙面刺客，深色紧身衣，双短刃，风系特效，潜行姿势，黑色面罩遮下半脸，锐利翠绿色眼睛，黑色短发，深绿与黑色相间的服装，皮质护甲，多个武器袋，露指手套，手臂缠绷带，短小披风，手持散发绿光的双匕首，冰冷锐利杀手眼神，蹲在建筑边缘如狩猎猎豹的姿势，风暴中的废墟城市背景，风沙树叶漩涡，阴沉乌云，动感构图，国漫风格</div>
+                <button class="copy-btn" onclick="copyPrompt('zhu_feng_full', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">觉醒立绘</span>
+                    <span class="filename">zhu_feng_awaken.png</span>
+                </div>
+                <div class="prompt-box" id="zhu_feng_awaken">刺客以不可能的速度移动留下残影，被龙卷风包围，刀刃散发绿色风系能量，面罩部分露出强烈表情，风暴完全吞没背景，终极风系绝技，隐形速度，绿色闪电，超凡刺客</div>
+                <button class="copy-btn" onclick="copyPrompt('zhu_feng_awaken', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">头像</span>
+                    <span class="filename">zhu_feng_portrait.png</span>
+                </div>
+                <div class="prompt-box" id="zhu_feng_portrait">蒙面刺客，黑面罩，翠绿锐利眼睛，黑发，深绿黑衣，皮质护甲，手持绿光双匕，冰冷杀手眼神，半身像，国漫风格</div>
+                <button class="copy-btn" onclick="copyPrompt('zhu_feng_portrait', this)">复制Prompt</button>
+            </div>
+        </div>
+
+        <div class="character yan_xin">
+            <div class="char-header">
+                <div class="char-icon">⛰️</div>
+                <div class="char-info">
+                    <h3>岩心</h3>
+                    <span class="title">铁壁 · 土系</span>
+                </div>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">全身立绘</span>
+                    <span class="filename">yan_xin_full.png</span>
+                </div>
+                <div class="prompt-box" id="yan_xin_full">魁梧重装骑士，巨塔盾，岩石质感铠甲，坚不可摧的守护者，30岁，高大肌肉身材，短发如钢针竖立，面部有伤疤，坚毅眼神，全身厚重岩石纹理板甲，山形肩甲，胸前大地宝石，可拆卸面甲头盔，破烂棕色披风，带裂纹图案的巨大塔盾，单手战锤，稳固站姿，破碎城墙或山地要塞背景，尘土飞扬的氛围，大地色调，写实动漫风格，稳健构图</div>
+                <button class="copy-btn" onclick="copyPrompt('yan_xin_full', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">觉醒立绘</span>
+                    <span class="filename">yan_xin_awaken.png</span>
+                </div>
+                <div class="prompt-box" id="yan_xin_awaken">铠甲覆盖活体岩石和水晶，身体部分与岩石融合，盾化作巨大岩墙，仅仅站立就产生地震，身后群山升起，大地泰坦形态，坚不可摧的堡垒，棕金光芒，终极防御</div>
+                <button class="copy-btn" onclick="copyPrompt('yan_xin_awaken', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">头像</span>
+                    <span class="filename">yan_xin_portrait.png</span>
+                </div>
+                <div class="prompt-box" id="yan_xin_portrait">重装骑士，岩石铠甲，高大肌肉，短发尖刺，面部伤疤，坚毅眼神，岩石纹理板甲，山形肩甲，手持巨盾战锤，半身像，写实动漫</div>
+                <button class="copy-btn" onclick="copyPrompt('yan_xin_portrait', this)">复制Prompt</button>
+            </div>
+        </div>
+
+        <div class="character ming_zhu">
+            <div class="char-header">
+                <div class="char-icon">✨</div>
+                <div class="char-info">
+                    <h3>明烛</h3>
+                    <span class="title">圣光祭司 · 光系</span>
+                </div>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">全身立绘</span>
+                    <span class="filename">ming_zhu_full.png</span>
+                </div>
+                <div class="prompt-box" id="ming_zhu_full">圣洁女祭司，金色光芒，白色长袍，神圣法杖，慈悲之心，25岁，金色编发，金色皇冠，温暖琥珀色眼睛，白色金色相间圣袍，太阳刺绣，金色腰带配十字架，金色饰品，手持散发光芒的神圣法杖，温柔慈悲表情，温和微笑，站立或优雅飘浮，光芒四射的神殿或云端圣所背景，金色光束，漂浮光点，天使符号，温暖神圣氛围，神圣幻想艺术，国漫风格</div>
+                <button class="copy-btn" onclick="copyPrompt('ming_zhu_full', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">觉醒立绘</span>
+                    <span class="filename">ming_zhu_awaken.png</span>
+                </div>
+                <div class="prompt-box" id="ming_zhu_awaken">完全转化为天使形态，纯光之翼，高空飘浮，散发强烈金色光环驱散一切黑暗，眼睛发光白色，背景天国之门开启，神圣升华，终极神圣形态，超凡光芒，金白光芒爆发</div>
+                <button class="copy-btn" onclick="copyPrompt('ming_zhu_awaken', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">头像</span>
+                    <span class="filename">ming_zhu_portrait.png</span>
+                </div>
+                <div class="prompt-box" id="ming_zhu_portrait">圣洁女祭司，金发编辫，金色皇冠，温暖琥珀眼，白金圣袍，太阳刺绣，手持发光法杖，温柔微笑，半身像，神圣幻想艺术</div>
+                <button class="copy-btn" onclick="copyPrompt('ming_zhu_portrait', this)">复制Prompt</button>
+            </div>
+        </div>
+
+        <div class="character can_ying">
+            <div class="char-header">
+                <div class="char-icon">🌑</div>
+                <div class="char-info">
+                    <h3>残影</h3>
+                    <span class="title">记忆碎片 · 暗系</span>
+                </div>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">全身立绘</span>
+                    <span class="filename">can_ying_full.png</span>
+                </div>
+                <div class="prompt-box" id="can_ying_full">神秘人影轮廓，记忆碎片，虚空实体，破碎现实，空灵，修长身形由记忆碎片构成，碎片间透出幽蓝虚空光芒，面部被阴影遮蔽，复杂情感的眼睛，半透明身体能看到不同场景的片段闪现，蓝色微光影刃，神秘伸手向观众姿势，纯粹虚空或星空背景，遥远星云，漂浮记忆碎片，深蓝与黑色，青色高光，抽象超现实，神秘氛围，国漫风格</div>
+                <button class="copy-btn" onclick="copyPrompt('can_ying_full', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">觉醒立绘</span>
+                    <span class="filename">can_ying_awaken.png</span>
+                </div>
+                <div class="prompt-box" id="can_ying_awaken">记忆碎片凝聚成更明确但仍空灵形态，通过碎片揭示真实身份片段，被记忆与阴影漩涡包围，眼睛展现人类全部情感，背景多重时间线汇聚，通过记忆升华，终极虚空形态</div>
+                <button class="copy-btn" onclick="copyPrompt('can_ying_awaken', this)">复制Prompt</button>
+            </div>
+            
+            <div class="version">
+                <div class="version-header">
+                    <span class="version-name">头像</span>
+                    <span class="filename">can_ying_portrait.png</span>
+                </div>
+                <div class="prompt-box" id="can_ying_portrait">神秘剪影，记忆碎片，虚空实体，身形碎片构成，幽蓝光芒，半透明身体，复杂眼神，半身像，抽象超现实</div>
+                <button class="copy-btn" onclick="copyPrompt('can_ying_portrait', this)">复制Prompt</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="batch-actions">
+        <button class="batch-btn" onclick="openJimeng()">打开即梦官网</button>
+    </div>
+
+    <script>
+        let copiedCount = 0;
+        const totalCount = 18;
+
+        function copyPrompt(id, btn) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerText = '已复制!';
+                btn.classList.add('copied');
+                copiedCount++;
+                updateProgress();
+                setTimeout(() => {
+                    btn.innerText = '复制Prompt';
+                    btn.classList.remove('copied');
+                }, 1500);
+            });
+        }
+
+        function updateProgress() {
+            const percentage = (copiedCount / totalCount) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        function openJimeng() {
+            window.open('https://jimeng.jianying.com', '_blank');
+        }
+    </script>
+</body>
+</html>
