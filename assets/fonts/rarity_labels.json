@@ -1,0 +1,35 @@
+{
+  "texture": "rarity_labels.png",
+  "labels": {
+    "N": {
+      "x": 5,
+      "y": 10,
+      "width": 105,
+      "height": 60
+    },
+    "R": {
+      "x": 125,
+      "y": 10,
+      "width": 105,
+      "height": 60
+    },
+    "SR": {
+      "x": 245,
+      "y": 10,
+      "width": 105,
+      "height": 60
+    },
+    "SSR": {
+      "x": 365,
+      "y": 10,
+      "width": 105,
+      "height": 60
+    },
+    "UR": {
+      "x": 485,
+      "y": 10,
+      "width": 105,
+      "height": 60
+    }
+  }
+}

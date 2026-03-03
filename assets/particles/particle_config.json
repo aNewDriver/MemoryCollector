@@ -1,0 +1,48 @@
+{
+  "particles": {
+    "glow": {
+      "texture": "glow_gold.png",
+      "blend_mode": "add"
+    },
+    "star": {
+      "texture": "star.png",
+      "blend_mode": "add"
+    },
+    "spark": {
+      "texture": "spark.png",
+      "blend_mode": "add"
+    },
+    "smoke": {
+      "texture": "smoke.png",
+      "blend_mode": "normal"
+    },
+    "fire": {
+      "texture": "element_fire.png",
+      "blend_mode": "add"
+    },
+    "water": {
+      "texture": "element_water.png",
+      "blend_mode": "normal"
+    },
+    "wood": {
+      "texture": "element_wood.png",
+      "blend_mode": "normal"
+    },
+    "metal": {
+      "texture": "element_metal.png",
+      "blend_mode": "add"
+    },
+    "earth": {
+      "texture": "element_earth.png",
+      "blend_mode": "normal"
+    },
+    "light": {
+      "texture": "element_light.png",
+      "blend_mode": "add"
+    },
+    "dark": {
+      "texture": "element_dark.png",
+      "blend_mode": "add"
+    }
+  }
+}
