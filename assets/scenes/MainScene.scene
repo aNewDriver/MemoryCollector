@@ -1,203 +1,236 @@
-{
-  "__type__": "__Declaration__",
-  "__editorExtras__": {},
-  "__metas__": {},
-  "__any__": [
-    {
-      "__type__": "cc.Scene",
-      "_name": "MainScene",
-      "_objFlags": 0,
-      "_parent": null,
-      "_children": [
-        {
-          "__id__": 2
-        },
-        {
-          "__id__": 3
-        }
-      ],
-      "_active": true,
-      "_components": [],
-      "_prefab": null,
-      "_lpos": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "_lrot": {
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "w": 1
-      },
-      "_lscale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "_mobility": 0,
-      "_layer": 33554432,
-      "_id": "6d3da0bb-b408-4aa7-be85-8a0a36fe2e6b"
-    },
-    {
-      "__type__": "cc.Node",
-      "_name": "Canvas",
-      "_objFlags": 0,
-      "_parent": {
-        "__id__": 1
-      },
-      "_children": [],
-      "_active": true,
-      "_components": [
-        {
-          "__type__": "cc.UITransform",
-          "_name": "",
-          "_objFlags": 0,
-          "node": {
-            "__id__": 2
-          },
-          "_enabled": true,
-          "__prefab": null,
-          "_contentSize": {
-            "width": 750,
-            "height": 1334
-          },
-          "_anchorPoint": {
-            "x": 0.5,
-            "y": 0.5
-          }
-        },
-        {
-          "__type__": "cc.Canvas",
-          "_name": "",
-          "_objFlags": 0,
-          "node": {
-            "__id__": 2
-          },
-          "_enabled": true,
-          "__prefab": null,
-          "_cameraComponent": {
-            "__id__": 4
-          },
-          "_alignCanvasWithScreen": true
-        },
-        {
-          "__type__": "cc.Widget",
-          "_name": "",
-          "_objFlags": 0,
-          "node": {
-            "__id__": 2
-          },
-          "_enabled": true,
-          "__prefab": null,
-          "_alignFlags": 45,
-          "_target": null,
-          "_left": 0,
-          "_right": 0,
-          "_top": 0,
-          "_bottom": 0,
-          "_horizontalCenter": 0,
-          "_verticalCenter": 0,
-          "_isAbsLeft": true,
-          "_isAbsRight": true,
-          "_isAbsTop": true,
-          "_isAbsBottom": true,
-          "_isAbsHorizontalCenter": true,
-          "_isAbsVerticalCenter": true,
-          "_originalWidth": 0,
-          "_originalHeight": 0
-        }
-      ],
-      "_prefab": null,
-      "_lpos": {
-        "x": 375,
-        "y": 667,
-        "z": 0
-      },
-      "_lrot": {
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "w": 1
-      },
-      "_lscale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "_mobility": 0,
-      "_layer": 33554432,
-      "_id": "a1d69db6-b2fc-42be-8891-cc4add554fa8"
-    },
-    {
-      "__type__": "cc.Node",
-      "_name": "MainCamera",
-      "_objFlags": 0,
-      "_parent": {
-        "__id__": 1
-      },
-      "_children": [],
-      "_active": true,
-      "_components": [
-        {
-          "__type__": "cc.Camera",
-          "_name": "",
-          "_objFlags": 0,
-          "node": {
-            "__id__": 3
-          },
-          "_enabled": true,
-          "__prefab": null,
-          "_projection": 0,
-          "_priority": 0,
-          "_fov": 45,
-          "_fovAxis": 0,
-          "_orthoHeight": 667,
-          "_near": 0,
-          "_far": 2000,
-          "_color": {
-            "r": 0,
-            "g": 0,
-            "b": 0,
-            "a": 255
-          },
-          "_depth": 1,
-          "_stencil": 0,
-          "_clearFlags": 7,
-          "_rect": {
-            "x": 0,
-            "y": 0,
-            "width": 1,
-            "height": 1
-          },
-          "_aperture": 19,
-          "_shutter": 7,
-          "_iso": 0,
-          "_screenScale": 1,
-          "_visibility": 33554432,
-          "_targetTexture": null
-        }
-      ],
-      "_prefab": null,
-      "_lpos": {
-        "x": 375,
-        "y": 667,
-        "z": 1000
-      },
-      "_lrot": {
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "w": 1
-      },
-      "_lscale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "_mobility": 0,
-      "_layer": 33554432,
-      "_id": "43fefe0f-d0d9-493c-a748-61a003f6a55e"
+[
+  {
+    "__type__": "cc.SceneAsset",
+    "_name": "MainScene",
+    "_objFlags": 0,
+    "_native": "",
+    "scene": {
+      "__id__": 1
     }
-  ]
-}
+  },
+  {
+    "__type__": "cc.Scene",
+    "_name": "MainScene",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "autoReleaseAssets": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Canvas",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      }
+    ],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 7
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 360,
+      "y": 640,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Background",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 8
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "UI",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "GameManager",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 9
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 720,
+      "height": 1280
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    }
+  },
+  {
+    "__type__": "cc.Canvas",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_cameraComponent": null,
+    "_alignCanvasWithScreen": true
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "_spriteFrame": null,
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true
+  },
+  {
+    "__type__": "cc.GameManager",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 5
+    },
+    "_enabled": true,
+    "isDebug": true
+  }
+]
