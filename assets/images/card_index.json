@@ -1,0 +1,1698 @@
+{
+  "metal": {
+    "N": [
+      {
+        "id": "metal_N_001",
+        "file": "cards/metal_N_001.png"
+      },
+      {
+        "id": "metal_N_002",
+        "file": "cards/metal_N_002.png"
+      },
+      {
+        "id": "metal_N_003",
+        "file": "cards/metal_N_003.png"
+      },
+      {
+        "id": "metal_N_004",
+        "file": "cards/metal_N_004.png"
+      },
+      {
+        "id": "metal_N_005",
+        "file": "cards/metal_N_005.png"
+      },
+      {
+        "id": "metal_N_006",
+        "file": "cards/metal_N_006.png"
+      },
+      {
+        "id": "metal_N_007",
+        "file": "cards/metal_N_007.png"
+      },
+      {
+        "id": "metal_N_008",
+        "file": "cards/metal_N_008.png"
+      },
+      {
+        "id": "metal_N_009",
+        "file": "cards/metal_N_009.png"
+      },
+      {
+        "id": "metal_N_010",
+        "file": "cards/metal_N_010.png"
+      },
+      {
+        "id": "metal_N_011",
+        "file": "cards/metal_N_011.png"
+      },
+      {
+        "id": "metal_N_012",
+        "file": "cards/metal_N_012.png"
+      },
+      {
+        "id": "metal_N_013",
+        "file": "cards/metal_N_013.png"
+      },
+      {
+        "id": "metal_N_014",
+        "file": "cards/metal_N_014.png"
+      },
+      {
+        "id": "metal_N_015",
+        "file": "cards/metal_N_015.png"
+      },
+      {
+        "id": "metal_N_016",
+        "file": "cards/metal_N_016.png"
+      },
+      {
+        "id": "metal_N_017",
+        "file": "cards/metal_N_017.png"
+      },
+      {
+        "id": "metal_N_018",
+        "file": "cards/metal_N_018.png"
+      },
+      {
+        "id": "metal_N_019",
+        "file": "cards/metal_N_019.png"
+      },
+      {
+        "id": "metal_N_020",
+        "file": "cards/metal_N_020.png"
+      },
+      {
+        "id": "metal_N_021",
+        "file": "cards/metal_N_021.png"
+      },
+      {
+        "id": "metal_N_022",
+        "file": "cards/metal_N_022.png"
+      },
+      {
+        "id": "metal_N_023",
+        "file": "cards/metal_N_023.png"
+      },
+      {
+        "id": "metal_N_024",
+        "file": "cards/metal_N_024.png"
+      },
+      {
+        "id": "metal_N_025",
+        "file": "cards/metal_N_025.png"
+      },
+      {
+        "id": "metal_N_026",
+        "file": "cards/metal_N_026.png"
+      },
+      {
+        "id": "metal_N_027",
+        "file": "cards/metal_N_027.png"
+      },
+      {
+        "id": "metal_N_028",
+        "file": "cards/metal_N_028.png"
+      },
+      {
+        "id": "metal_N_029",
+        "file": "cards/metal_N_029.png"
+      },
+      {
+        "id": "metal_N_030",
+        "file": "cards/metal_N_030.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "metal_R_001",
+        "file": "cards/metal_R_001.png"
+      },
+      {
+        "id": "metal_R_002",
+        "file": "cards/metal_R_002.png"
+      },
+      {
+        "id": "metal_R_003",
+        "file": "cards/metal_R_003.png"
+      },
+      {
+        "id": "metal_R_004",
+        "file": "cards/metal_R_004.png"
+      },
+      {
+        "id": "metal_R_005",
+        "file": "cards/metal_R_005.png"
+      },
+      {
+        "id": "metal_R_006",
+        "file": "cards/metal_R_006.png"
+      },
+      {
+        "id": "metal_R_007",
+        "file": "cards/metal_R_007.png"
+      },
+      {
+        "id": "metal_R_008",
+        "file": "cards/metal_R_008.png"
+      },
+      {
+        "id": "metal_R_009",
+        "file": "cards/metal_R_009.png"
+      },
+      {
+        "id": "metal_R_010",
+        "file": "cards/metal_R_010.png"
+      },
+      {
+        "id": "metal_R_011",
+        "file": "cards/metal_R_011.png"
+      },
+      {
+        "id": "metal_R_012",
+        "file": "cards/metal_R_012.png"
+      },
+      {
+        "id": "metal_R_013",
+        "file": "cards/metal_R_013.png"
+      },
+      {
+        "id": "metal_R_014",
+        "file": "cards/metal_R_014.png"
+      },
+      {
+        "id": "metal_R_015",
+        "file": "cards/metal_R_015.png"
+      },
+      {
+        "id": "metal_R_016",
+        "file": "cards/metal_R_016.png"
+      },
+      {
+        "id": "metal_R_017",
+        "file": "cards/metal_R_017.png"
+      },
+      {
+        "id": "metal_R_018",
+        "file": "cards/metal_R_018.png"
+      },
+      {
+        "id": "metal_R_019",
+        "file": "cards/metal_R_019.png"
+      },
+      {
+        "id": "metal_R_020",
+        "file": "cards/metal_R_020.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "metal_SR_001",
+        "file": "cards/metal_SR_001.png"
+      },
+      {
+        "id": "metal_SR_002",
+        "file": "cards/metal_SR_002.png"
+      },
+      {
+        "id": "metal_SR_003",
+        "file": "cards/metal_SR_003.png"
+      },
+      {
+        "id": "metal_SR_004",
+        "file": "cards/metal_SR_004.png"
+      },
+      {
+        "id": "metal_SR_005",
+        "file": "cards/metal_SR_005.png"
+      },
+      {
+        "id": "metal_SR_006",
+        "file": "cards/metal_SR_006.png"
+      },
+      {
+        "id": "metal_SR_007",
+        "file": "cards/metal_SR_007.png"
+      },
+      {
+        "id": "metal_SR_008",
+        "file": "cards/metal_SR_008.png"
+      },
+      {
+        "id": "metal_SR_009",
+        "file": "cards/metal_SR_009.png"
+      },
+      {
+        "id": "metal_SR_010",
+        "file": "cards/metal_SR_010.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "metal_SSR_001",
+        "file": "cards/metal_SSR_001.png"
+      },
+      {
+        "id": "metal_SSR_002",
+        "file": "cards/metal_SSR_002.png"
+      },
+      {
+        "id": "metal_SSR_003",
+        "file": "cards/metal_SSR_003.png"
+      },
+      {
+        "id": "metal_SSR_004",
+        "file": "cards/metal_SSR_004.png"
+      },
+      {
+        "id": "metal_SSR_005",
+        "file": "cards/metal_SSR_005.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "metal_UR_001",
+        "file": "cards/metal_UR_001.png"
+      },
+      {
+        "id": "metal_UR_002",
+        "file": "cards/metal_UR_002.png"
+      }
+    ]
+  },
+  "wood": {
+    "N": [
+      {
+        "id": "wood_N_001",
+        "file": "cards/wood_N_001.png"
+      },
+      {
+        "id": "wood_N_002",
+        "file": "cards/wood_N_002.png"
+      },
+      {
+        "id": "wood_N_003",
+        "file": "cards/wood_N_003.png"
+      },
+      {
+        "id": "wood_N_004",
+        "file": "cards/wood_N_004.png"
+      },
+      {
+        "id": "wood_N_005",
+        "file": "cards/wood_N_005.png"
+      },
+      {
+        "id": "wood_N_006",
+        "file": "cards/wood_N_006.png"
+      },
+      {
+        "id": "wood_N_007",
+        "file": "cards/wood_N_007.png"
+      },
+      {
+        "id": "wood_N_008",
+        "file": "cards/wood_N_008.png"
+      },
+      {
+        "id": "wood_N_009",
+        "file": "cards/wood_N_009.png"
+      },
+      {
+        "id": "wood_N_010",
+        "file": "cards/wood_N_010.png"
+      },
+      {
+        "id": "wood_N_011",
+        "file": "cards/wood_N_011.png"
+      },
+      {
+        "id": "wood_N_012",
+        "file": "cards/wood_N_012.png"
+      },
+      {
+        "id": "wood_N_013",
+        "file": "cards/wood_N_013.png"
+      },
+      {
+        "id": "wood_N_014",
+        "file": "cards/wood_N_014.png"
+      },
+      {
+        "id": "wood_N_015",
+        "file": "cards/wood_N_015.png"
+      },
+      {
+        "id": "wood_N_016",
+        "file": "cards/wood_N_016.png"
+      },
+      {
+        "id": "wood_N_017",
+        "file": "cards/wood_N_017.png"
+      },
+      {
+        "id": "wood_N_018",
+        "file": "cards/wood_N_018.png"
+      },
+      {
+        "id": "wood_N_019",
+        "file": "cards/wood_N_019.png"
+      },
+      {
+        "id": "wood_N_020",
+        "file": "cards/wood_N_020.png"
+      },
+      {
+        "id": "wood_N_021",
+        "file": "cards/wood_N_021.png"
+      },
+      {
+        "id": "wood_N_022",
+        "file": "cards/wood_N_022.png"
+      },
+      {
+        "id": "wood_N_023",
+        "file": "cards/wood_N_023.png"
+      },
+      {
+        "id": "wood_N_024",
+        "file": "cards/wood_N_024.png"
+      },
+      {
+        "id": "wood_N_025",
+        "file": "cards/wood_N_025.png"
+      },
+      {
+        "id": "wood_N_026",
+        "file": "cards/wood_N_026.png"
+      },
+      {
+        "id": "wood_N_027",
+        "file": "cards/wood_N_027.png"
+      },
+      {
+        "id": "wood_N_028",
+        "file": "cards/wood_N_028.png"
+      },
+      {
+        "id": "wood_N_029",
+        "file": "cards/wood_N_029.png"
+      },
+      {
+        "id": "wood_N_030",
+        "file": "cards/wood_N_030.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "wood_R_001",
+        "file": "cards/wood_R_001.png"
+      },
+      {
+        "id": "wood_R_002",
+        "file": "cards/wood_R_002.png"
+      },
+      {
+        "id": "wood_R_003",
+        "file": "cards/wood_R_003.png"
+      },
+      {
+        "id": "wood_R_004",
+        "file": "cards/wood_R_004.png"
+      },
+      {
+        "id": "wood_R_005",
+        "file": "cards/wood_R_005.png"
+      },
+      {
+        "id": "wood_R_006",
+        "file": "cards/wood_R_006.png"
+      },
+      {
+        "id": "wood_R_007",
+        "file": "cards/wood_R_007.png"
+      },
+      {
+        "id": "wood_R_008",
+        "file": "cards/wood_R_008.png"
+      },
+      {
+        "id": "wood_R_009",
+        "file": "cards/wood_R_009.png"
+      },
+      {
+        "id": "wood_R_010",
+        "file": "cards/wood_R_010.png"
+      },
+      {
+        "id": "wood_R_011",
+        "file": "cards/wood_R_011.png"
+      },
+      {
+        "id": "wood_R_012",
+        "file": "cards/wood_R_012.png"
+      },
+      {
+        "id": "wood_R_013",
+        "file": "cards/wood_R_013.png"
+      },
+      {
+        "id": "wood_R_014",
+        "file": "cards/wood_R_014.png"
+      },
+      {
+        "id": "wood_R_015",
+        "file": "cards/wood_R_015.png"
+      },
+      {
+        "id": "wood_R_016",
+        "file": "cards/wood_R_016.png"
+      },
+      {
+        "id": "wood_R_017",
+        "file": "cards/wood_R_017.png"
+      },
+      {
+        "id": "wood_R_018",
+        "file": "cards/wood_R_018.png"
+      },
+      {
+        "id": "wood_R_019",
+        "file": "cards/wood_R_019.png"
+      },
+      {
+        "id": "wood_R_020",
+        "file": "cards/wood_R_020.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "wood_SR_001",
+        "file": "cards/wood_SR_001.png"
+      },
+      {
+        "id": "wood_SR_002",
+        "file": "cards/wood_SR_002.png"
+      },
+      {
+        "id": "wood_SR_003",
+        "file": "cards/wood_SR_003.png"
+      },
+      {
+        "id": "wood_SR_004",
+        "file": "cards/wood_SR_004.png"
+      },
+      {
+        "id": "wood_SR_005",
+        "file": "cards/wood_SR_005.png"
+      },
+      {
+        "id": "wood_SR_006",
+        "file": "cards/wood_SR_006.png"
+      },
+      {
+        "id": "wood_SR_007",
+        "file": "cards/wood_SR_007.png"
+      },
+      {
+        "id": "wood_SR_008",
+        "file": "cards/wood_SR_008.png"
+      },
+      {
+        "id": "wood_SR_009",
+        "file": "cards/wood_SR_009.png"
+      },
+      {
+        "id": "wood_SR_010",
+        "file": "cards/wood_SR_010.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "wood_SSR_001",
+        "file": "cards/wood_SSR_001.png"
+      },
+      {
+        "id": "wood_SSR_002",
+        "file": "cards/wood_SSR_002.png"
+      },
+      {
+        "id": "wood_SSR_003",
+        "file": "cards/wood_SSR_003.png"
+      },
+      {
+        "id": "wood_SSR_004",
+        "file": "cards/wood_SSR_004.png"
+      },
+      {
+        "id": "wood_SSR_005",
+        "file": "cards/wood_SSR_005.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "wood_UR_001",
+        "file": "cards/wood_UR_001.png"
+      },
+      {
+        "id": "wood_UR_002",
+        "file": "cards/wood_UR_002.png"
+      }
+    ]
+  },
+  "water": {
+    "N": [
+      {
+        "id": "water_N_001",
+        "file": "cards/water_N_001.png"
+      },
+      {
+        "id": "water_N_002",
+        "file": "cards/water_N_002.png"
+      },
+      {
+        "id": "water_N_003",
+        "file": "cards/water_N_003.png"
+      },
+      {
+        "id": "water_N_004",
+        "file": "cards/water_N_004.png"
+      },
+      {
+        "id": "water_N_005",
+        "file": "cards/water_N_005.png"
+      },
+      {
+        "id": "water_N_006",
+        "file": "cards/water_N_006.png"
+      },
+      {
+        "id": "water_N_007",
+        "file": "cards/water_N_007.png"
+      },
+      {
+        "id": "water_N_008",
+        "file": "cards/water_N_008.png"
+      },
+      {
+        "id": "water_N_009",
+        "file": "cards/water_N_009.png"
+      },
+      {
+        "id": "water_N_010",
+        "file": "cards/water_N_010.png"
+      },
+      {
+        "id": "water_N_011",
+        "file": "cards/water_N_011.png"
+      },
+      {
+        "id": "water_N_012",
+        "file": "cards/water_N_012.png"
+      },
+      {
+        "id": "water_N_013",
+        "file": "cards/water_N_013.png"
+      },
+      {
+        "id": "water_N_014",
+        "file": "cards/water_N_014.png"
+      },
+      {
+        "id": "water_N_015",
+        "file": "cards/water_N_015.png"
+      },
+      {
+        "id": "water_N_016",
+        "file": "cards/water_N_016.png"
+      },
+      {
+        "id": "water_N_017",
+        "file": "cards/water_N_017.png"
+      },
+      {
+        "id": "water_N_018",
+        "file": "cards/water_N_018.png"
+      },
+      {
+        "id": "water_N_019",
+        "file": "cards/water_N_019.png"
+      },
+      {
+        "id": "water_N_020",
+        "file": "cards/water_N_020.png"
+      },
+      {
+        "id": "water_N_021",
+        "file": "cards/water_N_021.png"
+      },
+      {
+        "id": "water_N_022",
+        "file": "cards/water_N_022.png"
+      },
+      {
+        "id": "water_N_023",
+        "file": "cards/water_N_023.png"
+      },
+      {
+        "id": "water_N_024",
+        "file": "cards/water_N_024.png"
+      },
+      {
+        "id": "water_N_025",
+        "file": "cards/water_N_025.png"
+      },
+      {
+        "id": "water_N_026",
+        "file": "cards/water_N_026.png"
+      },
+      {
+        "id": "water_N_027",
+        "file": "cards/water_N_027.png"
+      },
+      {
+        "id": "water_N_028",
+        "file": "cards/water_N_028.png"
+      },
+      {
+        "id": "water_N_029",
+        "file": "cards/water_N_029.png"
+      },
+      {
+        "id": "water_N_030",
+        "file": "cards/water_N_030.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "water_R_001",
+        "file": "cards/water_R_001.png"
+      },
+      {
+        "id": "water_R_002",
+        "file": "cards/water_R_002.png"
+      },
+      {
+        "id": "water_R_003",
+        "file": "cards/water_R_003.png"
+      },
+      {
+        "id": "water_R_004",
+        "file": "cards/water_R_004.png"
+      },
+      {
+        "id": "water_R_005",
+        "file": "cards/water_R_005.png"
+      },
+      {
+        "id": "water_R_006",
+        "file": "cards/water_R_006.png"
+      },
+      {
+        "id": "water_R_007",
+        "file": "cards/water_R_007.png"
+      },
+      {
+        "id": "water_R_008",
+        "file": "cards/water_R_008.png"
+      },
+      {
+        "id": "water_R_009",
+        "file": "cards/water_R_009.png"
+      },
+      {
+        "id": "water_R_010",
+        "file": "cards/water_R_010.png"
+      },
+      {
+        "id": "water_R_011",
+        "file": "cards/water_R_011.png"
+      },
+      {
+        "id": "water_R_012",
+        "file": "cards/water_R_012.png"
+      },
+      {
+        "id": "water_R_013",
+        "file": "cards/water_R_013.png"
+      },
+      {
+        "id": "water_R_014",
+        "file": "cards/water_R_014.png"
+      },
+      {
+        "id": "water_R_015",
+        "file": "cards/water_R_015.png"
+      },
+      {
+        "id": "water_R_016",
+        "file": "cards/water_R_016.png"
+      },
+      {
+        "id": "water_R_017",
+        "file": "cards/water_R_017.png"
+      },
+      {
+        "id": "water_R_018",
+        "file": "cards/water_R_018.png"
+      },
+      {
+        "id": "water_R_019",
+        "file": "cards/water_R_019.png"
+      },
+      {
+        "id": "water_R_020",
+        "file": "cards/water_R_020.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "water_SR_001",
+        "file": "cards/water_SR_001.png"
+      },
+      {
+        "id": "water_SR_002",
+        "file": "cards/water_SR_002.png"
+      },
+      {
+        "id": "water_SR_003",
+        "file": "cards/water_SR_003.png"
+      },
+      {
+        "id": "water_SR_004",
+        "file": "cards/water_SR_004.png"
+      },
+      {
+        "id": "water_SR_005",
+        "file": "cards/water_SR_005.png"
+      },
+      {
+        "id": "water_SR_006",
+        "file": "cards/water_SR_006.png"
+      },
+      {
+        "id": "water_SR_007",
+        "file": "cards/water_SR_007.png"
+      },
+      {
+        "id": "water_SR_008",
+        "file": "cards/water_SR_008.png"
+      },
+      {
+        "id": "water_SR_009",
+        "file": "cards/water_SR_009.png"
+      },
+      {
+        "id": "water_SR_010",
+        "file": "cards/water_SR_010.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "water_SSR_001",
+        "file": "cards/water_SSR_001.png"
+      },
+      {
+        "id": "water_SSR_002",
+        "file": "cards/water_SSR_002.png"
+      },
+      {
+        "id": "water_SSR_003",
+        "file": "cards/water_SSR_003.png"
+      },
+      {
+        "id": "water_SSR_004",
+        "file": "cards/water_SSR_004.png"
+      },
+      {
+        "id": "water_SSR_005",
+        "file": "cards/water_SSR_005.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "water_UR_001",
+        "file": "cards/water_UR_001.png"
+      },
+      {
+        "id": "water_UR_002",
+        "file": "cards/water_UR_002.png"
+      }
+    ]
+  },
+  "fire": {
+    "N": [
+      {
+        "id": "fire_N_001",
+        "file": "cards/fire_N_001.png"
+      },
+      {
+        "id": "fire_N_002",
+        "file": "cards/fire_N_002.png"
+      },
+      {
+        "id": "fire_N_003",
+        "file": "cards/fire_N_003.png"
+      },
+      {
+        "id": "fire_N_004",
+        "file": "cards/fire_N_004.png"
+      },
+      {
+        "id": "fire_N_005",
+        "file": "cards/fire_N_005.png"
+      },
+      {
+        "id": "fire_N_006",
+        "file": "cards/fire_N_006.png"
+      },
+      {
+        "id": "fire_N_007",
+        "file": "cards/fire_N_007.png"
+      },
+      {
+        "id": "fire_N_008",
+        "file": "cards/fire_N_008.png"
+      },
+      {
+        "id": "fire_N_009",
+        "file": "cards/fire_N_009.png"
+      },
+      {
+        "id": "fire_N_010",
+        "file": "cards/fire_N_010.png"
+      },
+      {
+        "id": "fire_N_011",
+        "file": "cards/fire_N_011.png"
+      },
+      {
+        "id": "fire_N_012",
+        "file": "cards/fire_N_012.png"
+      },
+      {
+        "id": "fire_N_013",
+        "file": "cards/fire_N_013.png"
+      },
+      {
+        "id": "fire_N_014",
+        "file": "cards/fire_N_014.png"
+      },
+      {
+        "id": "fire_N_015",
+        "file": "cards/fire_N_015.png"
+      },
+      {
+        "id": "fire_N_016",
+        "file": "cards/fire_N_016.png"
+      },
+      {
+        "id": "fire_N_017",
+        "file": "cards/fire_N_017.png"
+      },
+      {
+        "id": "fire_N_018",
+        "file": "cards/fire_N_018.png"
+      },
+      {
+        "id": "fire_N_019",
+        "file": "cards/fire_N_019.png"
+      },
+      {
+        "id": "fire_N_020",
+        "file": "cards/fire_N_020.png"
+      },
+      {
+        "id": "fire_N_021",
+        "file": "cards/fire_N_021.png"
+      },
+      {
+        "id": "fire_N_022",
+        "file": "cards/fire_N_022.png"
+      },
+      {
+        "id": "fire_N_023",
+        "file": "cards/fire_N_023.png"
+      },
+      {
+        "id": "fire_N_024",
+        "file": "cards/fire_N_024.png"
+      },
+      {
+        "id": "fire_N_025",
+        "file": "cards/fire_N_025.png"
+      },
+      {
+        "id": "fire_N_026",
+        "file": "cards/fire_N_026.png"
+      },
+      {
+        "id": "fire_N_027",
+        "file": "cards/fire_N_027.png"
+      },
+      {
+        "id": "fire_N_028",
+        "file": "cards/fire_N_028.png"
+      },
+      {
+        "id": "fire_N_029",
+        "file": "cards/fire_N_029.png"
+      },
+      {
+        "id": "fire_N_030",
+        "file": "cards/fire_N_030.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "fire_R_001",
+        "file": "cards/fire_R_001.png"
+      },
+      {
+        "id": "fire_R_002",
+        "file": "cards/fire_R_002.png"
+      },
+      {
+        "id": "fire_R_003",
+        "file": "cards/fire_R_003.png"
+      },
+      {
+        "id": "fire_R_004",
+        "file": "cards/fire_R_004.png"
+      },
+      {
+        "id": "fire_R_005",
+        "file": "cards/fire_R_005.png"
+      },
+      {
+        "id": "fire_R_006",
+        "file": "cards/fire_R_006.png"
+      },
+      {
+        "id": "fire_R_007",
+        "file": "cards/fire_R_007.png"
+      },
+      {
+        "id": "fire_R_008",
+        "file": "cards/fire_R_008.png"
+      },
+      {
+        "id": "fire_R_009",
+        "file": "cards/fire_R_009.png"
+      },
+      {
+        "id": "fire_R_010",
+        "file": "cards/fire_R_010.png"
+      },
+      {
+        "id": "fire_R_011",
+        "file": "cards/fire_R_011.png"
+      },
+      {
+        "id": "fire_R_012",
+        "file": "cards/fire_R_012.png"
+      },
+      {
+        "id": "fire_R_013",
+        "file": "cards/fire_R_013.png"
+      },
+      {
+        "id": "fire_R_014",
+        "file": "cards/fire_R_014.png"
+      },
+      {
+        "id": "fire_R_015",
+        "file": "cards/fire_R_015.png"
+      },
+      {
+        "id": "fire_R_016",
+        "file": "cards/fire_R_016.png"
+      },
+      {
+        "id": "fire_R_017",
+        "file": "cards/fire_R_017.png"
+      },
+      {
+        "id": "fire_R_018",
+        "file": "cards/fire_R_018.png"
+      },
+      {
+        "id": "fire_R_019",
+        "file": "cards/fire_R_019.png"
+      },
+      {
+        "id": "fire_R_020",
+        "file": "cards/fire_R_020.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "fire_SR_001",
+        "file": "cards/fire_SR_001.png"
+      },
+      {
+        "id": "fire_SR_002",
+        "file": "cards/fire_SR_002.png"
+      },
+      {
+        "id": "fire_SR_003",
+        "file": "cards/fire_SR_003.png"
+      },
+      {
+        "id": "fire_SR_004",
+        "file": "cards/fire_SR_004.png"
+      },
+      {
+        "id": "fire_SR_005",
+        "file": "cards/fire_SR_005.png"
+      },
+      {
+        "id": "fire_SR_006",
+        "file": "cards/fire_SR_006.png"
+      },
+      {
+        "id": "fire_SR_007",
+        "file": "cards/fire_SR_007.png"
+      },
+      {
+        "id": "fire_SR_008",
+        "file": "cards/fire_SR_008.png"
+      },
+      {
+        "id": "fire_SR_009",
+        "file": "cards/fire_SR_009.png"
+      },
+      {
+        "id": "fire_SR_010",
+        "file": "cards/fire_SR_010.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "fire_SSR_001",
+        "file": "cards/fire_SSR_001.png"
+      },
+      {
+        "id": "fire_SSR_002",
+        "file": "cards/fire_SSR_002.png"
+      },
+      {
+        "id": "fire_SSR_003",
+        "file": "cards/fire_SSR_003.png"
+      },
+      {
+        "id": "fire_SSR_004",
+        "file": "cards/fire_SSR_004.png"
+      },
+      {
+        "id": "fire_SSR_005",
+        "file": "cards/fire_SSR_005.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "fire_UR_001",
+        "file": "cards/fire_UR_001.png"
+      },
+      {
+        "id": "fire_UR_002",
+        "file": "cards/fire_UR_002.png"
+      }
+    ]
+  },
+  "earth": {
+    "N": [
+      {
+        "id": "earth_N_001",
+        "file": "cards/earth_N_001.png"
+      },
+      {
+        "id": "earth_N_002",
+        "file": "cards/earth_N_002.png"
+      },
+      {
+        "id": "earth_N_003",
+        "file": "cards/earth_N_003.png"
+      },
+      {
+        "id": "earth_N_004",
+        "file": "cards/earth_N_004.png"
+      },
+      {
+        "id": "earth_N_005",
+        "file": "cards/earth_N_005.png"
+      },
+      {
+        "id": "earth_N_006",
+        "file": "cards/earth_N_006.png"
+      },
+      {
+        "id": "earth_N_007",
+        "file": "cards/earth_N_007.png"
+      },
+      {
+        "id": "earth_N_008",
+        "file": "cards/earth_N_008.png"
+      },
+      {
+        "id": "earth_N_009",
+        "file": "cards/earth_N_009.png"
+      },
+      {
+        "id": "earth_N_010",
+        "file": "cards/earth_N_010.png"
+      },
+      {
+        "id": "earth_N_011",
+        "file": "cards/earth_N_011.png"
+      },
+      {
+        "id": "earth_N_012",
+        "file": "cards/earth_N_012.png"
+      },
+      {
+        "id": "earth_N_013",
+        "file": "cards/earth_N_013.png"
+      },
+      {
+        "id": "earth_N_014",
+        "file": "cards/earth_N_014.png"
+      },
+      {
+        "id": "earth_N_015",
+        "file": "cards/earth_N_015.png"
+      },
+      {
+        "id": "earth_N_016",
+        "file": "cards/earth_N_016.png"
+      },
+      {
+        "id": "earth_N_017",
+        "file": "cards/earth_N_017.png"
+      },
+      {
+        "id": "earth_N_018",
+        "file": "cards/earth_N_018.png"
+      },
+      {
+        "id": "earth_N_019",
+        "file": "cards/earth_N_019.png"
+      },
+      {
+        "id": "earth_N_020",
+        "file": "cards/earth_N_020.png"
+      },
+      {
+        "id": "earth_N_021",
+        "file": "cards/earth_N_021.png"
+      },
+      {
+        "id": "earth_N_022",
+        "file": "cards/earth_N_022.png"
+      },
+      {
+        "id": "earth_N_023",
+        "file": "cards/earth_N_023.png"
+      },
+      {
+        "id": "earth_N_024",
+        "file": "cards/earth_N_024.png"
+      },
+      {
+        "id": "earth_N_025",
+        "file": "cards/earth_N_025.png"
+      },
+      {
+        "id": "earth_N_026",
+        "file": "cards/earth_N_026.png"
+      },
+      {
+        "id": "earth_N_027",
+        "file": "cards/earth_N_027.png"
+      },
+      {
+        "id": "earth_N_028",
+        "file": "cards/earth_N_028.png"
+      },
+      {
+        "id": "earth_N_029",
+        "file": "cards/earth_N_029.png"
+      },
+      {
+        "id": "earth_N_030",
+        "file": "cards/earth_N_030.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "earth_R_001",
+        "file": "cards/earth_R_001.png"
+      },
+      {
+        "id": "earth_R_002",
+        "file": "cards/earth_R_002.png"
+      },
+      {
+        "id": "earth_R_003",
+        "file": "cards/earth_R_003.png"
+      },
+      {
+        "id": "earth_R_004",
+        "file": "cards/earth_R_004.png"
+      },
+      {
+        "id": "earth_R_005",
+        "file": "cards/earth_R_005.png"
+      },
+      {
+        "id": "earth_R_006",
+        "file": "cards/earth_R_006.png"
+      },
+      {
+        "id": "earth_R_007",
+        "file": "cards/earth_R_007.png"
+      },
+      {
+        "id": "earth_R_008",
+        "file": "cards/earth_R_008.png"
+      },
+      {
+        "id": "earth_R_009",
+        "file": "cards/earth_R_009.png"
+      },
+      {
+        "id": "earth_R_010",
+        "file": "cards/earth_R_010.png"
+      },
+      {
+        "id": "earth_R_011",
+        "file": "cards/earth_R_011.png"
+      },
+      {
+        "id": "earth_R_012",
+        "file": "cards/earth_R_012.png"
+      },
+      {
+        "id": "earth_R_013",
+        "file": "cards/earth_R_013.png"
+      },
+      {
+        "id": "earth_R_014",
+        "file": "cards/earth_R_014.png"
+      },
+      {
+        "id": "earth_R_015",
+        "file": "cards/earth_R_015.png"
+      },
+      {
+        "id": "earth_R_016",
+        "file": "cards/earth_R_016.png"
+      },
+      {
+        "id": "earth_R_017",
+        "file": "cards/earth_R_017.png"
+      },
+      {
+        "id": "earth_R_018",
+        "file": "cards/earth_R_018.png"
+      },
+      {
+        "id": "earth_R_019",
+        "file": "cards/earth_R_019.png"
+      },
+      {
+        "id": "earth_R_020",
+        "file": "cards/earth_R_020.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "earth_SR_001",
+        "file": "cards/earth_SR_001.png"
+      },
+      {
+        "id": "earth_SR_002",
+        "file": "cards/earth_SR_002.png"
+      },
+      {
+        "id": "earth_SR_003",
+        "file": "cards/earth_SR_003.png"
+      },
+      {
+        "id": "earth_SR_004",
+        "file": "cards/earth_SR_004.png"
+      },
+      {
+        "id": "earth_SR_005",
+        "file": "cards/earth_SR_005.png"
+      },
+      {
+        "id": "earth_SR_006",
+        "file": "cards/earth_SR_006.png"
+      },
+      {
+        "id": "earth_SR_007",
+        "file": "cards/earth_SR_007.png"
+      },
+      {
+        "id": "earth_SR_008",
+        "file": "cards/earth_SR_008.png"
+      },
+      {
+        "id": "earth_SR_009",
+        "file": "cards/earth_SR_009.png"
+      },
+      {
+        "id": "earth_SR_010",
+        "file": "cards/earth_SR_010.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "earth_SSR_001",
+        "file": "cards/earth_SSR_001.png"
+      },
+      {
+        "id": "earth_SSR_002",
+        "file": "cards/earth_SSR_002.png"
+      },
+      {
+        "id": "earth_SSR_003",
+        "file": "cards/earth_SSR_003.png"
+      },
+      {
+        "id": "earth_SSR_004",
+        "file": "cards/earth_SSR_004.png"
+      },
+      {
+        "id": "earth_SSR_005",
+        "file": "cards/earth_SSR_005.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "earth_UR_001",
+        "file": "cards/earth_UR_001.png"
+      },
+      {
+        "id": "earth_UR_002",
+        "file": "cards/earth_UR_002.png"
+      }
+    ]
+  },
+  "light": {
+    "N": [
+      {
+        "id": "light_N_001",
+        "file": "cards/light_N_001.png"
+      },
+      {
+        "id": "light_N_002",
+        "file": "cards/light_N_002.png"
+      },
+      {
+        "id": "light_N_003",
+        "file": "cards/light_N_003.png"
+      },
+      {
+        "id": "light_N_004",
+        "file": "cards/light_N_004.png"
+      },
+      {
+        "id": "light_N_005",
+        "file": "cards/light_N_005.png"
+      },
+      {
+        "id": "light_N_006",
+        "file": "cards/light_N_006.png"
+      },
+      {
+        "id": "light_N_007",
+        "file": "cards/light_N_007.png"
+      },
+      {
+        "id": "light_N_008",
+        "file": "cards/light_N_008.png"
+      },
+      {
+        "id": "light_N_009",
+        "file": "cards/light_N_009.png"
+      },
+      {
+        "id": "light_N_010",
+        "file": "cards/light_N_010.png"
+      },
+      {
+        "id": "light_N_011",
+        "file": "cards/light_N_011.png"
+      },
+      {
+        "id": "light_N_012",
+        "file": "cards/light_N_012.png"
+      },
+      {
+        "id": "light_N_013",
+        "file": "cards/light_N_013.png"
+      },
+      {
+        "id": "light_N_014",
+        "file": "cards/light_N_014.png"
+      },
+      {
+        "id": "light_N_015",
+        "file": "cards/light_N_015.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "light_R_001",
+        "file": "cards/light_R_001.png"
+      },
+      {
+        "id": "light_R_002",
+        "file": "cards/light_R_002.png"
+      },
+      {
+        "id": "light_R_003",
+        "file": "cards/light_R_003.png"
+      },
+      {
+        "id": "light_R_004",
+        "file": "cards/light_R_004.png"
+      },
+      {
+        "id": "light_R_005",
+        "file": "cards/light_R_005.png"
+      },
+      {
+        "id": "light_R_006",
+        "file": "cards/light_R_006.png"
+      },
+      {
+        "id": "light_R_007",
+        "file": "cards/light_R_007.png"
+      },
+      {
+        "id": "light_R_008",
+        "file": "cards/light_R_008.png"
+      },
+      {
+        "id": "light_R_009",
+        "file": "cards/light_R_009.png"
+      },
+      {
+        "id": "light_R_010",
+        "file": "cards/light_R_010.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "light_SR_001",
+        "file": "cards/light_SR_001.png"
+      },
+      {
+        "id": "light_SR_002",
+        "file": "cards/light_SR_002.png"
+      },
+      {
+        "id": "light_SR_003",
+        "file": "cards/light_SR_003.png"
+      },
+      {
+        "id": "light_SR_004",
+        "file": "cards/light_SR_004.png"
+      },
+      {
+        "id": "light_SR_005",
+        "file": "cards/light_SR_005.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "light_SSR_001",
+        "file": "cards/light_SSR_001.png"
+      },
+      {
+        "id": "light_SSR_002",
+        "file": "cards/light_SSR_002.png"
+      },
+      {
+        "id": "light_SSR_003",
+        "file": "cards/light_SSR_003.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "light_UR_001",
+        "file": "cards/light_UR_001.png"
+      }
+    ]
+  },
+  "dark": {
+    "N": [
+      {
+        "id": "dark_N_001",
+        "file": "cards/dark_N_001.png"
+      },
+      {
+        "id": "dark_N_002",
+        "file": "cards/dark_N_002.png"
+      },
+      {
+        "id": "dark_N_003",
+        "file": "cards/dark_N_003.png"
+      },
+      {
+        "id": "dark_N_004",
+        "file": "cards/dark_N_004.png"
+      },
+      {
+        "id": "dark_N_005",
+        "file": "cards/dark_N_005.png"
+      },
+      {
+        "id": "dark_N_006",
+        "file": "cards/dark_N_006.png"
+      },
+      {
+        "id": "dark_N_007",
+        "file": "cards/dark_N_007.png"
+      },
+      {
+        "id": "dark_N_008",
+        "file": "cards/dark_N_008.png"
+      },
+      {
+        "id": "dark_N_009",
+        "file": "cards/dark_N_009.png"
+      },
+      {
+        "id": "dark_N_010",
+        "file": "cards/dark_N_010.png"
+      },
+      {
+        "id": "dark_N_011",
+        "file": "cards/dark_N_011.png"
+      },
+      {
+        "id": "dark_N_012",
+        "file": "cards/dark_N_012.png"
+      },
+      {
+        "id": "dark_N_013",
+        "file": "cards/dark_N_013.png"
+      },
+      {
+        "id": "dark_N_014",
+        "file": "cards/dark_N_014.png"
+      },
+      {
+        "id": "dark_N_015",
+        "file": "cards/dark_N_015.png"
+      }
+    ],
+    "R": [
+      {
+        "id": "dark_R_001",
+        "file": "cards/dark_R_001.png"
+      },
+      {
+        "id": "dark_R_002",
+        "file": "cards/dark_R_002.png"
+      },
+      {
+        "id": "dark_R_003",
+        "file": "cards/dark_R_003.png"
+      },
+      {
+        "id": "dark_R_004",
+        "file": "cards/dark_R_004.png"
+      },
+      {
+        "id": "dark_R_005",
+        "file": "cards/dark_R_005.png"
+      },
+      {
+        "id": "dark_R_006",
+        "file": "cards/dark_R_006.png"
+      },
+      {
+        "id": "dark_R_007",
+        "file": "cards/dark_R_007.png"
+      },
+      {
+        "id": "dark_R_008",
+        "file": "cards/dark_R_008.png"
+      },
+      {
+        "id": "dark_R_009",
+        "file": "cards/dark_R_009.png"
+      },
+      {
+        "id": "dark_R_010",
+        "file": "cards/dark_R_010.png"
+      }
+    ],
+    "SR": [
+      {
+        "id": "dark_SR_001",
+        "file": "cards/dark_SR_001.png"
+      },
+      {
+        "id": "dark_SR_002",
+        "file": "cards/dark_SR_002.png"
+      },
+      {
+        "id": "dark_SR_003",
+        "file": "cards/dark_SR_003.png"
+      },
+      {
+        "id": "dark_SR_004",
+        "file": "cards/dark_SR_004.png"
+      },
+      {
+        "id": "dark_SR_005",
+        "file": "cards/dark_SR_005.png"
+      }
+    ],
+    "SSR": [
+      {
+        "id": "dark_SSR_001",
+        "file": "cards/dark_SSR_001.png"
+      },
+      {
+        "id": "dark_SSR_002",
+        "file": "cards/dark_SSR_002.png"
+      },
+      {
+        "id": "dark_SSR_003",
+        "file": "cards/dark_SSR_003.png"
+      }
+    ],
+    "UR": [
+      {
+        "id": "dark_UR_001",
+        "file": "cards/dark_UR_001.png"
+      }
+    ]
+  }
+}
