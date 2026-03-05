@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>记忆回收者 - 手机试玩版 v0.3</title>
+    <title>记忆回收者 - 手机试玩版 v0.4 (完整版)</title>
     <script src="card-data.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
@@ -32,13 +32,18 @@
         .player-area { text-align: center; padding: 15px; background: rgba(0,255,0,0.1); border-radius: 12px; border: 2px solid #44ff44; }
         .hand-cards { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
         .hand-card { min-width: 100px; aspect-ratio: 2/3; background: linear-gradient(135deg, #2a2a4a, #1a1a3a); border-radius: 8px; border: 2px solid #ffd700; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 8px; }
-        .skill-btn { font-size: 10px; padding: 4px 8px; background: rgba(255,215,0,0.3); border: 1px solid #ffd700; border-radius: 4px; color: #ffd700; margin-top: 4px; }
+        .skill-btn { font-size: 10px; padding: 4px 8px; background: rgba(255,215,0,0.3); border: 1px solid #ffd700; border-radius: 4px; color: #ffd700; margin-top: 4px; width: 100%; }
         .skill-btn:disabled { opacity: 0.3; border-color: #666; color: #666; }
         .hp-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin-top: 5px; }
         .hp-fill { height: 100%; background: linear-gradient(90deg, #44ff44, #88ff88); transition: width 0.3s; }
         .upgrade-panel { background: rgba(255,215,0,0.05); border: 1px solid rgba(255,215,0,0.3); border-radius: 8px; padding: 15px; margin-top: 10px; }
         .material-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
         .material-item { text-align: center; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 11px; }
+        .buff-icon { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin: 2px; }
+        .buff-atk { background: rgba(255, 107, 107, 0.3); color: #ff6b6b; }
+        .buff-def { background: rgba(78, 205, 196, 0.3); color: #4ecdc4; }
+        .buff-taunt { background: rgba(255, 215, 0, 0.3); color: #ffd700; }
+        .skill-desc { font-size: 10px; color: #888; margin-top: 2px; text-align: center; }
     </style>
 </head>
 <body>
@@ -46,20 +51,20 @@
     <div id="main-menu">
         <div class="header">
             <h1>🔮 记忆回收者</h1>
-            <div class="subtitle">v0.3 技能系统 | 升级升星 | 智能AI</div>
+            <div class="subtitle">v0.4 完整版 | 23张卡牌 | 技能系统 | 完整养成</div>
         </div>
         <div class="game-container">
             <div class="section">
-                <div class="section-title">👤 我的收藏</div>
+                <div class="section-title">👤 玩家信息</div>
                 <div class="stats">
-                    <div class="stat-item"><div class="stat-value" id="card-count">0</div><div style="font-size:11px;color:#888">卡牌数</div></div>
-                    <div class="stat-item"><div class="stat-value" id="gold">1000</div><div style="font-size:11px;color:#888">金币</div></div>
-                    <div class="stat-item"><div class="stat-value" id="diamond">50</div><div style="font-size:11px;color:#888">钻石</div></div>
+                    <div class="stat-item"><div class="stat-value" id="card-count">0</div><div style="font-size:11px;color:#888">卡牌</div></div>
+                    <div class="stat-item"><div class="stat-value" id="gold">5000</div><div style="font-size:11px;color:#888">金币</div></div>
+                    <div class="stat-item"><div class="stat-value" id="exp-cards">20</div><div style="font-size:11px;color:#888">经验卡</div></div>
                 </div>
             </div>
             
             <button class="btn" onclick="showScreen('battle')">⚔️ 开始战斗</button>
-            <button class="btn btn-secondary" onclick="showScreen('gacha')">🎴 抽卡 (100金币)</button>
+            <button class="btn btn-secondary" onclick="showScreen('gacha')">🎴 召唤卡牌 (100金币)</button>
             <button class="btn btn-secondary" onclick="showScreen('collection')">📚 卡牌收藏</button>
             <button class="btn btn-secondary" onclick="showScreen('upgrade')">⭐ 升级升星</button>
             
@@ -78,16 +83,18 @@
         <div class="game-container">
             <div class="enemy-area">
                 <div style="font-size:48px;">👹</div>
-                <div id="enemy-name">记忆守卫 Lv.1</div>
-                <div class="hp-bar"><div class="hp-fill" id="enemy-hp-bar" style="width:100%;background:linear-gradient(90deg,#ff4444,#ff8888)"></div></div>
-                <div id="enemy-hp-text">500/500</div>
+                <div id="enemy-name">记忆守卫</div>
+                <div id="enemy-buffs"></div>
+                <div class="hp-bar"><div class="hp-fill" id="enemy-hp" style="width:100%;background:linear-gradient(90deg,#ff4444,#ff8888)"></div></div>
+                <div id="enemy-hp-text">1000/1000</div>
                 <div style="font-size:11px;color:#888;margin-top:5px;" id="enemy-intent">意图: 攻击</div>
             </div>
             
             <div class="player-area">
                 <div id="turn-indicator" style="font-weight:bold;color:#ffd700;">我的回合 - 选择行动!</div>
+                <div id="player-buffs"></div>
                 <div class="hp-bar"><div class="hp-fill" id="player-hp-bar" style="width:100%"></div></div>
-                <div>HP: <span id="player-hp">300</span>/300</div>
+                <div>HP: <span id="player-hp">300</span>/<span id="player-max-hp">300</span></div>
             </div>
             
             <div class="hand-cards" id="hand-cards"></div>
@@ -107,7 +114,7 @@
             <div class="section" style="text-align:center;padding:40px;">
                 <div style="font-size:80px;margin-bottom:20px;">✨</div>
                 <div style="font-size:18px;margin-bottom:10px;">消耗 100 金币召唤</div>
-                <div style="font-size:12px;color:#888;margin-bottom:30px;">有机会获得 SSR 传说卡牌!</div>
+                <div style="font-size:12px;color:#888;margin-bottom:30px;">SSR概率: 14% | SR: 28% | R: 28% | N: 30%</div>
                 <button class="btn" onclick="doGacha()" id="gacha-btn">召唤</button>
             </div>
             <div class="card-grid" id="gacha-result"></div>
@@ -139,57 +146,55 @@
                 <div class="section-title">选择卡牌</div>
                 <div class="card-grid" id="upgrade-grid"></div>
             </div>
+            
             <div class="upgrade-panel hidden" id="upgrade-detail">
                 <div style="text-align:center;margin-bottom:15px;">
                     <div style="font-size:32px;" id="upgrade-card-icon">🔥</div>
                     <div style="font-weight:bold;" id="upgrade-card-name">烬羽</div>
                     <div style="font-size:12px;color:#888;" id="upgrade-card-info">SSR | Lv.1 ⭐</div>
                 </div>
+                
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px;">
                     <div>
                         <div style="font-size:12px;color:#888;">当前属性</div>
-                        <div id="current-stats">ATK: 850</div>
+                        <div id="current-stats" style="font-size:12px;"></div>
                     </div>
                     <div>
                         <div style="font-size:12px;color:#888;">升级后</div>
-                        <div id="next-stats" style="color:#51cf66;">ATK: 876</div>
+                        <div id="next-stats" style="color:#51cf66;font-size:12px;"></div>
                     </div>
                 </div>
+                
                 <div style="font-size:12px;color:#888;margin-bottom:10px;">消耗材料:</div>
                 <div class="material-grid">
-                    <div class="material-item">
-                        <div>💰</div>
-                        <div id="cost-gold">1000</div>
-                    </div>
-                    <div class="material-item">
-                        <div>📖</div>
-                        <div id="cost-exp">1</div>
-                    </div>
+                    <div class="material-item"><div>💰</div><div id="cost-gold">100</div></div>
+                    <div class="material-item"><div>📖</div><div id="cost-exp">1</div></div>
                 </div>
+                
                 <button class="btn" style="margin-top:15px;" onclick="doUpgrade()">升级</button>
-                <button class="btn btn-secondary" onclick="doStarUp()">升星</button>
+                <button class="btn btn-secondary" onclick="doStarUp()">升星 (1000金币)</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 游戏数据
-        let playerData = { cards: [], gold: 5000, diamond: 50, expCards: 20 };
-        let battleState = null;
+        // ==================== 游戏数据 ====================
+        let playerData = { cards: [], gold: 5000, expCards: 20 };
+        let battleSystem = null;
         let selectedCardForUpgrade = null;
 
-        // 初始化
+        // ==================== 初始化 ====================
         function init() {
             // 初始赠送3张卡牌
             for (let i = 0; i < 3; i++) {
-                const card = drawCardFromDatabase();
-                playerData.cards.push(card);
+                playerData.cards.push(drawCardFromDatabase());
             }
             updateMainUI();
-            log('欢迎来到记忆回收者 v0.3！现在可以使用技能战斗了！');
+            log('欢迎来到记忆回收者 v0.4 完整版！');
+            log('✨ 新增：完整技能系统、Buff/Debuff、养成系统');
         }
 
-        // 显示界面
+        // ==================== 界面控制 ====================
         function showScreen(screen) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
             document.getElementById('main-menu').style.display = screen === 'main' ? 'block' : 'none';
@@ -203,14 +208,13 @@
             if (screen === 'upgrade') renderUpgrade();
         }
 
-        // 更新主界面
         function updateMainUI() {
             document.getElementById('card-count').textContent = playerData.cards.length;
             document.getElementById('gold').textContent = playerData.gold;
-            document.getElementById('diamond').textContent = playerData.diamond;
+            document.getElementById('exp-cards').textContent = playerData.expCards;
         }
 
-        // ===== 抽卡系统 =====
+        // ==================== 抽卡系统 ====================
         function doGacha() {
             if (playerData.gold < 100) {
                 alert('金币不足！');
@@ -224,55 +228,57 @@
             const container = document.getElementById('gacha-result');
             container.innerHTML = `
                 <div style="grid-column:1/-1;text-align:center;padding:20px;">
-                    <div style="font-size:60px;margin-bottom:10px;">${card.icon}</div>
-                    <div style="color:${getRarityColor(card.rarity)};font-weight:bold;">[${card.rarity}] ${card.name}</div>
+                    <div style="font-size:60px;margin-bottom:10px;">${card.baseCard.icon}</div>
+                    <div style="color:${getRarityColor(card.baseCard.rarity)};font-weight:bold;">[${card.baseCard.rarity}] ${card.baseCard.name}</div>
                     <div style="font-size:12px;color:#888;">ATK:${card.atk} HP:${card.hp}</div>
-                    <div style="font-size:11px;color:#666;margin-top:5px;">${card.skills && card.skills[0] ? card.skills[0].name : '无技能'}</div>
+                    <div style="font-size:11px;color:#666;margin-top:5px;">${card.baseCard.skills[0]?.name || '无技能'}</div>
                 </div>
             `;
-            log(`抽卡获得 [${card.rarity}] ${card.name}`);
+            log(`召唤获得 [${card.baseCard.rarity}] ${card.baseCard.name}`);
         }
 
         function getRarityColor(r) {
             return { N: '#888', R: '#4a9eff', SR: '#a855f7', SSR: '#ffd700' }[r] || '#fff';
         }
 
-        // ===== 收藏系统 =====
+        // ==================== 收藏系统 ====================
         function renderCollection() {
             document.getElementById('collection-count').textContent = playerData.cards.length;
             const grid = document.getElementById('collection-grid');
             grid.innerHTML = playerData.cards.map((card, idx) => `
-                <div class="card ${card.rarity}" onclick="showCardDetail(${idx})">
+                <div class="card ${card.baseCard.rarity}" onclick="showCardDetail(${idx})">
                     <span class="card-level">Lv.${card.level}</span>
                     <span class="card-star">${'⭐'.repeat(card.star)}</span>
-                    <div style="font-size:28px;">${card.icon}</div>
-                    <div style="font-size:10px;">${card.name}</div>
-                    <div style="font-size:10px;color:#888;">ATK:${getCardAtk(card)}</div>
+                    <div style="font-size:28px;">${card.baseCard.icon}</div>
+                    <div style="font-size:10px;">${card.baseCard.name}</div>
+                    <div style="font-size:10px;color:#888;">ATK:${card.atk}</div>
                 </div>
             `).join('');
         }
 
         function showCardDetail(idx) {
             const card = playerData.cards[idx];
-            const skills = card.skills || [];
-            alert(`[${card.rarity}] ${card.name} ${card.icon}
+            const skills = card.baseCard.skills || [];
+            const skillText = skills.map(s => `• ${s.name}: ${s.desc} ${s.type === 'active' ? '(CD:'+s.cd+')' : ''}`).join('\n');
+            
+            alert(`[${card.baseCard.rarity}] ${card.baseCard.name} ${card.baseCard.icon}
 等级: ${card.level} | 星级: ${card.star}
-攻击: ${getCardAtk(card)} | 生命: ${getCardHp(card)}
-防御: ${card.def} | 速度: ${card.spd}
+攻击: ${card.atk} | 生命: ${card.hp}
+防御: ${card.def} | 速度: ${card.spd} | 暴击: ${card.crit}%
 
 技能:
-${skills.map(s => `• ${s.name}: ${s.desc}`).join('\n') || '无技能'}`);
+${skillText || '无技能'}`);
         }
 
-        // ===== 升级升星系统 =====
+        // ==================== 升级升星系统 ====================
         function renderUpgrade() {
             const grid = document.getElementById('upgrade-grid');
             grid.innerHTML = playerData.cards.map((card, idx) => `
-                <div class="card ${card.rarity}" onclick="selectUpgradeCard(${idx})">
+                <div class="card ${card.baseCard.rarity}" onclick="selectUpgradeCard(${idx})">
                     <span class="card-level">Lv.${card.level}</span>
                     <span class="card-star">${'⭐'.repeat(card.star)}</span>
-                    <div style="font-size:28px;">${card.icon}</div>
-                    <div style="font-size:10px;">${card.name}</div>
+                    <div style="font-size:28px;">${card.baseCard.icon}</div>
+                    <div style="font-size:10px;">${card.baseCard.name}</div>
                 </div>
             `).join('');
         }
@@ -281,23 +287,28 @@ ${skills.map(s => `• ${s.name}: ${s.desc}`).join('\n') || '无技能'}`);
             selectedCardForUpgrade = idx;
             const card = playerData.cards[idx];
             document.getElementById('upgrade-detail').classList.remove('hidden');
-            document.getElementById('upgrade-card-icon').textContent = card.icon;
-            document.getElementById('upgrade-card-name').textContent = card.name;
-            document.getElementById('upgrade-card-info').textContent = `${card.rarity} | Lv.${card.level} ${'⭐'.repeat(card.star)}`;
+            document.getElementById('upgrade-card-icon').textContent = card.baseCard.icon;
+            document.getElementById('upgrade-card-name').textContent = card.baseCard.name;
+            document.getElementById('upgrade-card-info').textContent = `${card.baseCard.rarity} | Lv.${card.level} ${'⭐'.repeat(card.star)}`;
             
-            const curAtk = getCardAtk(card);
-            const nextAtk = Math.floor(curAtk * 1.03);
-            document.getElementById('current-stats').textContent = `ATK: ${curAtk}`;
-            document.getElementById('next-stats').textContent = `ATK: ${nextAtk}`;
+            document.getElementById('current-stats').innerHTML = `ATK: ${card.atk}<br>HP: ${card.hp}<br>DEF: ${card.def}`;
             
-            const costGold = card.level * 100;
+            // 模拟升级后的属性
+            const nextLevelCard = Object.create(card);
+            nextLevelCard.level = card.level + 1;
+            const mockInstance = new CardInstance(card.baseCard);
+            mockInstance.level = card.level + 1;
+            mockInstance.star = card.star;
+            document.getElementById('next-stats').innerHTML = `ATK: ${mockInstance.atk}<br>HP: ${mockInstance.hp}<br>DEF: ${mockInstance.def}`;
+            
+            const costGold = LEVEL_CONFIG.getUpgradeCost(card.level);
             document.getElementById('cost-gold').textContent = costGold;
         }
 
         function doUpgrade() {
             if (selectedCardForUpgrade === null) return;
             const card = playerData.cards[selectedCardForUpgrade];
-            const cost = card.level * 100;
+            const cost = LEVEL_CONFIG.getUpgradeCost(card.level);
             
             if (playerData.gold < cost) {
                 alert('金币不足！');
@@ -310,19 +321,21 @@ ${skills.map(s => `• ${s.name}: ${s.desc}`).join('\n') || '无技能'}`);
             
             playerData.gold -= cost;
             playerData.expCards -= 1;
-            card.level++;
+            
+            if (card.addExp(LEVEL_CONFIG.getExpRequired(card.level))) {
+                log(`${card.baseCard.name} 升级到 Lv.${card.level}！`);
+            }
             
             updateMainUI();
             renderUpgrade();
             selectUpgradeCard(selectedCardForUpgrade);
-            log(`${card.name} 升级到 Lv.${card.level}`);
         }
 
         function doStarUp() {
             if (selectedCardForUpgrade === null) return;
             const card = playerData.cards[selectedCardForUpgrade];
             
-            if (card.star >= 5) {
+            if (!card.canStarUp()) {
                 alert('已达最高星级！');
                 return;
             }
@@ -337,124 +350,164 @@ ${skills.map(s => `• ${s.name}: ${s.desc}`).join('\n') || '无技能'}`);
             updateMainUI();
             renderUpgrade();
             selectUpgradeCard(selectedCardForUpgrade);
-            log(`${card.name} 升星到 ${card.star}星！`);
+            log(`${card.baseCard.name} 升星到 ${card.star}星！✨`);
         }
 
-        function getCardAtk(card) {
-            return Math.floor(card.atk * (1 + (card.level - 1) * 0.03) * (1 + (card.star - 1) * 0.2));
-        }
-
-        function getCardHp(card) {
-            return Math.floor(card.hp * (1 + (card.level - 1) * 0.03) * (1 + (card.star - 1) * 0.2));
-        }
-
-        // ===== 战斗系统 =====
+        // ==================== 战斗系统 ====================
         function initBattle() {
             const shuffled = [...playerData.cards].sort(() => Math.random() - 0.5);
-            battleState = {
-                enemy: { name: '记忆守卫', hp: 800, maxHp: 800, atk: 80, def: 50, element: 'dark' },
-                playerHp: 300,
-                playerMaxHp: 300,
-                hand: shuffled.slice(0, 3).map(c => ({...c, currentCd: [0, 0]})),
-                turn: 1,
-                selectedCard: null
-            };
+            const playerTeam = shuffled.slice(0, 3);
+            
+            // 创建敌人
+            const enemyCards = [
+                new CardInstance(CARD_DATABASE.N[0]),
+                new CardInstance(CARD_DATABASE.R[0]),
+                new CardInstance(CARD_DATABASE.SR[0])
+            ];
+            
+            battleSystem = new BattleSystem(playerTeam, enemyCards);
             updateBattleUI();
             log('=== 战斗开始！ ===');
+            log(`敌方: ${battleSystem.getAliveUnits('enemy').length}人 | 我方: ${battleSystem.getAliveUnits('player').length}人`);
         }
 
         function updateBattleUI() {
-            const e = battleState.enemy;
-            document.getElementById('enemy-hp-bar').style.width = (e.hp / e.maxHp * 100) + '%';
-            document.getElementById('enemy-hp-text').textContent = `${e.hp}/${e.maxHp}`;
+            // 更新敌人
+            const enemies = battleSystem.getAliveUnits('enemy');
+            if (enemies.length > 0) {
+                const mainEnemy = enemies[0];
+                document.getElementById('enemy-hp').style.width = (mainEnemy.currentHp / mainEnemy.maxHp * 100) + '%';
+                document.getElementById('enemy-hp-text').textContent = `${mainEnemy.currentHp}/${mainEnemy.maxHp}`;
+                document.getElementById('enemy-name').textContent = `👹 ${mainEnemy.cardInstance.baseCard.name} x${enemies.length}`;
+                
+                // Buff显示
+                const buffsHtml = mainEnemy.buffs.map(b => 
+                    `<span class="buff-icon buff-${b.type.split('_')[1] || 'taunt'}">${b.type === 'taunt' ? '嘲讽' : b.type.includes('atk') ? '攻+' : '防+'}${b.duration}</span>`
+                ).join('');
+                document.getElementById('enemy-buffs').innerHTML = buffsHtml;
+            }
             
-            document.getElementById('player-hp-bar').style.width = (battleState.playerHp / battleState.playerMaxHp * 100) + '%';
-            document.getElementById('player-hp').textContent = battleState.playerHp;
+            // 更新玩家
+            const players = battleSystem.getAliveUnits('player');
+            if (players.length > 0) {
+                const totalHp = players.reduce((sum, p) => sum + p.currentHp, 0);
+                const totalMaxHp = players.reduce((sum, p) => sum + p.maxHp, 0);
+                document.getElementById('player-hp-bar').style.width = (totalHp / totalMaxHp * 100) + '%';
+                document.getElementById('player-hp').textContent = totalHp;
+                document.getElementById('player-max-hp').textContent = totalMaxHp;
+            }
             
-            // 敌人AI意图
-            const intent = Math.random() > 0.3 ? '攻击' : '蓄力(下回合2倍伤害)';
+            // AI意图
+            const intent = Math.random() > 0.3 ? '攻击' : '蓄力(下回合2倍)';
             document.getElementById('enemy-intent').textContent = `意图: ${intent}`;
             
             // 手牌
-            const container = document.getElementById('hand-cards');
-            container.innerHTML = battleState.hand.map((card, idx) => {
-                const skills = card.skills || [];
-                const activeSkill = skills.find(s => s.type === 'active');
-                const canUseSkill = activeSkill && card.currentCd[0] === 0;
+            const handContainer = document.getElementById('hand-cards');
+            handContainer.innerHTML = players.map((unit, idx) => {
+                const card = unit.cardInstance;
+                const skills = card.baseCard.skills || [];
+                const activeSkill = skills.find((s, i) => s.type === SKILL_TYPE.ACTIVE && card.skillCooldowns[i] === 0);
+                const skillIndex = skills.findIndex(s => s === activeSkill);
                 
                 return `
-                    <div class="hand-card" style="border-color:${getElementColor(card.element)}">
-                        <div style="font-size:20px;">${card.icon}</div>
-                        <div style="font-size:10px;">${card.name}</div>
-                        <div style="font-size:11px;color:#ffd700;">ATK:${getCardAtk(card)}</div>
-                        <button class="skill-btn" ${!canUseSkill ? 'disabled' : ''} onclick="useSkill(${idx})">
-                            ${activeSkill ? activeSkill.name : '普攻'}${card.currentCd[0] > 0 ? '('+card.currentCd[0]+')' : ''}
-                        </button>
-                        <button style="font-size:10px;padding:3px 6px;background:rgba(255,255,255,0.2);border:none;border-radius:3px;color:#fff;margin-top:4px;" onclick="normalAttack(${idx})">普攻</button>
+                    <div class="hand-card" style="border-color:${ELEMENT_DATA[card.baseCard.element].color}">
+                        <div style="font-size:20px;">${card.baseCard.icon}</div>
+                        <div style="font-size:10px;">${card.baseCard.name}</div>
+                        <div style="font-size:11px;color:#ffd700;">ATK:${card.atk}</div>
+                        <div style="font-size:9px;color:#888;">HP:${unit.currentHp}/${unit.maxHp}</div>
+                        
+                        ${activeSkill ? `
+                            <button class="skill-btn" onclick="useSkill(${idx}, ${skillIndex})">${activeSkill.name}</button>
+                            <div class="skill-desc">${activeSkill.desc}</div>
+                        ` : '<button class="skill-btn" disabled>技能冷却</button>'}
+                        
+                        <button style="font-size:10px;padding:3px 6px;background:rgba(255,255,255,0.2);border:none;border-radius:3px;color:#fff;margin-top:4px;width:100%;" 
+                                onclick="normalAttack(${idx})">普攻</button>
                     </div>
                 `;
             }).join('');
         }
 
-        function getElementColor(element) {
-            const colors = { fire: '#ff6b6b', water: '#4ecdc4', wood: '#95e1d3', metal: '#c0c0c0', earth: '#d4a574', light: '#ffd700', dark: '#8b7dd4' };
-            return colors[element] || '#fff';
-        }
-
-        function useSkill(idx) {
-            const card = battleState.hand[idx];
-            const skill = card.skills && card.skills.find(s => s.type === 'active');
-            if (!skill || card.currentCd[0] > 0) return;
+        function useSkill(unitIdx, skillIdx) {
+            const playerUnits = battleSystem.getAliveUnits('player');
+            const enemyUnits = battleSystem.getAliveUnits('enemy');
+            if (unitIdx >= playerUnits.length || enemyUnits.length === 0) return;
             
-            card.currentCd[0] = skill.cd || 3;
+            const attacker = playerUnits[unitIdx];
+            const skill = attacker.cardInstance.baseCard.skills[skillIdx];
             
-            if (skill.damage) {
-                const isCrit = Math.random() * 100 < card.crit;
-                const dmg = calculateDamage(
-                    { ...card, atk: getCardAtk(card) }, 
-                    battleState.enemy, 
-                    isCrit, 
-                    skill.damage
-                );
-                battleState.enemy.hp = Math.max(0, battleState.enemy.hp - dmg);
-                log(`${card.name} 使用 [${skill.name}] 造成 ${dmg} 伤害${isCrit ? ' (暴击!)' : ''}`);
-            } else if (skill.heal) {
-                const heal = Math.floor(battleState.playerMaxHp * skill.heal);
-                battleState.playerHp = Math.min(battleState.playerMaxHp, battleState.playerHp + heal);
-                log(`${card.name} 使用 [${skill.name}] 恢复 ${heal} 生命`);
+            // 选择目标
+            let target;
+            if (skill.effects.some(e => e.type === EFFECT_TYPE.HEAL)) {
+                // 治疗技能：选择血量最低的我方
+                target = playerUnits.sort((a, b) => a.currentHp / a.maxHp - b.currentHp / b.maxHp)[0];
+            } else {
+                // 攻击技能：选择第一个敌人
+                target = enemyUnits[0];
             }
             
-            updateBattleUI();
-            checkBattleEnd();
-        }
-
-        function normalAttack(idx) {
-            const card = battleState.hand[idx];
-            const isCrit = Math.random() * 100 < card.crit;
-            const dmg = calculateDamage(
-                { ...card, atk: getCardAtk(card) },
-                battleState.enemy,
-                isCrit,
-                1.0
-            );
-            battleState.enemy.hp = Math.max(0, battleState.enemy.hp - dmg);
-            log(`${card.name} 普攻造成 ${dmg} 伤害${isCrit ? ' (暴击!)' : ''}`);
+            // 执行技能
+            const results = battleSystem.useSkill(attacker, target, skill);
             
-            // 减少技能CD
-            battleState.hand.forEach(c => {
-                c.currentCd = c.currentCd.map(cd => Math.max(0, cd - 1));
+            // 设置冷却
+            attacker.cardInstance.skillCooldowns[skillIdx] = skill.cd;
+            
+            // 减少其他技能CD
+            playerUnits.forEach(u => {
+                u.cardInstance.skillCooldowns = u.cardInstance.skillCooldowns.map(cd => Math.max(0, cd - 1));
+            });
+            
+            // 显示结果
+            results.forEach(r => {
+                if (r.type === 'damage') {
+                    log(`${attacker.cardInstance.baseCard.name} 使用 [${skill.name}] 对 ${r.target} 造成 ${r.value} 伤害${r.isCrit ? ' (暴击!)' : ''}`);
+                } else if (r.type === 'heal') {
+                    log(`${attacker.cardInstance.baseCard.name} 使用 [${skill.name}] 恢复 ${r.target} ${r.value} 生命`);
+                } else if (r.type === 'buff') {
+                    log(`${attacker.cardInstance.baseCard.name} 获得 ${r.stat}+${r.value}`);
+                }
             });
             
             updateBattleUI();
             checkBattleEnd();
         }
 
+        function normalAttack(unitIdx) {
+            const playerUnits = battleSystem.getAliveUnits('player');
+            const enemyUnits = battleSystem.getAliveUnits('enemy');
+            if (unitIdx >= playerUnits.length || enemyUnits.length === 0) return;
+            
+            const attacker = playerUnits[unitIdx];
+            const target = enemyUnits[0];
+            
+            const normalSkill = { effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.0 }] };
+            const results = battleSystem.useSkill(attacker, target, normalSkill);
+            
+            // 减少技能CD
+            playerUnits.forEach(u => {
+                u.cardInstance.skillCooldowns = u.cardInstance.skillCooldowns.map(cd => Math.max(0, cd - 1));
+            });
+            
+            const dmg = results.find(r => r.type === 'damage');
+            if (dmg) {
+                log(`${attacker.cardInstance.baseCard.name} 普攻造成 ${dmg.value} 伤害${dmg.isCrit ? ' (暴击!)' : ''}`);
+            }
+            
+            updateBattleUI();
+            checkBattleEnd();
+        }
+
         function checkBattleEnd() {
-            if (battleState.enemy.hp <= 0) {
+            const result = battleSystem.checkBattleEnd();
+            if (result) {
                 setTimeout(() => {
-                    alert('胜利！获得200金币 + 2经验卡');
-                    playerData.gold += 200;
-                    playerData.expCards += 2;
+                    if (result === 'player_win') {
+                        alert('🎉 胜利！获得300金币 + 3经验卡');
+                        playerData.gold += 300;
+                        playerData.expCards += 3;
+                    } else {
+                        alert('💀 战斗失败...');
+                    }
                     updateMainUI();
                     showScreen('main');
                 }, 500);
@@ -463,35 +516,46 @@ ${skills.map(s => `• ${s.name}: ${s.desc}`).join('\n') || '无技能'}`);
             return false;
         }
 
-        function enemyAttack() {
-            const e = battleState.enemy;
-            const dmg = Math.floor(Math.random() * 20) + e.atk - 20;
-            battleState.playerHp = Math.max(0, battleState.playerHp - Math.max(10, dmg));
-            log(`👹 ${e.name} 造成 ${Math.max(10, dmg)} 伤害!`);
-            
-            if (battleState.playerHp <= 0) {
-                setTimeout(() => {
-                    alert('战斗失败...');
-                    showScreen('main');
-                }, 500);
-            }
-        }
-
         function endTurn() {
-            enemyAttack();
-            // 减少CD
-            battleState.hand.forEach(c => {
-                c.currentCd = c.currentCd.map(cd => Math.max(0, cd - 1));
+            const enemyUnits = battleSystem.getAliveUnits('enemy');
+            const playerUnits = battleSystem.getAliveUnits('player');
+            
+            // 敌人行动
+            enemyUnits.forEach(enemy => {
+                const action = battleSystem.enemyAIChooseAction(enemy);
+                if (action) {
+                    const results = battleSystem.useSkill(enemy, action.target, action.skill);
+                    
+                    results.forEach(r => {
+                        if (r.type === 'damage') {
+                            log(`👹 ${enemy.cardInstance.baseCard.name} 的 [${action.skill.name}] 造成 ${r.value} 伤害!`);
+                        } else if (r.type === 'heal') {
+                            log(`👹 ${enemy.cardInstance.baseCard.name} 恢复 ${r.value} 生命`);
+                        }
+                    });
+                }
             });
-            battleState.turn++;
+            
+            // 减少CD
+            [...playerUnits, ...enemyUnits].forEach(u => {
+                u.cardInstance.skillCooldowns = u.cardInstance.skillCooldowns.map(cd => Math.max(0, cd - 1));
+                // Buff持续时间减少
+                u.buffs = u.buffs.map(b => ({...b, duration: b.duration - 1})).filter(b => b.duration > 0);
+            });
+            
+            battleSystem.turnCount++;
             updateBattleUI();
+            
+            if (!checkBattleEnd()) {
+                log(`=== 第 ${battleSystem.turnCount} 回合 ===`);
+            }
         }
 
         function fleeBattle() {
             showScreen('main');
         }
 
-        // 日志
+        // ==================== 日志 ====================
         function log(msg) {
             const logDiv = document.getElementById('battle-log');
             const entry = document.createElement('div');
@@ -501,7 +565,7 @@ ${skills.map(s => `• ${s.name}: ${s.desc}`).join('\n') || '无技能'}`);
             logDiv.insertBefore(entry, logDiv.firstChild);
         }
 
-        // 启动
+        // ==================== 启动 ====================
         init();
     </script>
 </body>
