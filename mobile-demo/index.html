@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>记忆回收者 - 手机试玩版 v0.4 (完整版)</title>
     <script src="card-data.js"></script>
+    <script src="save-system.js"></script>
+    <script src="enemy-data.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f1a; min-height: 100vh; display: flex; flex-direction: column; color: #fff; }
@@ -66,7 +68,8 @@
             <button class="btn" onclick="showScreen('battle')">⚔️ 开始战斗</button>
             <button class="btn btn-secondary" onclick="showScreen('gacha')">🎴 召唤卡牌 (100金币)</button>
             <button class="btn btn-secondary" onclick="showScreen('collection')">📚 卡牌收藏</button>
-            <button class="btn btn-secondary" onclick="showScreen('upgrade')">⭐ 升级升星</button>
+            <button class="btn btn-secondary" onclick="showScreen('story')">📖 剧情模式</button>
+            <button class="btn btn-secondary" onclick="saveGame()">💾 保存游戏</button>
             
             <div class="section">
                 <div class="section-title">📜 战斗记录</div>
