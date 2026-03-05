@@ -116,6 +116,79 @@ const CARD_DATABASE = {
                 { id: 'p1', name: '生命汲取', type: SKILL_TYPE.PASSIVE, effect: 'lifesteal', value: 0.15,
                   effects: [{ type: 'lifesteal', value: 0.15 }], desc: '伤害15%转化为生命' }
             ]
+        },
+        // 新增SSR卡
+        {
+            id: 'SSR007', name: '风语者', element: ELEMENT_TYPE.WOOD, rarity: 'SSR',
+            hp: 2700, atk: 890, def: 240, spd: 120, crit: 20, icon: '🌪️',
+            skills: [
+                { id: 's1', name: '疾风步', type: SKILL_TYPE.ACTIVE, damage: 1.6, target: 'single', cd: 2,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.6 }, { type: EFFECT_TYPE.BUFF_SPD, value: 0.3 }],
+                  desc: '160%伤害，自身速度+30%（3回合）' },
+                { id: 'p1', name: '风之痕', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'extra_turn', chance: 0.2 }],
+                  desc: '20%概率额外行动一次' }
+            ]
+        },
+        {
+            id: 'SSR008', name: '雷霆裁决', element: ELEMENT_TYPE.METAL, rarity: 'SSR',
+            hp: 3200, atk: 950, def: 300, spd: 70, crit: 15, icon: '⚡',
+            skills: [
+                { id: 's1', name: '雷霆一击', type: SKILL_TYPE.ACTIVE, damage: 2.2, target: 'single', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.2 }],
+                  desc: '220%伤害，50%概率眩晕（1回合）' },
+                { id: 's2', name: '闪电链', type: SKILL_TYPE.ACTIVE, damage: 1.0, target: 'all', cd: 5,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.0 }],
+                  desc: '全体100%雷属性伤害' }
+            ]
+        },
+        {
+            id: 'SSR009', name: '生命之树', element: ELEMENT_TYPE.WOOD, rarity: 'SSR',
+            hp: 3800, atk: 520, def: 350, spd: 60, crit: 8, icon: '🌳',
+            skills: [
+                { id: 's1', name: '生命绽放', type: SKILL_TYPE.ACTIVE, heal: 0.35, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.HEAL, value: 0.35 }],
+                  desc: '全体恢复35%生命' },
+                { id: 'p1', name: '自然守护', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'regen', value: 0.05 }],
+                  desc: '每回合开始时，全体恢复5%生命' }
+            ]
+        },
+        {
+            id: 'SSR010', name: '虚空行者', element: ELEMENT_TYPE.DARK, rarity: 'SSR',
+            hp: 2500, atk: 920, def: 200, spd: 100, crit: 22, icon: '🌌',
+            skills: [
+                { id: 's1', name: '虚空裂隙', type: SKILL_TYPE.ACTIVE, damage: 1.8, target: 'single', cd: 3,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.8 }, { type: EFFECT_TYPE.DEBUFF_DEF, value: 0.3 }],
+                  desc: '180%伤害，降低目标30%防御（2回合）' },
+                { id: 's2', name: '维度穿梭', type: SKILL_TYPE.ACTIVE, effect: 'invincible', target: 'self', cd: 6,
+                  effects: [{ type: 'invincible', duration: 1 }],
+                  desc: '下回合免疫所有伤害' }
+            ]
+        },
+        {
+            id: 'SSR011', name: '太阳神官', element: ELEMENT_TYPE.LIGHT, rarity: 'SSR',
+            hp: 3100, atk: 680, def: 280, spd: 80, crit: 12, icon: '☀️',
+            skills: [
+                { id: 's1', name: '神圣庇护', type: SKILL_TYPE.ACTIVE, effect: 'shield', target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.SHIELD, value: 0.2 }],
+                  desc: '全体获得20%最大生命的护盾' },
+                { id: 'p1', name: '日光普照', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.BUFF_ATK, value: 0.1 }],
+                  desc: '全体友方攻击力+10%' }
+            ]
+        },
+        {
+            id: 'SSR012', name: '深渊吞噬者', element: ELEMENT_TYPE.WATER, rarity: 'SSR',
+            hp: 3600, atk: 780, def: 320, spd: 55, crit: 10, icon: '🌊',
+            skills: [
+                { id: 's1', name: '深渊之口', type: SKILL_TYPE.ACTIVE, damage: 1.4, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.4 }, { type: EFFECT_TYPE.TAUNT, value: 1 }],
+                  desc: '全体140%伤害，嘲讽（2回合）' },
+                { id: 'p1', name: '深海之力', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'hp_regen', value: 0.08 }],
+                  desc: '每回合恢复8%最大生命' }
+            ]
         }
     ],
     SR: [
@@ -132,7 +205,24 @@ const CARD_DATABASE = {
         { id: 'SR006', name: '晨曦', element: ELEMENT_TYPE.LIGHT, rarity: 'SR', hp: 2400, atk: 460, def: 210, spd: 70, crit: 8, icon: '🌅',
           skills: [{ id: 's1', name: '圣光治疗', type: SKILL_TYPE.ACTIVE, heal: 0.25, cd: 3, effects: [{ type: EFFECT_TYPE.HEAL, value: 0.25 }], desc: '恢复25%生命' }] },
         { id: 'SR007', name: '暗影', element: ELEMENT_TYPE.DARK, rarity: 'SR', hp: 2300, atk: 760, def: 170, spd: 95, crit: 22, icon: '🌑',
-          skills: [{ id: 's1', name: '暗影突袭', type: SKILL_TYPE.ACTIVE, damage: 1.6, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.6 }], desc: '160%伤害' }] }
+          skills: [{ id: 's1', name: '暗影突袭', type: SKILL_TYPE.ACTIVE, damage: 1.6, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.6 }], desc: '160%伤害' }] },
+        // 新增SR卡
+        { id: 'SR008', name: '暴风射手', element: ELEMENT_TYPE.WOOD, rarity: 'SR', hp: 2300, atk: 760, def: 170, spd: 105, crit: 18, icon: '🏹',
+          skills: [{ id: 's1', name: '连射', type: SKILL_TYPE.ACTIVE, damage: 0.9, cd: 2, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 0.9 }], desc: '随机射击3次，每次90%伤害' }] },
+        { id: 'SR009', name: '岩浆巨人', element: ELEMENT_TYPE.FIRE, rarity: 'SR', hp: 3600, atk: 580, def: 360, spd: 45, crit: 6, icon: '🌋',
+          skills: [{ id: 's1', name: '岩浆喷发', type: SKILL_TYPE.ACTIVE, damage: 1.3, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.3 }], desc: '130%伤害，附加灼烧' }] },
+        { id: 'SR010', name: '霜冻法师', element: ELEMENT_TYPE.WATER, rarity: 'SR', hp: 2100, atk: 720, def: 160, spd: 85, crit: 12, icon: '❄️',
+          skills: [{ id: 's1', name: '冰霜新星', type: SKILL_TYPE.ACTIVE, damage: 1.1, cd: 4, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.1 }], desc: '全体110%伤害，30%概率冰冻' }] },
+        { id: 'SR011', name: '圣骑士', element: ELEMENT_TYPE.LIGHT, rarity: 'SR', hp: 3300, atk: 620, def: 300, spd: 60, crit: 8, icon: '⚜️',
+          skills: [{ id: 's1', name: '圣光斩', type: SKILL_TYPE.ACTIVE, damage: 1.4, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.4 }], desc: '140%伤害，吸血15%' }] },
+        { id: 'SR012', name: '影舞者', element: ELEMENT_TYPE.DARK, rarity: 'SR', hp: 2200, atk: 790, def: 150, spd: 115, crit: 25, icon: '🎭',
+          skills: [{ id: 's1', name: '影分身', type: SKILL_TYPE.ACTIVE, damage: 1.2, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.2 }], desc: '120%伤害，闪避+50%' }] },
+        { id: 'SR013', name: '沙漠守护者', element: ELEMENT_TYPE.EARTH, rarity: 'SR', hp: 3100, atk: 560, def: 330, spd: 50, crit: 7, icon: '🏺',
+          skills: [{ id: 's1', name: '沙尘暴', type: SKILL_TYPE.ACTIVE, damage: 1.0, cd: 4, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.0 }], desc: '全体100%伤害，降低命中' }] },
+        { id: 'SR014', name: '雷霆战锤', element: ELEMENT_TYPE.METAL, rarity: 'SR', hp: 2900, atk: 700, def: 260, spd: 65, crit: 14, icon: '🔨',
+          skills: [{ id: 's1', name: '雷霆猛击', type: SKILL_TYPE.ACTIVE, damage: 1.7, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.7 }], desc: '170%伤害，无视20%防御' }] },
+        { id: 'SR015', name: '潮汐祭祀', element: ELEMENT_TYPE.WATER, rarity: 'SR', hp: 2500, atk: 580, def: 200, spd: 75, crit: 9, icon: '🐚',
+          skills: [{ id: 's1', name: '潮汐祝福', type: SKILL_TYPE.ACTIVE, effect: 'buff', cd: 4, effects: [{ type: EFFECT_TYPE.BUFF_ATK, value: 0.2 }], desc: '全体攻击力+20%（3回合）' }] }
     ],
     R: [
         { id: 'R001', name: '赤焰', element: ELEMENT_TYPE.FIRE, rarity: 'R', hp: 2200, atk: 540, def: 180, spd: 75, crit: 10, icon: '🔥',
@@ -144,14 +234,37 @@ const CARD_DATABASE = {
         { id: 'R004', name: '青藤', element: ELEMENT_TYPE.WOOD, rarity: 'R', hp: 1900, atk: 420, def: 160, spd: 80, crit: 6, icon: '🌿',
           skills: [{ id: 's1', name: '缠绕', type: SKILL_TYPE.ACTIVE, damage: 1.2, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.2 }], desc: '120%伤害' }] },
         { id: 'R005', name: '岩盾', element: ELEMENT_TYPE.EARTH, rarity: 'R', hp: 2600, atk: 400, def: 260, spd: 50, crit: 5, icon: '🛡️',
-          skills: [{ id: 's1', name: '守护', type: SKILL_TYPE.ACTIVE, effect: 'shield', cd: 4, effects: [{ type: EFFECT_TYPE.SHIELD, value: 200 }], desc: '获得护盾' }] }
+          skills: [{ id: 's1', name: '守护', type: SKILL_TYPE.ACTIVE, effect: 'shield', cd: 4, effects: [{ type: EFFECT_TYPE.SHIELD, value: 200 }], desc: '获得护盾' }] },
+        // 新增R卡
+        { id: 'R006', name: '野火法师', element: ELEMENT_TYPE.FIRE, rarity: 'R', hp: 1900, atk: 520, def: 140, spd: 80, crit: 11, icon: '🔥',
+          skills: [{ id: 's1', name: '火球', type: SKILL_TYPE.ACTIVE, damage: 1.35, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.35 }], desc: '135%火伤害' }] },
+        { id: 'R007', name: '溪流精灵', element: ELEMENT_TYPE.WATER, rarity: 'R', hp: 1700, atk: 480, def: 130, spd: 88, crit: 9, icon: '💧',
+          skills: [{ id: 's1', name: '净化', type: SKILL_TYPE.ACTIVE, heal: 0.15, cd: 3, effects: [{ type: EFFECT_TYPE.HEAL, value: 0.15 }], desc: '恢复15%生命，清除debuff' }] },
+        { id: 'R008', name: '铁甲卫士', element: ELEMENT_TYPE.METAL, rarity: 'R', hp: 2400, atk: 420, def: 240, spd: 48, crit: 5, icon: '🛡️',
+          skills: [{ id: 's1', name: '铁壁', type: SKILL_TYPE.ACTIVE, effect: 'shield', cd: 4, effects: [{ type: EFFECT_TYPE.SHIELD, value: 300 }], desc: '获得300点护盾' }] },
+        { id: 'R009', name: '藤蔓术士', element: ELEMENT_TYPE.WOOD, rarity: 'R', hp: 1800, atk: 500, def: 150, spd: 82, crit: 10, icon: '🌿',
+          skills: [{ id: 's1', name: '缠绕', type: SKILL_TYPE.ACTIVE, damage: 1.1, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.1 }, { type: 'slow', value: 0.2 }], desc: '110%伤害，减速20%' }] },
+        { id: 'R010', name: '岩石傀儡', element: ELEMENT_TYPE.EARTH, rarity: 'R', hp: 2800, atk: 380, def: 280, spd: 42, crit: 4, icon: '🗿',
+          skills: [{ id: 's1', name: '投掷', type: SKILL_TYPE.ACTIVE, damage: 1.3, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.3 }], desc: '130%伤害，50%概率眩晕' }] },
+        { id: 'R011', name: '光辉牧师', element: ELEMENT_TYPE.LIGHT, rarity: 'R', hp: 2000, atk: 440, def: 180, spd: 72, crit: 7, icon: '✨',
+          skills: [{ id: 's1', name: '祝福', type: SKILL_TYPE.ACTIVE, effect: 'buff', cd: 4, effects: [{ type: EFFECT_TYPE.BUFF_DEF, value: 0.25 }], desc: '防御+25%（3回合）' }] },
+        { id: 'R012', name: '暗影刺客', element: ELEMENT_TYPE.DARK, rarity: 'R', hp: 1750, atk: 540, def: 120, spd: 92, crit: 16, icon: '🗡️',
+          skills: [{ id: 's1', name: '暗影步', type: SKILL_TYPE.ACTIVE, damage: 1.45, cd: 3, effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.45 }], desc: '145%伤害，闪避+30%' }] }
     ],
     N: [
         { id: 'N001', name: '小火灵', element: ELEMENT_TYPE.FIRE, rarity: 'N', hp: 1200, atk: 380, def: 80, spd: 70, crit: 5, icon: '🔥', skills: [] },
         { id: 'N002', name: '水滴', element: ELEMENT_TYPE.WATER, rarity: 'N', hp: 1000, atk: 280, def: 90, spd: 65, crit: 4, icon: '💧', skills: [] },
         { id: 'N003', name: '铁块', element: ELEMENT_TYPE.METAL, rarity: 'N', hp: 1400, atk: 320, def: 120, spd: 55, crit: 5, icon: '⚔️', skills: [] },
         { id: 'N004', name: '树苗', element: ELEMENT_TYPE.WOOD, rarity: 'N', hp: 1300, atk: 300, def: 100, spd: 60, crit: 4, icon: '🌿', skills: [] },
-        { id: 'N005', name: '石块', element: ELEMENT_TYPE.EARTH, rarity: 'N', hp: 1600, atk: 240, def: 160, spd: 45, crit: 3, icon: '🪨', skills: [] }
+        { id: 'N005', name: '石块', element: ELEMENT_TYPE.EARTH, rarity: 'N', hp: 1600, atk: 240, def: 160, spd: 45, crit: 3, icon: '🪨', skills: [] },
+        // 新增N卡
+        { id: 'N006', name: '火精灵', element: ELEMENT_TYPE.FIRE, rarity: 'N', hp: 1100, atk: 340, def: 70, spd: 68, crit: 6, icon: '🔥', skills: [] },
+        { id: 'N007', name: '水精灵', element: ELEMENT_TYPE.WATER, rarity: 'N', hp: 950, atk: 300, def: 85, spd: 62, crit: 5, icon: '💧', skills: [] },
+        { id: 'N008', name: '金精灵', element: ELEMENT_TYPE.METAL, rarity: 'N', hp: 1300, atk: 310, def: 110, spd: 52, crit: 6, icon: '⚔️', skills: [] },
+        { id: 'N009', name: '木精灵', element: ELEMENT_TYPE.WOOD, rarity: 'N', hp: 1250, atk: 290, def: 95, spd: 58, crit: 5, icon: '🌿', skills: [] },
+        { id: 'N010', name: '土精灵', element: ELEMENT_TYPE.EARTH, rarity: 'N', hp: 1500, atk: 220, def: 150, spd: 43, crit: 4, icon: '🪨', skills: [] },
+        { id: 'N011', name: '光精灵', element: ELEMENT_TYPE.LIGHT, rarity: 'N', hp: 1050, atk: 280, def: 80, spd: 65, crit: 5, icon: '✨', skills: [] },
+        { id: 'N012', name: '暗精灵', element: ELEMENT_TYPE.DARK, rarity: 'N', hp: 1150, atk: 350, def: 75, spd: 70, crit: 7, icon: '🌑', skills: [] }
     ]
 };
 
