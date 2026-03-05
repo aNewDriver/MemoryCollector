@@ -1,0 +1,69 @@
+=== 生成的卡牌代码 ===
+
+// ==================== 批量生成卡牌 (52-100张) ====================
+
+    // N级卡牌扩展
+        { id: 'N013', name: '烈焰战士 2', element: ELEMENT_TYPE.FIRE, rarity: 'N', hp: 3000, atk: 700, def: 250, spd: 70, crit: 10, icon: '🌋', skills: [] },
+        { id: 'N014', name: '海啸法师 3', element: ELEMENT_TYPE.WATER, rarity: 'N', hp: 2200, atk: 850, def: 180, spd: 85, crit: 12, icon: '💦', skills: [] },
+        { id: 'N015', name: '叶影刺客 3', element: ELEMENT_TYPE.WOOD, rarity: 'N', hp: 2400, atk: 900, def: 150, spd: 110, crit: 25, icon: '🌿', skills: [] },
+        { id: 'N016', name: '钢铁守卫 3', element: ELEMENT_TYPE.METAL, rarity: 'N', hp: 4000, atk: 550, def: 400, spd: 50, crit: 5, icon: '🛡️', skills: [] },
+        { id: 'N017', name: '大地治疗师 3', element: ELEMENT_TYPE.EARTH, rarity: 'N', hp: 2600, atk: 500, def: 220, spd: 75, crit: 8, icon: '⛰️', skills: [] },
+        { id: 'N018', name: '光明辅助 3', element: ELEMENT_TYPE.LIGHT, rarity: 'N', hp: 2800, atk: 600, def: 250, spd: 80, crit: 10, icon: '🌟', skills: [] },
+        { id: 'N019', name: '暗影战士 3', element: ELEMENT_TYPE.DARK, rarity: 'N', hp: 3000, atk: 700, def: 250, spd: 70, crit: 10, icon: '🎭', skills: [] },
+        { id: 'N020', name: '烈焰法师 3', element: ELEMENT_TYPE.FIRE, rarity: 'N', hp: 2200, atk: 850, def: 180, spd: 85, crit: 12, icon: '🔥', skills: [] },
+        { id: 'N021', name: '流水刺客 4', element: ELEMENT_TYPE.WATER, rarity: 'N', hp: 2400, atk: 900, def: 150, spd: 110, crit: 25, icon: '❄️', skills: [] },
+        { id: 'N022', name: '古树守卫 4', element: ELEMENT_TYPE.WOOD, rarity: 'N', hp: 4000, atk: 550, def: 400, spd: 50, crit: 5, icon: '🍃', skills: [] },
+        { id: 'N023', name: '金属治疗师 4', element: ELEMENT_TYPE.METAL, rarity: 'N', hp: 2600, atk: 500, def: 220, spd: 75, crit: 8, icon: '⚙️', skills: [] },
+        { id: 'N024', name: '大地辅助 4', element: ELEMENT_TYPE.EARTH, rarity: 'N', hp: 2800, atk: 600, def: 250, spd: 80, crit: 10, icon: '🏺', skills: [] },
+        { id: 'N025', name: '圣光战士 4', element: ELEMENT_TYPE.LIGHT, rarity: 'N', hp: 3000, atk: 700, def: 250, spd: 70, crit: 10, icon: '✨', skills: [] },
+        { id: 'N026', name: '暗影法师 4', element: ELEMENT_TYPE.DARK, rarity: 'N', hp: 2200, atk: 850, def: 180, spd: 85, crit: 12, icon: '🌙', skills: [] },
+        { id: 'N027', name: '火影刺客 4', element: ELEMENT_TYPE.FIRE, rarity: 'N', hp: 2400, atk: 900, def: 150, spd: 110, crit: 25, icon: '☀️', skills: [] },
+        { id: 'N028', name: '深海守卫 5', element: ELEMENT_TYPE.WATER, rarity: 'N', hp: 4000, atk: 550, def: 400, spd: 50, crit: 5, icon: '☔', skills: [] },
+        { id: 'N029', name: '森林治疗师 5', element: ELEMENT_TYPE.WOOD, rarity: 'N', hp: 2600, atk: 500, def: 220, spd: 75, crit: 8, icon: '🌳', skills: [] },
+        { id: 'N030', name: '金属辅助 5', element: ELEMENT_TYPE.METAL, rarity: 'N', hp: 2800, atk: 600, def: 250, spd: 80, crit: 10, icon: '⚔️', skills: [] },
+
+    // R级卡牌扩展
+        { id: 'R013', name: '烈焰战士 2', element: ELEMENT_TYPE.FIRE, rarity: 'R', hp: 3900, atk: 910, def: 325, spd: 70, crit: 13, icon: '🌋', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R014', name: '海啸法师 3', element: ELEMENT_TYPE.WATER, rarity: 'R', hp: 2860, atk: 1105, def: 234, spd: 85, crit: 15, icon: '💦', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R015', name: '叶影刺客 3', element: ELEMENT_TYPE.WOOD, rarity: 'R', hp: 3120, atk: 1170, def: 195, spd: 110, crit: 28, icon: '🌿', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R016', name: '钢铁守卫 3', element: ELEMENT_TYPE.METAL, rarity: 'R', hp: 5200, atk: 715, def: 520, spd: 50, crit: 8, icon: '🛡️', skills: [{ id: 's1', name: '护盾', type: 'active', effect: 'shield', cd: 4, effects: [{ type: 'shield', value: 300 }], desc: '获得300护盾' }] },
+        { id: 'R017', name: '大地治疗师 3', element: ELEMENT_TYPE.EARTH, rarity: 'R', hp: 3380, atk: 650, def: 286, spd: 75, crit: 11, icon: '⛰️', skills: [{ id: 's1', name: '治疗', type: 'active', heal: 0.25, cd: 3, effects: [{ type: 'heal', value: 0.25 }], desc: '恢复25%生命' }] },
+        { id: 'R018', name: '光明辅助 3', element: ELEMENT_TYPE.LIGHT, rarity: 'R', hp: 3640, atk: 780, def: 325, spd: 80, crit: 13, icon: '🌟', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R019', name: '暗影战士 3', element: ELEMENT_TYPE.DARK, rarity: 'R', hp: 3900, atk: 910, def: 325, spd: 70, crit: 13, icon: '🎭', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R020', name: '烈焰法师 3', element: ELEMENT_TYPE.FIRE, rarity: 'R', hp: 2860, atk: 1105, def: 234, spd: 85, crit: 15, icon: '🔥', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R021', name: '流水刺客 4', element: ELEMENT_TYPE.WATER, rarity: 'R', hp: 3120, atk: 1170, def: 195, spd: 110, crit: 28, icon: '❄️', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R022', name: '古树守卫 4', element: ELEMENT_TYPE.WOOD, rarity: 'R', hp: 5200, atk: 715, def: 520, spd: 50, crit: 8, icon: '🍃', skills: [{ id: 's1', name: '护盾', type: 'active', effect: 'shield', cd: 4, effects: [{ type: 'shield', value: 300 }], desc: '获得300护盾' }] },
+        { id: 'R023', name: '金属治疗师 4', element: ELEMENT_TYPE.METAL, rarity: 'R', hp: 3380, atk: 650, def: 286, spd: 75, crit: 11, icon: '⚙️', skills: [{ id: 's1', name: '治疗', type: 'active', heal: 0.25, cd: 3, effects: [{ type: 'heal', value: 0.25 }], desc: '恢复25%生命' }] },
+        { id: 'R024', name: '大地辅助 4', element: ELEMENT_TYPE.EARTH, rarity: 'R', hp: 3640, atk: 780, def: 325, spd: 80, crit: 13, icon: '🏺', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'R025', name: '圣光战士 4', element: ELEMENT_TYPE.LIGHT, rarity: 'R', hp: 3900, atk: 910, def: 325, spd: 70, crit: 13, icon: '✨', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+
+    // SR级卡牌扩展
+        { id: 'SR016', name: '烈焰战士 3', element: ELEMENT_TYPE.FIRE, rarity: 'SR', hp: 4800, atk: 1120, def: 400, spd: 70, crit: 16, icon: '🔆', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR017', name: '海啸法师 3', element: ELEMENT_TYPE.WATER, rarity: 'SR', hp: 3520, atk: 1360, def: 288, spd: 85, crit: 18, icon: '🌊', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR018', name: '叶影刺客 3', element: ELEMENT_TYPE.WOOD, rarity: 'SR', hp: 3840, atk: 1440, def: 240, spd: 110, crit: 31, icon: '🌱', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR019', name: '钢铁守卫 3', element: ELEMENT_TYPE.METAL, rarity: 'SR', hp: 6400, atk: 880, def: 640, spd: 50, crit: 11, icon: '🔱', skills: [{ id: 's1', name: '护盾', type: 'active', effect: 'shield', cd: 4, effects: [{ type: 'shield', value: 300 }], desc: '获得300护盾' }] },
+        { id: 'SR020', name: '大地治疗师 3', element: ELEMENT_TYPE.EARTH, rarity: 'SR', hp: 4160, atk: 800, def: 352, spd: 75, crit: 14, icon: '🏔️', skills: [{ id: 's1', name: '治疗', type: 'active', heal: 0.25, cd: 3, effects: [{ type: 'heal', value: 0.25 }], desc: '恢复25%生命' }] },
+        { id: 'SR021', name: '光明辅助 4', element: ELEMENT_TYPE.LIGHT, rarity: 'SR', hp: 4480, atk: 960, def: 400, spd: 80, crit: 16, icon: '⭐', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR022', name: '暗影战士 4', element: ELEMENT_TYPE.DARK, rarity: 'SR', hp: 4800, atk: 1120, def: 400, spd: 70, crit: 16, icon: '🌌', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR023', name: '烈焰法师 4', element: ELEMENT_TYPE.FIRE, rarity: 'SR', hp: 3520, atk: 1360, def: 288, spd: 85, crit: 18, icon: '🌋', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR024', name: '流水刺客 4', element: ELEMENT_TYPE.WATER, rarity: 'SR', hp: 3840, atk: 1440, def: 240, spd: 110, crit: 31, icon: '💦', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SR025', name: '古树守卫 4', element: ELEMENT_TYPE.WOOD, rarity: 'SR', hp: 6400, atk: 880, def: 640, spd: 50, crit: 11, icon: '🌿', skills: [{ id: 's1', name: '护盾', type: 'active', effect: 'shield', cd: 4, effects: [{ type: 'shield', value: 300 }], desc: '获得300护盾' }] },
+
+    // SSR级卡牌扩展
+        { id: 'SSR013', name: '烈焰战士 2', element: ELEMENT_TYPE.FIRE, rarity: 'SSR', hp: 6000, atk: 1400, def: 500, spd: 77, crit: 20, icon: '🌋', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SSR014', name: '海啸法师 3', element: ELEMENT_TYPE.WATER, rarity: 'SSR', hp: 4400, atk: 1700, def: 360, spd: 93, crit: 22, icon: '💦', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SSR015', name: '叶影刺客 3', element: ELEMENT_TYPE.WOOD, rarity: 'SSR', hp: 4800, atk: 1800, def: 300, spd: 121, crit: 35, icon: '🌿', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SSR016', name: '钢铁守卫 3', element: ELEMENT_TYPE.METAL, rarity: 'SSR', hp: 8000, atk: 1100, def: 800, spd: 55, crit: 15, icon: '🛡️', skills: [{ id: 's1', name: '护盾', type: 'active', effect: 'shield', cd: 4, effects: [{ type: 'shield', value: 300 }], desc: '获得300护盾' }] },
+        { id: 'SSR017', name: '大地治疗师 3', element: ELEMENT_TYPE.EARTH, rarity: 'SSR', hp: 5200, atk: 1000, def: 440, spd: 82, crit: 18, icon: '⛰️', skills: [{ id: 's1', name: '治疗', type: 'active', heal: 0.25, cd: 3, effects: [{ type: 'heal', value: 0.25 }], desc: '恢复25%生命' }] },
+        { id: 'SSR018', name: '光明辅助 3', element: ELEMENT_TYPE.LIGHT, rarity: 'SSR', hp: 5600, atk: 1200, def: 500, spd: 88, crit: 20, icon: '🌟', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SSR019', name: '暗影战士 3', element: ELEMENT_TYPE.DARK, rarity: 'SSR', hp: 6000, atk: 1400, def: 500, spd: 77, crit: 20, icon: '🎭', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+        { id: 'SSR020', name: '烈焰法师 3', element: ELEMENT_TYPE.FIRE, rarity: 'SSR', hp: 4400, atk: 1700, def: 360, spd: 93, crit: 22, icon: '🔥', skills: [{ id: 's1', name: '重击', type: 'active', damage: 1.5, cd: 3, effects: [{ type: 'damage', value: 1.5 }], desc: '150%伤害' }] },
+
+
+=== 统计 ===
+N卡: 18张 (13-30)
+R卡: 13张 (13-25)
+SR卡: 10张 (16-25)
+SSR卡: 8张 (13-20)
+总计: 49 张
+目标: 100张
