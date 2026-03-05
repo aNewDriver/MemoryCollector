@@ -3,607 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>记忆回收者 - 手机试玩版</title>
+    <title>记忆回收者 - 手机试玩版 v0.2</title>
+    <script src="card-data.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            touch-action: manipulation;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: #0f0f1a;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 15px;
-            text-align: center;
-            border-bottom: 2px solid #ffd700;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header h1 {
-            font-size: 20px;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-        
-        .header .subtitle {
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
-        }
-        
-        .game-container {
-            flex: 1;
-            padding: 10px;
-            max-width: 480px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        .section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .section-title {
-            font-size: 16px;
-            color: #ffd700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .card {
-            aspect-ratio: 2/3;
-            background: linear-gradient(135deg, #2a2a4a 0%, #1a1a3a 100%);
-            border-radius: 8px;
-            border: 2px solid;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card:active {
-            transform: scale(0.95);
-        }
-        
-        .card.N { border-color: #888; }
-        .card.R { border-color: #4a9eff; }
-        .card.SR { border-color: #a855f7; }
-        .card.SSR { border-color: #ffd700; }
-        .card.UR { border-color: #ff4444; }
-        
-        .card-rarity {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 5px;
-            border-radius: 3px;
-            background: rgba(0,0,0,0.5);
-        }
-        
-        .card-icon {
-            font-size: 32px;
-            margin-bottom: 5px;
-        }
-        
-        .card-name {
-            font-size: 11px;
-            text-align: center;
-            color: #fff;
-        }
-        
-        .card-power {
-            font-size: 12px;
-            color: #ffd700;
-            margin-top: 4px;
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 25px;
-            color: #fff;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 10px;
-            touch-action: manipulation;
-        }
-        
-        .btn:active {
-            opacity: 0.8;
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            text-align: center;
-        }
-        
-        .stat-item {
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
-            border-radius: 8px;
-        }
-        
-        .stat-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffd700;
-        }
-        
-        .stat-label {
-            font-size: 11px;
-            color: #888;
-            margin-top: 4px;
-        }
-        
-        .battle-log {
-            background: rgba(0,0,0,0.3);
-            border-radius: 8px;
-            padding: 10px;
-            max-height: 150px;
-            overflow-y: auto;
-            font-size: 12px;
-            font-family: monospace;
-        }
-        
-        .log-entry {
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .damage {
-            color: #ff6b6b;
-        }
-        
-        .heal {
-            color: #51cf66;
-        }
-        
-        .footer {
-            background: #1a1a2e;
-            padding: 15px;
-            text-align: center;
-            font-size: 11px;
-            color: #666;
-            border-top: 1px solid rgba(255,215,0,0.2);
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        #battle-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #0f0f1a;
-            z-index: 200;
-            padding: 15px;
-            overflow-y: auto;
-        }
-        
-        .enemy-area {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255,0,0,0.1);
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-        
-        .enemy-hp-bar {
-            height: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        
-        .enemy-hp-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff4444, #ff8888);
-            transition: width 0.3s;
-        }
-        
-        .player-area {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0,255,0,0.1);
-            border-radius: 12px;
-        }
-        
-        .hand-cards {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 0;
-            margin: 15px 0;
-        }
-        
-        .hand-card {
-            min-width: 80px;
-            aspect-ratio: 2/3;
-            background: linear-gradient(135deg, #2a2a4a 0%, #1a1a3a 100%);
-            border-radius: 8px;
-            border: 2px solid #ffd700;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            cursor: pointer;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f1a; min-height: 100vh; display: flex; flex-direction: column; color: #fff; }
+        .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 15px; text-align: center; border-bottom: 2px solid #ffd700; position: sticky; top: 0; z-index: 100; }
+        .header h1 { font-size: 20px; color: #ffd700; }
+        .header .subtitle { font-size: 12px; color: #888; margin-top: 5px; }
+        .game-container { flex: 1; padding: 10px; max-width: 480px; margin: 0 auto; width: 100%; }
+        .section { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 1px solid rgba(255,215,0,0.2); }
+        .section-title { font-size: 16px; color: #ffd700; margin-bottom: 12px; }
+        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .card { aspect-ratio: 2/3; background: linear-gradient(135deg, #2a2a4a, #1a1a3a); border-radius: 8px; border: 2px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; cursor: pointer; }
+        .card.N { border-color: #888; } .card.R { border-color: #4a9eff; } .card.SR { border-color: #a855f7; } .card.SSR { border-color: #ffd700; }
+        .btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; border-radius: 25px; color: #fff; padding: 12px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 10px; }
+        .btn-secondary { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,215,0,0.3); }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+        .stat-item { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; }
+        .stat-value { font-size: 20px; font-weight: bold; color: #ffd700; }
+        .battle-log { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 10px; max-height: 150px; overflow-y: auto; font-size: 12px; }
+        .hidden { display: none !important; }
+        #battle-screen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0f0f1a; z-index: 200; padding: 15px; }
+        .enemy-area { text-align: center; padding: 20px; background: rgba(255,0,0,0.1); border-radius: 12px; border: 2px solid #ff4444; margin-bottom: 15px; }
+        .player-area { text-align: center; padding: 15px; background: rgba(0,255,0,0.1); border-radius: 12px; border: 2px solid #44ff44; }
+        .hand-cards { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
+        .hand-card { min-width: 90px; aspect-ratio: 2/3; background: linear-gradient(135deg, #2a2a4a, #1a1a3a); border-radius: 8px; border: 2px solid #ffd700; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; }
     </style>
 </head>
 <body>
-    <!-- 主菜单 -->
     <div id="main-menu">
         <div class="header">
             <h1>🔮 记忆回收者</h1>
-            <div class="subtitle">手机试玩版 v0.1</div>
+            <div class="subtitle">v0.2 真实卡牌数据 | 23张卡牌可用</div>
         </div>
-        
         <div class="game-container">
-            <!-- 玩家状态 -->
             <div class="section">
                 <div class="section-title">👤 我的收藏</div>
                 <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="card-count">0</div>
-                        <div class="stat-label">卡牌数</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="gold">1000</div>
-                        <div class="stat-label">金币</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="diamond">50</div>
-                        <div class="stat-label">钻石</div>
-                    </div>
+                    <div class="stat-item"><div class="stat-value" id="card-count">0</div><div style="font-size:11px;color:#888">卡牌数</div></div>
+                    <div class="stat-item"><div class="stat-value" id="gold">1000</div><div style="font-size:11px;color:#888">金币</div></div>
+                    <div class="stat-item"><div class="stat-value" id="diamond">50</div><div style="font-size:11px;color:#888">钻石</div></div>
                 </div>
             </div>
             
-            <!-- 主按钮 -->
             <button class="btn" onclick="startBattle()">⚔️ 开始战斗</button>
             <button class="btn btn-secondary" onclick="drawCard()">🎴 抽卡 (100金币)</button>
             <button class="btn btn-secondary" onclick="showCollection()">📚 查看收藏</button>
             
-            <!-- 最近获得 -->
             <div class="section" id="recent-section" style="display:none;">
                 <div class="section-title">🎁 最近获得</div>
                 <div class="card-grid" id="recent-cards"></div>
             </div>
             
-            <!-- 战斗记录 -->
             <div class="section">
                 <div class="section-title">📜 战斗记录</div>
                 <div class="battle-log" id="battle-log"
->
-                    <div class="log-entry">欢迎来到记忆回收者！点击"开始战斗"体验游戏~</div>
-                </div>
+></div>
             </div>
-        </div>
-        
-        <div class="footer">
-            © 2026 记忆回收者 | 当前为试玩版本
         </div>
     </div>
     
-    <!-- 战斗画面 -->
     <div id="battle-screen" class="hidden">
-        <div class="header">
-            <h1>⚔️ 战斗中</h1>
+        <div style="background:#1a1a2e;padding:15px;text-align:center;border-bottom:2px solid #ffd700;">
+            <h2>⚔️ 战斗中</h2>
         </div>
         
-        <div class="enemy-area">
-            <div style="font-size:48px;">👹</div>
-            <div>记忆守卫 Lv.1</div>
-            <div class="enemy-hp-bar">
-                <div class="enemy-hp-fill" id="enemy-hp" style="width:100%"></div>
+        <div class="game-container">
+            <div class="enemy-area">
+                <div style="font-size:48px;">👹</div>
+                <div>记忆守卫 Lv.1</div>
+                <div class="enemy-hp-bar"><div class="enemy-hp-fill" id="enemy-hp" style="width:100%"></div></div>
+                <div id="enemy-hp-text">500/500</div>
             </div>
-            <div id="enemy-hp-text">500/500</div>
-        </div>
-        
-        <div class="player-area">
-            <div>我的回合 - 选择卡牌攻击!</div>
-            <div>HP: <span id="player-hp">300</span>/300</div>
-        </div>
-        
-        <div class="hand-cards" id="hand-cards"
+            
+            <div class="player-area">
+                <div id="turn-indicator">我的回合 - 选择卡牌攻击!</div>
+                <div>HP: <span id="player-hp">300</span>/300</div>
+            </div>
+            
+            <div class="hand-cards" id="hand-cards"
 ></div>
-        
-        <button class="btn" onclick="endTurn()">结束回合</button>
-        <button class="btn btn-secondary" onclick="fleeBattle()">逃跑</button>
+            
+            <button class="btn" onclick="endTurn()">结束回合</button>
+            <button class="btn btn-secondary" onclick="fleeBattle()">逃跑</button>
+        </div>
     </div>
     
     <script>
-        // 游戏数据
-        const elements = {
-            fire: { icon: '🔥', color: '#ff6b6b', counter: 'metal' },
-            water: { icon: '💧', color: '#4ecdc4', counter: 'fire' },
-            wood: { icon: '🌿', color: '#95e1d3', counter: 'earth' },
-            metal: { icon: '⚔️', color: '#c0c0c0', counter: 'wood' },
-            earth: { icon: '🏔️', color: '#d4a574', counter: 'water' },
-            light: { icon: '✨', color: '#ffd700', counter: 'dark' },
-            dark: { icon: '🌑', color: '#8b7dd4', counter: 'light' }
-        };
+        let playerData = { cards: [], gold: 1000, diamond: 50, recentCards: [] };
+        let battleState = { enemyHp: 500, enemyMaxHp: 500, playerHp: 300, playerMaxHp: 300, hand: [], turn: 1 };
         
-        const rarities = ['N', 'R', 'SR', 'SSR', 'UR'];
-        
-        let playerData = {
-            cards: [],
-            gold: 1000,
-            diamond: 50,
-            recentCards: []
-        };
-        
-        let battleState = {
-            enemyHp: 500,
-            enemyMaxHp: 500,
-            playerHp: 300,
-            playerMaxHp: 300,
-            hand: [],
-            turn: 1
-        };
-        
-        // 生成随机卡牌
-        function generateCard() {
-            const elementKeys = Object.keys(elements);
-            const element = elementKeys[Math.floor(Math.random() * elementKeys.length)];
-            const rarity = rarities[Math.floor(Math.random() * rarities.length)];
-            const power = Math.floor(Math.random() * 100) + 50;
-            
-            const names = {
-                fire: ['烬羽', '炎心', '赤焰'], water: ['青漪', '流霜', '碧波'],
-                wood: ['翠影', '青岚', '苍梧'], metal: ['银锋', '铁壁', '金戈'],
-                earth: ['岩心', '岳尘', '砂砾'], light: ['明烛', '晨曦', '圣光'],
-                dark: ['幽烛', '夜幕', '暗影']
-            };
-            
-            const name = names[element][Math.floor(Math.random() * names[element].length)];
-            
-            return {
-                id: Date.now() + Math.random(),
-                name,
-                element,
-                rarity,
-                power,
-                icon: elements[element].icon
-            };
-        }
-        
-        // 抽卡
         function drawCard() {
-            if (playerData.gold < 100) {
-                log('金币不足！');
-                return;
-            }
-            
+            if (playerData.gold < 100) { log('金币不足！'); return; }
             playerData.gold -= 100;
-            const card = generateCard();
+            const card = drawCardFromDatabase();
             playerData.cards.push(card);
             playerData.recentCards.unshift(card);
             if (playerData.recentCards.length > 6) playerData.recentCards.pop();
-            
             updateUI();
             showRecentCards();
-            log(`获得 ${card.rarity} 卡牌: ${card.name} ${card.icon} (战力${card.power})`);
+            log(`获得 [${card.rarity}] ${card.name} ${card.icon} (ATK:${card.atk})`);
         }
         
-        // 显示最近获得的卡
         function showRecentCards() {
             const container = document.getElementById('recent-cards');
             const section = document.getElementById('recent-section');
-            
-            if (playerData.recentCards.length === 0) {
-                section.style.display = 'none';
-                return;
-            }
-            
+            if (playerData.recentCards.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
             container.innerHTML = playerData.recentCards.map(card => `
                 <div class="card ${card.rarity}">
-                    <span class="card-rarity" style="color:${elements[card.element].color}">${card.rarity}</span>
-                    <div class="card-icon">${card.icon}</div>
-                    <div class="card-name">${card.name}</div>
-                    <div class="card-power">${card.power}</div>
-                </div>
-            `).join('');
-        }
-        
-        // 开始战斗
-        function startBattle() {
-            if (playerData.cards.length < 3) {
-                alert('需要至少3张卡牌才能战斗！请先抽卡。');
-                return;
-            }
-            
-            // 随机选择3张卡牌作为手牌
-            const shuffled = [...playerData.cards].sort(() => Math.random() - 0.5);
-            battleState.hand = shuffled.slice(0, 3);
-            battleState.enemyHp = 500;
-            battleState.playerHp = 300;
-            battleState.turn = 1;
-            
-            // 显示战斗画面
-            document.getElementById('main-menu').classList.add('hidden');
-            document.getElementById('battle-screen').classList.remove('hidden');
-            
-            updateBattleUI();
-            log('战斗开始！');
-        }
-        
-        // 更新战斗UI
-        function updateBattleUI() {
-            // 敌人HP
-            const enemyHpPercent = (battleState.enemyHp / battleState.enemyMaxHp) * 100;
-            document.getElementById('enemy-hp').style.width = enemyHpPercent + '%';
-            document.getElementById('enemy-hp-text').textContent = `${battleState.enemyHp}/${battleState.enemyMaxHp}`;
-            
-            // 玩家HP
-            document.getElementById('player-hp').textContent = battleState.playerHp;
-            
-            // 手牌
-            const handContainer = document.getElementById('hand-cards');
-            handContainer.innerHTML = battleState.hand.map((card, index) => `
-                <div class="hand-card ${card.rarity}" onclick="playCard(${index})">
+                    <span class="card-rarity" style="color:${getElementColor(card.element)}">${card.rarity}</span>
                     <div style="font-size:24px;">${card.icon}</div>
                     <div style="font-size:10px;">${card.name}</div>
-                    <div style="font-size:12px;color:#ffd700;">${card.power}</div>
+                    <div style="font-size:10px;color:#888;">ATK:${card.atk}</div>
                 </div>
             `).join('');
         }
         
-        // 打出卡牌
+        function getElementColor(element) {
+            const colors = { fire: '#ff6b6b', water: '#4ecdc4', wood: '#95e1d3', metal: '#c0c0c0', earth: '#d4a574', light: '#ffd700', dark: '#8b7dd4' };
+            return colors[element] || '#fff';
+        }
+        
+        function startBattle() {
+            if (playerData.cards.length < 3) { alert('需要至少3张卡牌！请先抽卡。'); return; }
+            const shuffled = [...playerData.cards].sort(() => Math.random() - 0.5);
+            battleState.hand = shuffled.slice(0, 3);
+            battleState.enemyHp = 500; battleState.playerHp = 300; battleState.turn = 1;
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('battle-screen').classList.remove('hidden');
+            updateBattleUI();
+            log('=== 战斗开始！ ===');
+        }
+        
+        function updateBattleUI() {
+            document.getElementById('enemy-hp').style.width = (battleState.enemyHp/battleState.enemyMaxHp*100) + '%';
+            document.getElementById('enemy-hp-text').textContent = `${battleState.enemyHp}/${battleState.enemyMaxHp}`;
+            document.getElementById('player-hp').textContent = battleState.playerHp;
+            const handContainer = document.getElementById('hand-cards');
+            handContainer.innerHTML = battleState.hand.map((card, index) => `
+                <div class="hand-card" onclick="playCard(${index})" style="border-color:${getElementColor(card.element)}">
+                    <div style="font-size:20px;">${card.icon}</div>
+                    <div style="font-size:10px;">${card.name}</div>
+                    <div style="font-size:12px;color:#ffd700;">ATK:${card.atk}</div>
+                    <div style="font-size:10px;color:#888;">${ELEMENT_COUNTER[card.element] ? '克:' + ELEMENT_COUNTER[card.element] : ''}</div>
+                </div>
+            `).join('');
+        }
+        
         function playCard(index) {
             const card = battleState.hand[index];
             if (!card) return;
-            
-            // 计算伤害（克制关系）
-            let damage = card.power;
-            const enemyElement = 'dark'; // 假设敌人是暗属性
-            
-            if (elements[card.element].counter === enemyElement) {
-                damage = Math.floor(damage * 1.3);
-                log(`${card.name} 触发克制! 造成 <span class="damage">${damage}</span> 伤害!`);
-            } else {
-                log(`${card.name} 造成 <span class="damage">${damage}</span> 伤害`);
-            }
-            
+            const isCounter = ELEMENT_COUNTER[card.element] === 'dark'; // 敌人假设为暗属性
+            let damage = calculateDamage(card, { def: 100 }, Math.random() < card.crit/100);
+            if (isCounter) damage = Math.floor(damage * 1.3);
             battleState.enemyHp = Math.max(0, battleState.enemyHp - damage);
-            
-            // 从手牌移除
             battleState.hand.splice(index, 1);
-            
             updateBattleUI();
-            
-            // 检查胜利
+            log(`${card.name} 造成 ${damage} 伤害${isCounter ? ' (克制!)' : ''}`);
             if (battleState.enemyHp <= 0) {
-                setTimeout(() => {
-                    alert('胜利！获得100金币');
-                    playerData.gold += 100;
-                    fleeBattle();
-                }, 500);
+                setTimeout(() => { alert('胜利！获得100金币'); playerData.gold += 100; fleeBattle(); }, 500);
                 return;
             }
-            
-            // 敌人反击
             setTimeout(enemyAttack, 500);
         }
         
-        // 敌人攻击
         function enemyAttack() {
             const damage = Math.floor(Math.random() * 30) + 20;
             battleState.playerHp = Math.max(0, battleState.playerHp - damage);
-            log(`敌人造成 <span class="damage">${damage}</span> 伤害!`);
-            
+            log(`敌人造成 ${damage} 伤害!`);
             updateBattleUI();
-            
-            if (battleState.playerHp <= 0) {
-                setTimeout(() => {
-                    alert('战斗失败...');
-                    fleeBattle();
-                }, 500);
-            }
+            if (battleState.playerHp <= 0) { setTimeout(() => { alert('战斗失败...'); fleeBattle(); }, 500); }
         }
         
-        // 结束回合
         function endTurn() {
-            // 补充手牌
             if (battleState.hand.length < 3 && playerData.cards.length > battleState.hand.length) {
                 const available = playerData.cards.filter(c => !battleState.hand.includes(c));
                 if (available.length > 0) {
-                    const newCard = available[Math.floor(Math.random() * available.length)];
-                    battleState.hand.push(newCard);
+                    battleState.hand.push(available[Math.floor(Math.random() * available.length)]);
                     log('补充手牌');
                 }
             }
-            
             battleState.turn++;
             enemyAttack();
             updateBattleUI();
         }
         
-        // 逃跑
         function fleeBattle() {
             document.getElementById('battle-screen').classList.add('hidden');
             document.getElementById('main-menu').classList.remove('hidden');
             updateUI();
         }
         
-        // 显示收藏
         function showCollection() {
-            if (playerData.cards.length === 0) {
-                alert('还没有卡牌，快去抽卡吧！');
-                return;
-            }
-            alert(`收藏夹共有 ${playerData.cards.length} 张卡牌:\n` + 
-                playerData.cards.slice(0, 10).map(c => `${c.rarity} ${c.name} ${c.icon}`).join('\n') +
-                (playerData.cards.length > 10 ? '\n...等' : ''));
+            if (playerData.cards.length === 0) { alert('还没有卡牌，快去抽卡吧！'); return; }
+            const list = playerData.cards.slice(0, 10).map(c => `[${c.rarity}]${c.name} ATK:${c.atk}`).join('\n');
+            alert(`收藏夹共 ${playerData.cards.length} 张:\n${list}${playerData.cards.length > 10 ? '\n...' : ''}`);
         }
         
-        // 更新主界面
         function updateUI() {
             document.getElementById('card-count').textContent = playerData.cards.length;
             document.getElementById('gold').textContent = playerData.gold;
             document.getElementById('diamond').textContent = playerData.diamond;
         }
         
-        // 日志
         function log(msg) {
             const logDiv = document.getElementById('battle-log');
             const entry = document.createElement('div');
             entry.className = 'log-entry';
-            entry.innerHTML = msg;
+            entry.textContent = msg;
             logDiv.insertBefore(entry, logDiv.firstChild);
         }
         
-        // 初始化
         updateUI();
-        log('欢迎来到记忆回收者！点击"抽卡"获得你的第一张卡牌~');
+        log('欢迎来到记忆回收者 v0.2！\n现在使用真实卡牌数据（23张卡牌）');
     </script>
 </body>
 </html>
