@@ -7,6 +7,7 @@
     <script src="card-data.js"></script>
     <script src="save-system.js"></script>
     <script src="enemy-data.js"></script>
+    <script src="story-system.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f1a; min-height: 100vh; display: flex; flex-direction: column; color: #fff; }
@@ -176,6 +177,78 @@
                 
                 <button class="btn" style="margin-top:15px;" onclick="doUpgrade()">升级</button>
                 <button class="btn btn-secondary" onclick="doStarUp()">升星 (1000金币)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 剧情模式界面 -->
+    <div id="story-screen" class="screen hidden">
+        <div style="background:#1a1a2e;padding:15px;text-align:center;border-bottom:2px solid #ffd700;">
+            <h2>📖 剧情模式</h2>
+            <button onclick="showScreen('main')" style="position:absolute;left:15px;top:15px;background:none;border:none;color:#fff;font-size:20px;">←</button>
+        </div>
+        <div class="game-container">
+            <div class="section">
+                <div class="section-title">第一章：觉醒</div>
+                <div style="text-align:center;padding:30px;background:rgba(255,215,0,0.05);border-radius:12px;border:1px solid rgba(255,215,0,0.2);">
+                    <div style="font-size:60px;margin-bottom:15px;">🌙</div>
+                    <div style="font-size:18px;margin-bottom:10px;">梦境入口</div>
+                    <div style="font-size:12px;color:#888;margin-bottom:20px;">在崩坏的世界中，收集失落的记忆</div>
+                    <button class="btn" onclick="startStory()">开始旅程</button>
+                </div>
+            </div>
+            
+            <div class="section hidden" id="story-progress">
+                <div class="section-title">进度</div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                    <div style="flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
+                        <div id="story-progress-bar" style="width:0%;height:100%;background:linear-gradient(90deg,#ffd700,#ffed4e);transition:width 0.5s;"></div>
+                    </div>
+                    <div style="font-size:12px;color:#888;" id="story-progress-text">0/6</div>
+                </div>
+            </div>
+            
+            <!-- 剧情对话区域 -->
+            <div class="section hidden" id="story-dialogue" style="min-height:200px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;" onclick="advanceStory()">
+                <div id="story-speaker" style="font-size:14px;color:#ffd700;margin-bottom:10px;">旁白</div>
+                <div id="story-text" style="font-size:16px;line-height:1.6;">点击开始...</div>
+                <div style="text-align:center;margin-top:20px;font-size:12px;color:#666;">点击继续 ▼</div>
+            </div>
+            
+            <!-- 战斗准备区域 -->
+            <div class="section hidden" id="story-battle-prep">
+                <div class="section-title">⚔️ 战斗开始</div>
+                <div id="story-enemy-info" style="text-align:center;padding:20px;">
+                    <div style="font-size:48px;">👹</div>
+                    <div style="font-weight:bold;">记忆守卫</div>
+                </div>
+                <button class="btn" onclick="startStoryBattle()">进入战斗</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 存档管理界面 -->
+    <div id="save-screen" class="screen hidden">
+        <div style="background:#1a1a2e;padding:15px;text-align:center;border-bottom:2px solid #ffd700;">
+            <h2>💾 存档管理</h2>
+            <button onclick="showScreen('main')" style="position:absolute;left:15px;top:15px;background:none;border:none;color:#fff;font-size:20px;">←</button>
+        </div>
+        <div class="game-container">
+            <div class="section">
+                <div class="section-title">当前存档</div>
+                <div id="save-info" style="padding:15px;background:rgba(0,0,0,0.3);border-radius:8px;margin-bottom:15px;">
+                    <div style="font-size:12px;color:#888;">暂无存档</div>
+                </div>
+                <button class="btn" onclick="doSaveGame()">💾 保存游戏</button>
+                <button class="btn btn-secondary" onclick="doLoadGame()">📂 读取存档</button>
+                <button class="btn btn-secondary" onclick="exportSave()">📤 导出存档</button>
+                <button class="btn btn-secondary" onclick="importSave()">📥 导入存档</button>
+                <button class="btn btn-secondary" onclick="deleteSave()" style="background:rgba(255,0,0,0.2);border-color:#ff4444;">🗑️ 删除存档</button>
+            </div>
+            
+            <div class="section hidden" id="export-section">
+                <div class="section-title">导出代码（复制保存）</div>
+                <textarea id="export-code" readonly style="width:100%;height:100px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,215,0,0.3);border-radius:8px;padding:10px;color:#fff;font-size:11px;word-break:break-all;"></textarea>
             </div>
         </div>
     </div>
@@ -566,6 +639,300 @@ ${skillText || '无技能'}`);
             entry.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
             entry.textContent = msg;
             logDiv.insertBefore(entry, logDiv.firstChild);
+        }
+
+        // ==================== 剧情模式 ====================
+        let storyManager = null;
+        let isTyping = false;
+        let typeTimer = null;
+
+        function startStory() {
+            storyManager = new StoryManager();
+            storyManager.startChapter(STORY_CHAPTER1);
+            
+            document.getElementById('story-progress').classList.remove('hidden');
+            document.getElementById('story-dialogue').classList.remove('hidden');
+            
+            updateStoryProgress();
+            advanceStory();
+        }
+
+        function advanceStory() {
+            if (isTyping) {
+                // 如果正在打字，点击直接显示全部
+                skipTyping();
+                return;
+            }
+            
+            const result = storyManager.advance();
+            
+            switch (result.type) {
+                case 'dialogue':
+                    showStoryDialogue(result.data);
+                    break;
+                case 'stage_change':
+                    handleStageChange(result);
+                    break;
+                case 'start_battle':
+                    prepareStoryBattle(result.enemies, result.boss);
+                    break;
+                case 'chapter_complete':
+                    completeChapter(result.rewards);
+                    break;
+            }
+            
+            updateStoryProgress();
+        }
+
+        function showStoryDialogue(data) {
+            const speakerEl = document.getElementById('story-speaker');
+            const textEl = document.getElementById('story-text');
+            
+            speakerEl.textContent = getSpeakerName(data.speaker);
+            speakerEl.style.color = data.speaker === 'boss' ? '#ff6b6b' : 
+                                   data.speaker === 'protagonist' ? '#4ecdc4' : '#ffd700';
+            
+            textEl.textContent = '';
+            isTyping = true;
+            
+            let index = 0;
+            typeTimer = setInterval(() => {
+                if (index < data.text.length) {
+                    textEl.textContent += data.text[index];
+                    index++;
+                } else {
+                    clearInterval(typeTimer);
+                    isTyping = false;
+                }
+            }, 40);
+        }
+
+        function skipTyping() {
+            if (typeTimer) {
+                clearInterval(typeTimer);
+                const textEl = document.getElementById('story-text');
+                const currentData = storyManager.getCurrentStage().lines[storyManager.dialogueIndex - 1];
+                textEl.textContent = currentData.text;
+                isTyping = false;
+            }
+        }
+
+        function getSpeakerName(speaker) {
+            const names = { narrator: '旁白', protagonist: '主角', boss: '遗忘守护者', system: '系统' };
+            return names[speaker] || speaker;
+        }
+
+        function handleStageChange(result) {
+            if (result.stageType === 'battle' || result.stageType === 'boss') {
+                document.getElementById('story-dialogue').classList.add('hidden');
+                document.getElementById('story-battle-prep').classList.remove('hidden');
+            } else {
+                document.getElementById('story-dialogue').classList.remove('hidden');
+                document.getElementById('story-battle-prep').classList.add('hidden');
+            }
+        }
+
+        function prepareStoryBattle(enemies, isBoss) {
+            // 显示敌人信息
+            const enemyInfo = document.getElementById('story-enemy-info');
+            if (isBoss) {
+                enemyInfo.innerHTML = `
+                    <div style="font-size:60px;">👹</div>
+                    <div style="font-weight:bold;color:#ff6b6b;">遗忘守护者</div>
+                    <div style="font-size:12px;color:#888;">BOSS战</div>
+                `;
+            } else {
+                enemyInfo.innerHTML = `
+                    <div style="font-size:48px;">💧</div>
+                    <div style="font-weight:bold;">记忆史莱姆</div>
+                `;
+            }
+        }
+
+        function startStoryBattle() {
+            // 切换到战斗界面，使用剧情敌人
+            showScreen('battle');
+            initStoryBattle();
+        }
+
+        function initStoryBattle() {
+            const shuffled = [...playerData.cards].sort(() => Math.random() - 0.5);
+            const playerTeam = shuffled.slice(0, 3);
+            
+            // 创建剧情敌人
+            const stage = storyManager.getCurrentStage();
+            const enemyTeam = stage.enemies.map(eId => {
+                const enemyData = ENEMY_DATABASE.dream_entrance.find(e => e.id === eId) ||
+                                 ENEMY_DATABASE.dream_elite.find(e => e.id === eId) ||
+                                 ENEMY_DATABASE.dream_boss.find(e => e.id === eId);
+                if (enemyData) {
+                    // 创建敌人卡牌实例
+                    const enemyCard = new CardInstance({
+                        id: enemyData.id,
+                        name: enemyData.name,
+                        element: enemyData.element,
+                        rarity: 'N',
+                        hp: enemyData.hp,
+                        atk: enemyData.atk,
+                        def: enemyData.def,
+                        spd: enemyData.spd,
+                        crit: 5,
+                        icon: enemyData.icon,
+                        skills: enemyData.skills || []
+                    });
+                    return enemyCard;
+                }
+                return null;
+            }).filter(e => e !== null);
+            
+            battleSystem = new BattleSystem(playerTeam, enemyTeam);
+            updateBattleUI();
+            log('=== 剧情战斗开始！ ===');
+        }
+
+        function updateStoryProgress() {
+            if (!storyManager || !storyManager.currentChapter) return;
+            
+            const total = storyManager.currentChapter.stages.length;
+            const current = storyManager.currentStageIndex + 1;
+            const percent = (current / total) * 100;
+            
+            document.getElementById('story-progress-bar').style.width = percent + '%';
+            document.getElementById('story-progress-text').textContent = `${current}/${total}`;
+        }
+
+        function completeChapter(rewards) {
+            document.getElementById('story-dialogue').classList.remove('hidden');
+            document.getElementById('story-battle-prep').classList.add('hidden');
+            
+            document.getElementById('story-speaker').textContent = '系统';
+            document.getElementById('story-speaker').style.color = '#ffd700';
+            document.getElementById('story-text').innerHTML = `
+                🎉 第一章完成！<br><br>
+                奖励：<br>
+                ${rewards.gold ? '💰 金币 x' + rewards.gold : ''}<br>
+                ${rewards.expCards ? '📖 经验卡 x' + rewards.expCards : ''}<br>
+                ${rewards.card ? '✨ 新卡牌：' + rewards.card : ''}
+            `;
+            
+            // 发放奖励
+            if (rewards.gold) playerData.gold += rewards.gold;
+            if (rewards.expCards) playerData.expCards += rewards.expCards;
+            updateMainUI();
+            
+            // 3秒后返回主菜单
+            setTimeout(() => {
+                showScreen('main');
+                log('完成第一章：觉醒！');
+            }, 3000);
+        }
+
+        // ==================== 存档功能 ====================
+        function saveGame() {
+            showScreen('save');
+            updateSaveInfo();
+        }
+
+        function updateSaveInfo() {
+            const info = saveManager.getSaveInfo();
+            const infoEl = document.getElementById('save-info');
+            
+            if (info.exists) {
+                const date = new Date(info.timestamp).toLocaleString();
+                infoEl.innerHTML = `
+                    <div style="font-size:14px;color:#fff;">存档版本: ${info.version}</div>
+                    <div style="font-size:12px;color:#888;margin-top:5px;">保存时间: ${date}</div>
+                `;
+            } else {
+                infoEl.innerHTML = `<div style="font-size:12px;color:#888;">暂无存档</div>`;
+            }
+        }
+
+        function doSaveGame() {
+            // 准备存档数据
+            const saveData = saveManager.createNewSave();
+            saveData.player.gold = playerData.gold;
+            saveData.player.expCards = playerData.expCards;
+            saveData.collection = playerData.cards.map(c => ({
+                id: c.baseCard.id,
+                level: c.level,
+                star: c.star,
+                exp: c.exp
+            }));
+            
+            if (saveManager.save(saveData)) {
+                alert('💾 游戏已保存！');
+                updateSaveInfo();
+            } else {
+                alert('保存失败，请重试');
+            }
+        }
+
+        function doLoadGame() {
+            const data = saveManager.load();
+            if (data && data.collection) {
+                // 恢复卡牌
+                playerData.cards = data.collection.map(cData => {
+                    const baseCard = findCardById(cData.id);
+                    if (baseCard) {
+                        const card = new CardInstance(baseCard);
+                        card.level = cData.level;
+                        card.star = cData.star;
+                        card.exp = cData.exp;
+                        return card;
+                    }
+                    return null;
+                }).filter(c => c !== null);
+                
+                // 恢复资源
+                playerData.gold = data.player.gold;
+                playerData.expCards = data.player.expCards;
+                
+                updateMainUI();
+                alert('📂 存档已读取！');
+                showScreen('main');
+            } else {
+                alert('没有找到存档');
+            }
+        }
+
+        function findCardById(id) {
+            for (const rarity of ['SSR', 'SR', 'R', 'N']) {
+                const card = CARD_DATABASE[rarity].find(c => c.id === id);
+                if (card) return card;
+            }
+            return null;
+        }
+
+        function exportSave() {
+            const data = saveManager.export();
+            if (data) {
+                document.getElementById('export-section').classList.remove('hidden');
+                document.getElementById('export-code').value = data;
+                // 自动复制到剪贴板
+                navigator.clipboard?.writeText(data).then(() => {
+                    log('存档代码已复制到剪贴板');
+                });
+            }
+        }
+
+        function importSave() {
+            const code = prompt('请输入存档代码:');
+            if (code && saveManager.import(code)) {
+                doLoadGame();
+                alert('📥 存档已导入！');
+            } else {
+                alert('导入失败，请检查代码');
+            }
+        }
+
+        function deleteSave() {
+            if (confirm('确定要删除存档吗？此操作不可恢复！')) {
+                if (saveManager.delete()) {
+                    alert('🗑️ 存档已删除');
+                    updateSaveInfo();
+                }
+            }
         }
 
         // ==================== 启动 ====================
