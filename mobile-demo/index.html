@@ -804,6 +804,10 @@ ${skillText || '无技能'}`);
                 enemyData = ENEMY_DATABASE.memory_maze.find(e => e.id === enemyIds[0]) ||
                            ENEMY_DATABASE.maze_elite.find(e => e.id === enemyIds[0]) ||
                            ENEMY_DATABASE.maze_boss.find(e => e.id === enemyIds[0]);
+            } else if (currentChapterId === 'chapter4') {
+                enemyData = ENEMY_DATABASE.volcano_area.find(e => e.id === enemyIds[0]) ||
+                           ENEMY_DATABASE.volcano_elite.find(e => e.id === enemyIds[0]) ||
+                           ENEMY_DATABASE.volcano_boss.find(e => e.id === enemyIds[0]);
             }
             
             if (isBoss && enemyData) {
@@ -847,6 +851,10 @@ ${skillText || '无技能'}`);
                     enemyData = ENEMY_DATABASE.memory_maze.find(e => e.id === eId) ||
                                ENEMY_DATABASE.maze_elite.find(e => e.id === eId) ||
                                ENEMY_DATABASE.maze_boss.find(e => e.id === eId);
+                } else if (currentChapterId === 'chapter4') {
+                    enemyData = ENEMY_DATABASE.volcano_area.find(e => e.id === eId) ||
+                               ENEMY_DATABASE.volcano_elite.find(e => e.id === eId) ||
+                               ENEMY_DATABASE.volcano_boss.find(e => e.id === eId);
                 }
                 
                 if (enemyData) {

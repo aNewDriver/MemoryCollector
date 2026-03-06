@@ -319,6 +319,114 @@ const ENEMY_DATABASE = {
                 { speaker: 'player', text: '迷宫的出口，在于直面自己的记忆。' }
             ]
         }
+    ],
+
+    // 第四章 - 愤怒火山
+    volcano_area: [
+        {
+            id: 'lava_beast',
+            name: '熔岩兽',
+            icon: '🌋',
+            element: 'fire',
+            type: ENEMY_TYPE.NORMAL,
+            hp: 600,
+            atk: 80,
+            def: 60,
+            spd: 50,
+            behavior: AI_BEHAVIOR.AGGRESSIVE,
+            skills: [
+                { name: '熔岩冲撞', damage: 1.3, cd: 2, effect: 'burn' }
+            ],
+            description: '由岩浆凝聚而成的野兽'
+        },
+        {
+            id: 'fire_elemental',
+            name: '火元素',
+            icon: '🔥',
+            element: 'fire',
+            type: ENEMY_TYPE.NORMAL,
+            hp: 450,
+            atk: 90,
+            def: 40,
+            spd: 70,
+            behavior: AI_BEHAVIOR.AGGRESSIVE,
+            skills: [
+                { name: '火焰箭', damage: 1.2, cd: 1 }
+            ],
+            description: '纯粹的火焰精灵'
+        },
+        {
+            id: 'rage_warrior',
+            name: '狂怒战士',
+            icon: '⚔️',
+            element: 'fire',
+            type: ENEMY_TYPE.NORMAL,
+            hp: 550,
+            atk: 95,
+            def: 50,
+            spd: 60,
+            behavior: AI_BEHAVIOR.AGGRESSIVE,
+            skills: [
+                { name: '狂怒斩', damage: 1.4, cd: 2 },
+                { name: '战吼', effect: 'buff_atk', value: 0.3, cd: 3 }
+            ],
+            description: '被愤怒吞噬的战士'
+        }
+    ],
+
+    // 第四章 - 精英
+    volcano_elite: [
+        {
+            id: 'magma_giant',
+            name: '熔岩巨人',
+            icon: '🗿',
+            element: 'fire',
+            type: ENEMY_TYPE.ELITE,
+            hp: 1500,
+            atk: 110,
+            def: 90,
+            spd: 35,
+            behavior: AI_BEHAVIOR.BALANCED,
+            skills: [
+                { name: '熔岩爆发', damage: 1.5, target: 'all', cd: 3 },
+                { name: '岩浆护盾', effect: 'shield', value: 300, cd: 4 },
+                { name: '灼烧大地', damage: 1.2, target: 'all', cd: 2, effect: 'burn_all' }
+            ],
+            description: '火山深处的熔岩巨兽'
+        }
+    ],
+
+    // 第四章 - Boss
+    volcano_boss: [
+        {
+            id: 'rage_king',
+            name: '愤怒之王',
+            icon: '👹',
+            element: 'fire',
+            type: ENEMY_TYPE.BOSS,
+            hp: 6000,
+            atk: 170,
+            def: 110,
+            spd: 55,
+            behavior: AI_BEHAVIOR.CLEVER,
+            skills: [
+                { name: '怒火爆发', damage: 1.8, target: 'all', cd: 3, effect: 'rage' },
+                { name: '狂暴之刃', damage: 2.0, cd: 2 },
+                { name: '愤怒领域', effect: 'buff_atk_all', value: 0.5, cd: 4 },
+                { name: '毁灭打击', damage: 2.5, target: 'single', cd: 5, effect: 'stun' }
+            ],
+            description: '愤怒火山的主宰，永不熄灭的怒火化身',
+            introDialogue: [
+                { speaker: 'boss', text: '入侵者...你将化为灰烬！', emotion: 'rage' },
+                { speaker: 'player', text: '你就是愤怒之王？', emotion: 'determined' },
+                { speaker: 'boss', text: '愤怒！只有愤怒才是真实！', emotion: 'rage' },
+                { speaker: 'boss', text: '任何阻挡我的东西，都将被焚烧殆尽！', emotion: 'rage' }
+            ],
+            defeatDialogue: [
+                { speaker: 'boss', text: '我的愤怒...竟然...被平息了...', emotion: 'defeated' },
+                { speaker: 'player', text: '愤怒会蒙蔽双眼，让人看不见真相。', emotion: 'calm' }
+            ]
+        }
     ]
 };
 

@@ -215,6 +215,8 @@ class StoryManager {
             this.currentChapter = STORY_CHAPTER2;
         } else if (chapterId === 'chapter3') {
             this.currentChapter = STORY_CHAPTER3;
+        } else if (chapterId === 'chapter4') {
+            this.currentChapter = STORY_CHAPTER4;
         }
     }
 
@@ -490,6 +492,140 @@ const STORY_CHAPTER3 = {
     ]
 };
 
+// 剧情场景定义 - 第四章：愤怒火山
+const STORY_CHAPTER4 = {
+    id: 'chapter4',
+    name: '第四章：愤怒火山',
+    stages: [
+        {
+            id: 'volcano_base',
+            type: 'dialogue',
+            background: 'volcano_base',
+            bgm: 'rage_theme',
+            lines: [
+                { speaker: 'narrator', text: '离开迷宫后，炽热的气息扑面而来。', effect: 'fade_in' },
+                { speaker: 'narrator', text: '远处，一座巨大的火山正在喷发，天空被染成了血红色。' },
+                { speaker: 'protagonist', text: '好热...这里简直像地狱一样...', emotion: 'concerned' },
+                { speaker: 'protagonist', text: '委托人的记忆中...竟然隐藏着如此强烈的愤怒？', emotion: 'surprised' },
+                { speaker: 'narrator', text: '地面开始震动，岩浆从裂缝中涌出。' },
+                { speaker: 'protagonist', text: '看来这座火山不欢迎访客啊。', emotion: 'determined' }
+            ],
+            next: 'volcano_path'
+        },
+        {
+            id: 'volcano_path',
+            type: 'battle',
+            background: 'volcano_slope',
+            enemies: ['lava_beast', 'fire_elemental'],
+            lines: [
+                { speaker: 'protagonist', text: '这些怪物...是由岩浆构成的？', emotion: 'alert' },
+                { speaker: 'protagonist', text: '愤怒让这里的记忆变得狂暴了！', emotion: 'concerned' }
+            ],
+            next: 'rage_memory'
+        },
+        {
+            id: 'rage_memory',
+            type: 'cutscene',
+            background: 'memory_space',
+            bgm: 'memory_reconstruction',
+            lines: [
+                { speaker: 'narrator', text: '【记忆碎片收集完成】', effect: 'memory_flash' },
+                { speaker: 'narrator', text: '一段关于背叛的记忆浮现...' },
+                { speaker: 'memory_voice', text: '为什么...为什么要背叛我！', emotion: 'rage' },
+                { speaker: 'memory_voice', text: '我把一切都给了你...你却...', emotion: 'anger' },
+                { speaker: 'protagonist', text: '这是...被背叛的愤怒？', emotion: 'surprised' },
+                { speaker: 'protagonist', text: '委托人曾经遭受过严重的背叛...', emotion: 'thoughtful' }
+            ],
+            reward: { memory: 'betrayal_memory', gold: 250 },
+            next: 'volcano_climb'
+        },
+        {
+            id: 'volcano_climb',
+            type: 'dialogue',
+            background: 'volcano_cliff',
+            bgm: 'rage_theme',
+            lines: [
+                { speaker: 'narrator', text: '越往上走，温度越高，空气都仿佛要燃烧起来。' },
+                { speaker: 'protagonist', text: '这种愤怒...快要失控了...', emotion: 'struggling' },
+                { speaker: 'protagonist', text: '如果不尽快平息，委托人的意识会被愤怒完全吞噬！', emotion: 'determined' },
+                { speaker: 'narrator', text: '山顶传来震耳欲聋的咆哮声...' },
+                { speaker: 'protagonist', text: '那就是愤怒的源头吗...', emotion: 'alert' }
+            ],
+            next: 'rage_warrior_encounter'
+        },
+        {
+            id: 'rage_warrior_encounter',
+            type: 'battle',
+            background: 'volcano_path',
+            enemies: ['rage_warrior', 'rage_warrior'],
+            lines: [
+                { speaker: 'protagonist', text: '这些战士...他们被愤怒完全控制了！', emotion: 'concerned' },
+                { speaker: 'protagonist', text: '必须快点，否则来不及了！', emotion: 'determined' }
+            ],
+            next: 'magma_giant_battle'
+        },
+        {
+            id: 'magma_giant_battle',
+            type: 'battle',
+            background: 'volcano_ridge',
+            enemies: ['magma_giant'],
+            lines: [
+                { speaker: 'protagonist', text: '那是...熔岩巨人？', emotion: 'alert' },
+                { speaker: 'protagonist', text: '它在守护着通往山顶的道路！', emotion: 'determined' }
+            ],
+            next: 'rage_throne'
+        },
+        {
+            id: 'rage_throne',
+            type: 'dialogue',
+            background: 'volcano_peak',
+            bgm: 'boss_theme_rage',
+            lines: [
+                { speaker: 'narrator', text: '火山顶峰，一个由熔岩构成的王座。' },
+                { speaker: 'narrator', text: '王座上，一个燃烧的身影缓缓站起。' },
+                { speaker: 'boss', text: '入侵者...你将化为灰烬！', emotion: 'rage', effect: 'boss_appear' },
+                { speaker: 'protagonist', text: '你就是愤怒之王？', emotion: 'determined' },
+                { speaker: 'boss', text: '愤怒！只有愤怒才是真实！', emotion: 'rage' },
+                { speaker: 'boss', text: '信任只会带来背叛！感情只会带来痛苦！', emotion: 'rage' },
+                { speaker: 'boss', text: '唯有愤怒，才能保护我免受伤害！', emotion: 'rage' },
+                { speaker: 'protagonist', text: '愤怒确实能保护人...但也会让人失去更多。', emotion: 'calm' },
+                { speaker: 'protagonist', text: '你被愤怒囚禁了，让我来解放你。', emotion: 'determined' },
+                { speaker: 'boss', text: '可笑！先打倒我再说吧！', emotion: 'rage' }
+            ],
+            next: 'rage_king_battle'
+        },
+        {
+            id: 'rage_king_battle',
+            type: 'boss',
+            background: 'volcano_peak',
+            enemies: ['rage_king'],
+            bossHp: 6000,
+            lines: [
+                { speaker: 'boss', text: '感受无尽的怒火吧！', emotion: 'rage', trigger: 'battle_start' }
+            ],
+            next: 'chapter4_end'
+        },
+        {
+            id: 'chapter4_end',
+            type: 'ending',
+            background: 'memory_space',
+            bgm: 'victory_rage',
+            lines: [
+                { speaker: 'boss', text: '我的愤怒...竟然...被平息了...', emotion: 'defeated' },
+                { speaker: 'protagonist', text: '愤怒会蒙蔽双眼，让人看不见真相。', emotion: 'calm' },
+                { speaker: 'protagonist', text: '只有放下愤怒，才能看清真正重要的东西。', emotion: 'determined' },
+                { speaker: 'boss', text: '真正重要的...东西...', emotion: 'confused' },
+                { speaker: 'protagonist', text: '是的。被背叛固然痛苦，但不能让愤怒毁掉自己的人生。', emotion: 'calm' },
+                { speaker: 'boss', text: '也许...是时候...放下了...', emotion: 'relieved' },
+                { speaker: 'narrator', text: '愤怒之王的火焰渐渐熄灭，火山也慢慢平静下来。', effect: 'fade_out' },
+                { speaker: 'narrator', text: '【第四章完成】', effect: 'chapter_clear' },
+                { speaker: 'narrator', text: '获得奖励：SSR卡牌「愤怒之王」' }
+            ],
+            reward: { card: 'SSR008', gold: 1200, expCards: 12 }
+        }
+    ]
+};
+
 // 对话UI控制器
 class DialogueUI {
     constructor(containerId) {
@@ -565,5 +701,5 @@ class DialogueUI {
 
 // 导出
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { StoryManager, DialogueUI, STORY_CHAPTER1, STORY_CHAPTER2, STORY_CHAPTER3 };
+    module.exports = { StoryManager, DialogueUI, STORY_CHAPTER1, STORY_CHAPTER2, STORY_CHAPTER3, STORY_CHAPTER4 };
 }
