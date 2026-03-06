@@ -180,6 +180,38 @@ const ENEMY_DATABASE = {
             ],
             description: '被悲伤吞噬的骑士灵魂'
         }
+    ],
+
+    // 第二章 - Boss
+    sorrow_boss: [
+        {
+            id: 'sorrow_queen',
+            name: '悲伤女王',
+            icon: '👑',
+            element: 'water',
+            type: ENEMY_TYPE.BOSS,
+            hp: 3500,
+            atk: 130,
+            def: 100,
+            spd: 55,
+            behavior: AI_BEHAVIOR.CLEVER,
+            skills: [
+                { name: '悲伤之歌', damage: 1.2, target: 'all', cd: 2, effect: 'debuff_atk_all' },
+                { name: '泪之刃', damage: 1.5, cd: 1 },
+                { name: '哀伤治愈', effect: 'heal', value: 0.25, target: 'self', cd: 3 },
+                { name: '绝望深渊', damage: 1.8, target: 'single', cd: 4, effect: 'silence' }
+            ],
+            description: '悲伤沼泽的主宰，由千年泪水凝聚而成',
+            introDialogue: [
+                { speaker: 'boss', text: '哭泣吧...让悲伤吞噬一切...' },
+                { speaker: 'player', text: '你的悲伤...源于什么？' },
+                { speaker: 'boss', text: '失去...永远无法挽回的失去！' }
+            ],
+            defeatDialogue: [
+                { speaker: 'boss', text: '眼泪...终于流干了...' },
+                { speaker: 'player', text: '悲伤不是终点，是新的开始。' }
+            ]
+        }
     ]
 };
 

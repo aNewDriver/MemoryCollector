@@ -188,13 +188,10 @@
             <button onclick="showScreen('main')" style="position:absolute;left:15px;top:15px;background:none;border:none;color:#fff;font-size:20px;">←</button>
         </div>
         <div class="game-container">
-            <div class="section">
-                <div class="section-title">第一章：觉醒</div>
-                <div style="text-align:center;padding:30px;background:rgba(255,215,0,0.05);border-radius:12px;border:1px solid rgba(255,215,0,0.2);">
-                    <div style="font-size:60px;margin-bottom:15px;">🌙</div>
-                    <div style="font-size:18px;margin-bottom:10px;">梦境入口</div>
-                    <div style="font-size:12px;color:#888;margin-bottom:20px;">在崩坏的世界中，收集失落的记忆</div>
-                    <button class="btn" onclick="startStory()">开始旅程</button>
+            <div class="section" id="chapter-select">
+                <div class="section-title">选择章节</div>
+                <div id="chapter-list" style="display:flex;flex-direction:column;gap:15px;">
+                    <!-- 章节列表由JS动态生成 -->
                 </div>
             </div>
             
@@ -282,6 +279,13 @@
             if (screen === 'battle') initBattle();
             if (screen === 'collection') renderCollection();
             if (screen === 'upgrade') renderUpgrade();
+            if (screen === 'story') {
+                renderChapterList();
+                document.getElementById('chapter-select').classList.remove('hidden');
+                document.getElementById('story-progress').classList.add('hidden');
+                document.getElementById('story-dialogue').classList.add('hidden');
+                document.getElementById('story-battle-prep').classList.add('hidden');
+            }
         }
 
         function updateMainUI() {
@@ -646,15 +650,63 @@ ${skillText || '无技能'}`);
         let isTyping = false;
         let typeTimer = null;
 
+        // 章节数据
+        const CHAPTERS = [
+            { id: 'chapter1', name: '第一章：觉醒', icon: '🌙', desc: '梦境入口 - 在崩坏的世界中收集失落的记忆', unlocked: true, completed: false },
+            { id: 'chapter2', name: '第二章：悲伤沼泽', icon: '💧', desc: '被悲伤情绪笼罩的沼泽地带', unlocked: false, completed: false },
+            { id: 'chapter3', name: '第三章：记忆迷宫', icon: '🗿', desc: '错综复杂的记忆迷宫', unlocked: false, completed: false },
+            { id: 'chapter4', name: '第四章：愤怒火山', icon: '🌋', desc: '被愤怒吞噬的火焰之地', unlocked: false, completed: false }
+        ];
+        
+        let currentChapterId = null;
+
         function startStory() {
             storyManager = new StoryManager();
-            storyManager.startChapter(STORY_CHAPTER1);
+            storyManager.loadChapter(currentChapterId);
+            storyManager.startChapter(storyManager.currentChapter);
             
+            document.getElementById('chapter-select').classList.add('hidden');
             document.getElementById('story-progress').classList.remove('hidden');
             document.getElementById('story-dialogue').classList.remove('hidden');
             
             updateStoryProgress();
             advanceStory();
+        }
+
+        function selectChapter(chapterId) {
+            currentChapterId = chapterId;
+            startStory();
+        }
+        
+        function renderChapterList() {
+            const listEl = document.getElementById('chapter-list');
+            listEl.innerHTML = CHAPTERS.map(chapter => {
+                const lockedClass = !chapter.unlocked ? 'opacity:0.5;' : '';
+                const lockedIcon = !chapter.unlocked ? '🔒' : chapter.completed ? '✅' : chapter.icon;
+                const onclick = chapter.unlocked ? `onclick="selectChapter('${chapter.id}')"` : '';
+                const cursor = chapter.unlocked ? 'cursor:pointer;' : 'cursor:not-allowed;';
+                
+                return `
+                    <div style="padding:20px;background:rgba(255,215,0,0.05);border-radius:12px;border:1px solid rgba(255,215,0,0.2);${lockedClass}${cursor}" ${onclick}>
+                        <div style="display:flex;align-items:center;gap:15px;">
+                            <div style="font-size:40px;">${lockedIcon}</div>
+                            <div style="flex:1;">
+                                <div style="font-weight:bold;margin-bottom:5px;">${chapter.name}</div>
+                                <div style="font-size:12px;color:#888;">${chapter.desc}</div>
+                            </div>
+                            ${chapter.unlocked && !chapter.completed ? '<div style="color:#ffd700;">▶</div>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function unlockChapter(chapterId) {
+            const chapter = CHAPTERS.find(c => c.id === chapterId);
+            if (chapter) {
+                chapter.unlocked = true;
+                renderChapterList();
+            }
         }
 
         function advanceStory() {
@@ -735,16 +787,31 @@ ${skillText || '无技能'}`);
         function prepareStoryBattle(enemies, isBoss) {
             // 显示敌人信息
             const enemyInfo = document.getElementById('story-enemy-info');
-            if (isBoss) {
+            const stage = storyManager.getCurrentStage();
+            const enemyIds = stage.enemies || [];
+            
+            // 根据当前章节获取敌人数据
+            let enemyData = null;
+            if (currentChapterId === 'chapter1') {
+                enemyData = ENEMY_DATABASE.dream_entrance.find(e => e.id === enemyIds[0]) ||
+                           ENEMY_DATABASE.dream_elite.find(e => e.id === enemyIds[0]) ||
+                           ENEMY_DATABASE.dream_boss.find(e => e.id === enemyIds[0]);
+            } else if (currentChapterId === 'chapter2') {
+                enemyData = ENEMY_DATABASE.sorrow_swamp.find(e => e.id === enemyIds[0]) ||
+                           ENEMY_DATABASE.sorrow_elite.find(e => e.id === enemyIds[0]) ||
+                           ENEMY_DATABASE.sorrow_boss.find(e => e.id === enemyIds[0]);
+            }
+            
+            if (isBoss && enemyData) {
                 enemyInfo.innerHTML = `
-                    <div style="font-size:60px;">👹</div>
-                    <div style="font-weight:bold;color:#ff6b6b;">遗忘守护者</div>
+                    <div style="font-size:60px;">${enemyData.icon}</div>
+                    <div style="font-weight:bold;color:#ff6b6b;">${enemyData.name}</div>
                     <div style="font-size:12px;color:#888;">BOSS战</div>
                 `;
-            } else {
+            } else if (enemyData) {
                 enemyInfo.innerHTML = `
-                    <div style="font-size:48px;">💧</div>
-                    <div style="font-weight:bold;">记忆史莱姆</div>
+                    <div style="font-size:48px;">${enemyData.icon}</div>
+                    <div style="font-weight:bold;">${enemyData.name}</div>
                 `;
             }
         }
@@ -762,9 +829,18 @@ ${skillText || '无技能'}`);
             // 创建剧情敌人
             const stage = storyManager.getCurrentStage();
             const enemyTeam = stage.enemies.map(eId => {
-                const enemyData = ENEMY_DATABASE.dream_entrance.find(e => e.id === eId) ||
-                                 ENEMY_DATABASE.dream_elite.find(e => e.id === eId) ||
-                                 ENEMY_DATABASE.dream_boss.find(e => e.id === eId);
+                // 根据当前章节查找敌人数据
+                let enemyData = null;
+                if (currentChapterId === 'chapter1') {
+                    enemyData = ENEMY_DATABASE.dream_entrance.find(e => e.id === eId) ||
+                               ENEMY_DATABASE.dream_elite.find(e => e.id === eId) ||
+                               ENEMY_DATABASE.dream_boss.find(e => e.id === eId);
+                } else if (currentChapterId === 'chapter2') {
+                    enemyData = ENEMY_DATABASE.sorrow_swamp.find(e => e.id === eId) ||
+                               ENEMY_DATABASE.sorrow_elite.find(e => e.id === eId) ||
+                               ENEMY_DATABASE.sorrow_boss.find(e => e.id === eId);
+                }
+                
                 if (enemyData) {
                     // 创建敌人卡牌实例
                     const enemyCard = new CardInstance({
@@ -805,10 +881,28 @@ ${skillText || '无技能'}`);
             document.getElementById('story-dialogue').classList.remove('hidden');
             document.getElementById('story-battle-prep').classList.add('hidden');
             
+            // 标记当前章节完成并解锁下一章
+            const currentChapter = CHAPTERS.find(c => c.id === currentChapterId);
+            if (currentChapter) {
+                currentChapter.completed = true;
+                const nextIndex = CHAPTERS.indexOf(currentChapter) + 1;
+                if (nextIndex < CHAPTERS.length) {
+                    CHAPTERS[nextIndex].unlocked = true;
+                }
+            }
+            
+            const chapterNames = {
+                'chapter1': '第一章',
+                'chapter2': '第二章',
+                'chapter3': '第三章',
+                'chapter4': '第四章'
+            };
+            const chapterName = chapterNames[currentChapterId] || '章节';
+            
             document.getElementById('story-speaker').textContent = '系统';
             document.getElementById('story-speaker').style.color = '#ffd700';
             document.getElementById('story-text').innerHTML = `
-                🎉 第一章完成！<br><br>
+                🎉 ${chapterName}完成！<br><br>
                 奖励：<br>
                 ${rewards.gold ? '💰 金币 x' + rewards.gold : ''}<br>
                 ${rewards.expCards ? '📖 经验卡 x' + rewards.expCards : ''}<br>
@@ -823,7 +917,7 @@ ${skillText || '无技能'}`);
             // 3秒后返回主菜单
             setTimeout(() => {
                 showScreen('main');
-                log('完成第一章：觉醒！');
+                log('完成' + chapterName + '！');
             }, 3000);
         }
 
