@@ -212,6 +212,113 @@ const ENEMY_DATABASE = {
                 { speaker: 'player', text: '悲伤不是终点，是新的开始。' }
             ]
         }
+    ],
+
+    // 第三章 - 记忆迷宫
+    memory_maze: [
+        {
+            id: 'memory_guardian',
+            name: '记忆守卫',
+            icon: '🛡️',
+            element: 'earth',
+            type: ENEMY_TYPE.NORMAL,
+            hp: 500,
+            atk: 65,
+            def: 80,
+            spd: 40,
+            behavior: AI_BEHAVIOR.DEFENSIVE,
+            skills: [
+                { name: '守护斩', damage: 1.0, cd: 0 },
+                { name: '记忆护盾', effect: 'shield', value: 150, cd: 3 }
+            ],
+            description: '守护记忆碎片的石像守卫'
+        },
+        {
+            id: 'nightmare_wisp',
+            name: '噩梦光点',
+            icon: '👻',
+            element: 'dark',
+            type: ENEMY_TYPE.NORMAL,
+            hp: 400,
+            atk: 75,
+            def: 30,
+            spd: 85,
+            behavior: AI_BEHAVIOR.AGGRESSIVE,
+            skills: [
+                { name: '噩梦缠绕', damage: 1.2, cd: 1, effect: 'sleep' }
+            ],
+            description: '被噩梦污染的负面记忆'
+        },
+        {
+            id: 'phantom',
+            name: '幻影',
+            icon: '👤',
+            element: 'dark',
+            type: ENEMY_TYPE.NORMAL,
+            hp: 350,
+            atk: 80,
+            def: 20,
+            spd: 100,
+            behavior: AI_BEHAVIOR.AGGRESSIVE,
+            skills: [
+                { name: '幻影突袭', damage: 1.3, cd: 2 }
+            ],
+            description: '迷失在迷宫中的幻影'
+        }
+    ],
+
+    // 第三章 - 精英
+    maze_elite: [
+        {
+            id: 'maze_sentinel',
+            name: '迷宫哨兵',
+            icon: '🗿',
+            element: 'earth',
+            type: ENEMY_TYPE.ELITE,
+            hp: 1200,
+            atk: 90,
+            def: 100,
+            spd: 35,
+            behavior: AI_BEHAVIOR.CLEVER,
+            skills: [
+                { name: '石化凝视', damage: 1.1, cd: 2, effect: 'stun' },
+                { name: '大地庇护', effect: 'shield_all', value: 200, cd: 4 },
+                { name: '碎石风暴', damage: 1.5, target: 'all', cd: 3 }
+            ],
+            description: '迷宫深处的守护者'
+        }
+    ],
+
+    // 第三章 - Boss
+    maze_boss: [
+        {
+            id: 'maze_keeper',
+            name: '迷宫守护者',
+            icon: '🗿',
+            element: 'earth',
+            type: ENEMY_TYPE.BOSS,
+            hp: 4500,
+            atk: 140,
+            def: 130,
+            spd: 45,
+            behavior: AI_BEHAVIOR.CLEVER,
+            skills: [
+                { name: '迷宫陷阱', damage: 1.3, target: 'random', cd: 2, effect: 'confuse' },
+                { name: '大地震动', damage: 1.6, target: 'all', cd: 3, effect: 'stun_all' },
+                { name: '记忆封印', effect: 'silence_all', cd: 4 },
+                { name: '守护之壁', effect: 'shield', value: 800, target: 'self', cd: 3 }
+            ],
+            description: '记忆迷宫的主宰，千年石像苏醒',
+            introDialogue: [
+                { speaker: 'boss', text: '擅闯者...你将永远迷失在记忆的迷宫中...' },
+                { speaker: 'player', text: '你就是这座迷宫的守护者？' },
+                { speaker: 'boss', text: '我是记忆的守门人...任何试图逃避过去的人，都将被我封印...' }
+            ],
+            defeatDialogue: [
+                { speaker: 'boss', text: '居然...突破了迷宫...' },
+                { speaker: 'player', text: '迷宫的出口，在于直面自己的记忆。' }
+            ]
+        }
     ]
 };
 

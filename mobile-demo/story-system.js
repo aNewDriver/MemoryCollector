@@ -213,6 +213,8 @@ class StoryManager {
             this.currentChapter = STORY_CHAPTER1;
         } else if (chapterId === 'chapter2') {
             this.currentChapter = STORY_CHAPTER2;
+        } else if (chapterId === 'chapter3') {
+            this.currentChapter = STORY_CHAPTER3;
         }
     }
 
@@ -353,6 +355,141 @@ const STORY_CHAPTER2 = {
     ]
 };
 
+// 剧情场景定义 - 第三章：记忆迷宫
+const STORY_CHAPTER3 = {
+    id: 'chapter3',
+    name: '第三章：记忆迷宫',
+    stages: [
+        {
+            id: 'maze_entrance',
+            type: 'dialogue',
+            background: 'maze_gate',
+            bgm: 'mystery_theme',
+            lines: [
+                { speaker: 'narrator', text: '离开悲伤沼泽后，一座巨大的石制迷宫出现在眼前。', effect: 'fade_in' },
+                { speaker: 'narrator', text: '迷宫的墙壁上刻满了古老的符文，散发着微弱的光芒。' },
+                { speaker: 'protagonist', text: '这就是...记忆迷宫？', emotion: 'surprised' },
+                { speaker: 'protagonist', text: '据说这里封存着人们最不愿面对的记忆...', emotion: 'thoughtful' },
+                { speaker: 'narrator', text: '一阵冷风吹过，入口处传来低沉的回响。' },
+                { speaker: 'protagonist', text: '看来，迷宫在欢迎我进去呢。', emotion: 'determined' }
+            ],
+            next: 'maze_first_room'
+        },
+        {
+            id: 'maze_first_room',
+            type: 'battle',
+            background: 'maze_corridor',
+            enemies: ['memory_guardian', 'nightmare_wisp'],
+            lines: [
+                { speaker: 'protagonist', text: '这些守卫...是活的石像？', emotion: 'alert' },
+                { speaker: 'protagonist', text: '它们在守护着什么东西...', emotion: 'thoughtful' }
+            ],
+            next: 'maze_puzzle'
+        },
+        {
+            id: 'maze_puzzle',
+            type: 'dialogue',
+            background: 'maze_crossroad',
+            bgm: 'mystery_theme',
+            lines: [
+                { speaker: 'narrator', text: '击败守卫后，迷宫的墙壁开始移动...' },
+                { speaker: 'protagonist', text: '迷宫在变化？这是...活的迷宫？', emotion: 'surprised' },
+                { speaker: 'narrator', text: '三条道路出现在眼前。' },
+                { speaker: 'protagonist', text: '左边...是恐惧的气息。', emotion: 'concerned' },
+                { speaker: 'protagonist', text: '右边...是后悔的味道。', emotion: 'sad' },
+                { speaker: 'protagonist', text: '中间...什么都没有，只有虚无。', emotion: 'confused' },
+                { speaker: 'protagonist', text: '那就走中间吧。虚无，意味着无限可能。', emotion: 'determined' }
+            ],
+            next: 'maze_depths'
+        },
+        {
+            id: 'maze_depths',
+            type: 'battle',
+            background: 'maze_depth',
+            enemies: ['phantom', 'nightmare_wisp', 'phantom'],
+            lines: [
+                { speaker: 'protagonist', text: '这些幻影...它们在模仿我？', emotion: 'surprised' },
+                { speaker: 'phantom_voice', text: '你...是...谁...', emotion: 'echo' },
+                { speaker: 'protagonist', text: '它们在重复我的话...不，是在读取我的记忆！', emotion: 'alert' }
+            ],
+            next: 'memory_fragment3'
+        },
+        {
+            id: 'memory_fragment3',
+            type: 'cutscene',
+            background: 'memory_space',
+            bgm: 'memory_reconstruction',
+            lines: [
+                { speaker: 'narrator', text: '【记忆碎片收集完成】', effect: 'memory_flash' },
+                { speaker: 'narrator', text: '一段关于选择的记忆浮现...' },
+                { speaker: 'memory_voice', text: '如果当时...我做出了不同的选择...', emotion: 'regret' },
+                { speaker: 'memory_voice', text: '一切会不会不一样...', emotion: 'sad' },
+                { speaker: 'protagonist', text: '这是...关于后悔的记忆？', emotion: 'surprised' },
+                { speaker: 'protagonist', text: '委托人一直在为某个选择而后悔吗...', emotion: 'thoughtful' }
+            ],
+            reward: { memory: 'regret_memory', gold: 200 },
+            next: 'sentinel_encounter'
+        },
+        {
+            id: 'sentinel_encounter',
+            type: 'battle',
+            background: 'maze_shrine',
+            enemies: ['maze_sentinel'],
+            lines: [
+                { speaker: 'protagonist', text: '那是...更大的守卫？', emotion: 'alert' },
+                { speaker: 'protagonist', text: '它在守护着迷宫的核心！', emotion: 'determined' }
+            ],
+            next: 'keeper_chamber'
+        },
+        {
+            id: 'keeper_chamber',
+            type: 'dialogue',
+            background: 'maze_core',
+            bgm: 'boss_theme_maze',
+            lines: [
+                { speaker: 'narrator', text: '迷宫的最深处，一座巨大的石像缓缓苏醒。' },
+                { speaker: 'protagonist', text: '那就是...迷宫的核心？', emotion: 'alert' },
+                { speaker: 'boss', text: '擅闯者...你将永远迷失在记忆的迷宫中...', emotion: 'cold', effect: 'boss_appear' },
+                { speaker: 'protagonist', text: '你就是这座迷宫的守护者？', emotion: 'determined' },
+                { speaker: 'boss', text: '我是记忆的守门人...任何试图逃避过去的人，都将被我封印...', emotion: 'ominous' },
+                { speaker: 'protagonist', text: '我不是来逃避的。我是来面对记忆的。', emotion: 'determined' },
+                { speaker: 'boss', text: '面对？可笑...记忆是痛苦的根源，逃避才是解脱！', emotion: 'rage' },
+                { speaker: 'protagonist', text: '痛苦也是记忆的一部分。没有痛苦，快乐也失去了意义。', emotion: 'calm' },
+                { speaker: 'boss', text: '那就让我看看...你是否真的有勇气面对一切！', emotion: 'rage' }
+            ],
+            next: 'keeper_battle'
+        },
+        {
+            id: 'keeper_battle',
+            type: 'boss',
+            background: 'maze_core',
+            enemies: ['maze_keeper'],
+            bossHp: 4500,
+            lines: [
+                { speaker: 'boss', text: '感受迷宫的愤怒吧！', emotion: 'rage', trigger: 'battle_start' }
+            ],
+            next: 'chapter3_end'
+        },
+        {
+            id: 'chapter3_end',
+            type: 'ending',
+            background: 'memory_space',
+            bgm: 'victory_maze',
+            lines: [
+                { speaker: 'boss', text: '居然...突破了迷宫...', emotion: 'defeated' },
+                { speaker: 'protagonist', text: '迷宫的出口，在于直面自己的记忆。', emotion: 'determined' },
+                { speaker: 'protagonist', text: '无论痛苦还是快乐，都是构成「我」的一部分。', emotion: 'calm' },
+                { speaker: 'boss', text: '也许...你是对的...', emotion: 'calm' },
+                { speaker: 'boss', text: '千年来...你是第一个敢于面对记忆的人...', emotion: 'respectful' },
+                { speaker: 'narrator', text: '迷宫守护者的石像缓缓崩塌，露出通往深处的道路。', effect: 'fade_out' },
+                { speaker: 'narrator', text: '【第三章完成】', effect: 'chapter_clear' },
+                { speaker: 'narrator', text: '获得奖励：SSR卡牌「迷宫守护者」' }
+            ],
+            reward: { card: 'SSR007', gold: 1000, expCards: 10 }
+        }
+    ]
+};
+
 // 对话UI控制器
 class DialogueUI {
     constructor(containerId) {
@@ -428,5 +565,5 @@ class DialogueUI {
 
 // 导出
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { StoryManager, DialogueUI, STORY_CHAPTER1, STORY_CHAPTER2 };
+    module.exports = { StoryManager, DialogueUI, STORY_CHAPTER1, STORY_CHAPTER2, STORY_CHAPTER3 };
 }
