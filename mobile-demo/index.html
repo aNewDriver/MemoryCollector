@@ -19,7 +19,7 @@
         .section-title { font-size: 16px; color: #ffd700; margin-bottom: 12px; }
         .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .card { aspect-ratio: 2/3; background: linear-gradient(135deg, #2a2a4a, #1a1a3a); border-radius: 8px; border: 2px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; cursor: pointer; position: relative; }
-        .card.N { border-color: #888; } .card.R { border-color: #4a9eff; } .card.SR { border-color: #a855f7; } .card.SSR { border-color: #ffd700; }
+        .card.N { border-color: #888; } .card.R { border-color: #4a9eff; } .card.SR { border-color: #a855f7; } .card.SSR { border-color: #ffd700; } .card.UR { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
         .card-level { position: absolute; top: 4px; left: 4px; font-size: 10px; background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 3px; }
         .card-star { position: absolute; top: 4px; right: 4px; font-size: 10px; color: #ffd700; }
         .btn { background: linear-gradient(135deg, #667eea, #764ba2); border: none; border-radius: 25px; color: #fff; padding: 12px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 10px; }
@@ -318,7 +318,7 @@
         }
 
         function getRarityColor(r) {
-            return { N: '#888', R: '#4a9eff', SR: '#a855f7', SSR: '#ffd700' }[r] || '#fff';
+            return { N: '#888', R: '#4a9eff', SR: '#a855f7', SSR: '#ffd700', UR: '#ff0000' }[r] || '#fff';
         }
 
         // ==================== 收藏系统 ====================

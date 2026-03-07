@@ -877,6 +877,130 @@ const CARD_DATABASE = {
         { id: 'N078', name: '晨曦辅助 2', element: ELEMENT_TYPE.LIGHT, rarity: 'N', hp: 2800, atk: 600, def: 250, spd: 80, crit: 10, icon: '🔆', skills: [] },
         { id: 'N079', name: '鬼魅战士 2', element: ELEMENT_TYPE.DARK, rarity: 'N', hp: 3000, atk: 700, def: 250, spd: 70, crit: 10, icon: '🌙', skills: [] },
         { id: 'N080', name: '烈焰法师 2', element: ELEMENT_TYPE.FIRE, rarity: 'N', hp: 2200, atk: 850, def: 180, spd: 85, crit: 12, icon: '🔥', skills: [] },
+    ],
+    
+    // UR - 终极传说（10张）
+    UR: [
+        {
+            id: 'UR001', name: '太阳神·拉', element: ELEMENT_TYPE.LIGHT, rarity: 'UR',
+            hp: 5000, atk: 1200, def: 400, spd: 100, crit: 20, icon: '☀️',
+            skills: [
+                { id: 's1', name: '太阳耀斑', type: SKILL_TYPE.ACTIVE, damage: 2.5, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.5 }], desc: '造成250%全体伤害' },
+                { id: 's2', name: '神之治愈', type: SKILL_TYPE.ACTIVE, heal: 0.5, target: 'all', cd: 5,
+                  effects: [{ type: EFFECT_TYPE.HEAL, value: 0.5 }], desc: '全体恢复50%生命' },
+                { id: 'p1', name: '光明领域', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.BUFF_ATK, value: 0.3 }], desc: '全体攻击+30%' }
+            ]
+        },
+        {
+            id: 'UR002', name: '月神·塞勒涅', element: ELEMENT_TYPE.DARK, rarity: 'UR',
+            hp: 4500, atk: 1100, def: 350, spd: 110, crit: 25, icon: '🌙',
+            skills: [
+                { id: 's1', name: '月蚀', type: SKILL_TYPE.ACTIVE, damage: 3.0, target: 'single', cd: 3,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 3.0 }], desc: '造成300%单体伤害' },
+                { id: 's2', name: '梦境操控', type: SKILL_TYPE.ACTIVE, effect: 'sleep', target: 'all', cd: 4,
+                  effects: [{ type: 'sleep', value: 1 }], desc: '使全体敌人睡眠1回合' },
+                { id: 'p1', name: '夜幕降临', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.BUFF_SPD, value: 0.4 }], desc: '速度+40%' }
+            ]
+        },
+        {
+            id: 'UR003', name: '炎帝·祝融', element: ELEMENT_TYPE.FIRE, rarity: 'UR',
+            hp: 4800, atk: 1300, def: 380, spd: 90, crit: 30, icon: '🔥',
+            skills: [
+                { id: 's1', name: '焚天烈焰', type: SKILL_TYPE.ACTIVE, damage: 2.0, target: 'all', cd: 3,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.0 }], desc: '造成200%全体伤害+灼烧' },
+                { id: 's2', name: '火神之怒', type: SKILL_TYPE.ACTIVE, damage: 4.0, target: 'single', cd: 5,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 4.0 }], desc: '造成400%单体伤害' },
+                { id: 'p1', name: '不灭之火', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'burn_immune', value: 1 }], desc: '免疫灼烧，火属性伤害+50%' }
+            ]
+        },
+        {
+            id: 'UR004', name: '水神·共工', element: ELEMENT_TYPE.WATER, rarity: 'UR',
+            hp: 5500, atk: 1000, def: 450, spd: 85, crit: 15, icon: '💧',
+            skills: [
+                { id: 's1', name: '怒涛狂澜', type: SKILL_TYPE.ACTIVE, damage: 2.2, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.2 }], desc: '造成220%全体伤害' },
+                { id: 's2', name: '生命源泉', type: SKILL_TYPE.ACTIVE, heal: 0.4, target: 'all', cd: 3,
+                  effects: [{ type: EFFECT_TYPE.HEAL, value: 0.4 }], desc: '全体恢复40%生命+净化' },
+                { id: 'p1', name: '水之护盾', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.SHIELD, value: 500 }], desc: '战斗开始时全体获得护盾' }
+            ]
+        },
+        {
+            id: 'UR005', name: '木神·句芒', element: ELEMENT_TYPE.WOOD, rarity: 'UR',
+            hp: 5200, atk: 1050, def: 400, spd: 105, crit: 18, icon: '🌿',
+            skills: [
+                { id: 's1', name: '万物复苏', type: SKILL_TYPE.ACTIVE, heal: 0.3, target: 'all', cd: 3,
+                  effects: [{ type: EFFECT_TYPE.HEAL, value: 0.3 }], desc: '全体恢复30%生命+持续恢复' },
+                { id: 's2', name: '荆棘缠绕', type: SKILL_TYPE.ACTIVE, damage: 1.8, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.8 }], desc: '造成180%伤害+束缚' },
+                { id: 'p1', name: '生命绽放', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'regen', value: 0.1 }], desc: '每回合恢复10%生命' }
+            ]
+        },
+        {
+            id: 'UR006', name: '金神·蓐收', element: ELEMENT_TYPE.METAL, rarity: 'UR',
+            hp: 4600, atk: 1350, def: 380, spd: 95, crit: 35, icon: '⚔️',
+            skills: [
+                { id: 's1', name: '万剑归宗', type: SKILL_TYPE.ACTIVE, damage: 2.8, target: 'single', cd: 3,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.8 }], desc: '造成280%单体伤害' },
+                { id: 's2', name: '剑气纵横', type: SKILL_TYPE.ACTIVE, damage: 1.5, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 1.5 }], desc: '造成150%全体伤害' },
+                { id: 'p1', name: '无坚不摧', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'armor_pierce', value: 0.3 }], desc: '攻击无视30%防御' }
+            ]
+        },
+        {
+            id: 'UR007', name: '土神·后土', element: ELEMENT_TYPE.EARTH, rarity: 'UR',
+            hp: 6000, atk: 900, def: 500, spd: 70, crit: 10, icon: '🏔️',
+            skills: [
+                { id: 's1', name: '大地守护', type: SKILL_TYPE.ACTIVE, effect: 'shield', target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.SHIELD, value: 1000 }], desc: '全体获得1000护盾' },
+                { id: 's2', name: '山崩地裂', type: SKILL_TYPE.ACTIVE, damage: 2.5, target: 'all', cd: 5,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.5 }], desc: '造成250%全体伤害+眩晕' },
+                { id: 'p1', name: '不动如山', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.BUFF_DEF, value: 0.5 }], desc: '防御+50%，免疫控制' }
+            ]
+        },
+        {
+            id: 'UR008', name: '时空旅者', element: ELEMENT_TYPE.LIGHT, rarity: 'UR',
+            hp: 4800, atk: 1150, def: 360, spd: 120, crit: 22, icon: '⏰',
+            skills: [
+                { id: 's1', name: '时间停止', type: SKILL_TYPE.ACTIVE, effect: 'stun', target: 'all', cd: 5,
+                  effects: [{ type: 'stun', value: 1 }], desc: '全体敌人眩晕1回合' },
+                { id: 's2', name: '时间回溯', type: SKILL_TYPE.ACTIVE, heal: 0.5, target: 'all', cd: 6,
+                  effects: [{ type: 'revive', value: 0.3 }], desc: '复活阵亡友方并恢复50%生命' },
+                { id: 'p1', name: '时间加速', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.BUFF_SPD, value: 0.5 }], desc: '速度+50%，先制攻击' }
+            ]
+        },
+        {
+            id: 'UR009', name: '混沌魔君', element: ELEMENT_TYPE.DARK, rarity: 'UR',
+            hp: 5000, atk: 1250, def: 380, spd: 95, crit: 28, icon: '👿',
+            skills: [
+                { id: 's1', name: '混沌之息', type: SKILL_TYPE.ACTIVE, damage: 2.2, target: 'all', cd: 4,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 2.2 }], desc: '造成220%全体伤害+混乱' },
+                { id: 's2', name: '黑暗吞噬', type: SKILL_TYPE.ACTIVE, damage: 3.5, target: 'single', cd: 4,
+                  effects: [{ type: 'life_steal', value: 0.5 }], desc: '造成350%伤害并恢复50%伤害值生命' },
+                { id: 'p1', name: '混沌领域', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: 'debuff_all', value: 0.2 }], desc: '敌人全体属性-20%' }
+            ]
+        },
+        {
+            id: 'UR010', name: '创世神·盘古', element: ELEMENT_TYPE.EARTH, rarity: 'UR',
+            hp: 6500, atk: 1400, def: 450, spd: 80, crit: 25, icon: '👑',
+            skills: [
+                { id: 's1', name: '开天辟地', type: SKILL_TYPE.ACTIVE, damage: 5.0, target: 'single', cd: 5,
+                  effects: [{ type: EFFECT_TYPE.DAMAGE, value: 5.0 }], desc: '造成500%单体伤害' },
+                { id: 's2', name: '创世之光', type: SKILL_TYPE.ACTIVE, heal: 1.0, target: 'all', cd: 6,
+                  effects: [{ type: EFFECT_TYPE.HEAL, value: 1.0 }], desc: '全体恢复100%生命' },
+                { id: 'p1', name: '神之威严', type: SKILL_TYPE.PASSIVE,
+                  effects: [{ type: EFFECT_TYPE.BUFF_ATK, value: 0.5 }, { type: EFFECT_TYPE.BUFF_DEF, value: 0.5 }], desc: '攻击+50%，防御+50%' }
+            ]
+        }
     ]
 };
 
@@ -1117,8 +1241,15 @@ class BattleSystem {
 
 // ==================== 工具函数 ====================
 function drawCardFromDatabase() {
-    const rarities = ['N', 'N', 'N', 'R', 'R', 'SR', 'SSR'];
-    const rarity = rarities[Math.floor(Math.random() * rarities.length)];
+    // 抽卡概率：UR 1%, SSR 5%, SR 14%, R 30%, N 50%
+    const rand = Math.random();
+    let rarity;
+    if (rand < 0.01) rarity = 'UR';
+    else if (rand < 0.06) rarity = 'SSR';
+    else if (rand < 0.20) rarity = 'SR';
+    else if (rand < 0.50) rarity = 'R';
+    else rarity = 'N';
+    
     const cards = CARD_DATABASE[rarity];
     const baseCard = cards[Math.floor(Math.random() * cards.length)];
     return new CardInstance(baseCard);
