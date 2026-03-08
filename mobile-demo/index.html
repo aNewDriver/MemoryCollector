@@ -8,6 +8,7 @@
     <script src="save-system.js"></script>
     <script src="enemy-data.js"></script>
     <script src="story-system.js"></script>
+    <script src="achievement-system.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f1a; min-height: 100vh; display: flex; flex-direction: column; color: #fff; }
@@ -70,6 +71,7 @@
             <button class="btn btn-secondary" onclick="showScreen('gacha')">🎴 召唤卡牌 (100金币)</button>
             <button class="btn btn-secondary" onclick="showScreen('collection')">📚 卡牌收藏</button>
             <button class="btn btn-secondary" onclick="showScreen('story')">📖 剧情模式</button>
+            <button class="btn btn-secondary" onclick="showScreen('achievement')">🏆 成就系统</button>
             <button class="btn btn-secondary" onclick="saveGame()">💾 保存游戏</button>
             
             <div class="section">
@@ -250,6 +252,44 @@
         </div>
     </div>
 
+    <!-- 成就系统界面 -->
+    <div id="achievement-screen" class="screen hidden">
+        <div style="background:#1a1a2e;padding:15px;text-align:center;border-bottom:2px solid #ffd700;">
+            <h2>🏆 成就系统</h2>
+            <button onclick="showScreen('main')" style="position:absolute;left:15px;top:15px;background:none;border:none;color:#fff;font-size:20px;">←</button>
+        </div>
+        <div class="game-container">
+            <!-- 成就统计 -->
+            <div class="section">
+                <div class="section-title">成就统计</div>
+                <div style="display:flex;justify-content:space-around;text-align:center;">
+                    <div>
+                        <div style="font-size:32px;color:#ffd700;" id="ach-total">0/45</div>
+                        <div style="font-size:12px;color:#888;">总成就</div>
+                    </div>
+                    <div>
+                        <div style="font-size:32px;color:#4ecdc4;" id="ach-percent">0%</div>
+                        <div style="font-size:12px;color:#888;">完成度</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 成就分类 -->
+            <div class="section">
+                <div style="display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap;">
+                    <button class="btn" style="flex:1;padding:8px;font-size:12px;" onclick="showAchCategory('all')">全部</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showAchCategory('collection')">🎴收集</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showAchCategory('battle')">⚔️战斗</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showAchCategory('story')">📖剧情</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showAchCategory('growth')">📈成长</button>
+                </div>
+                <div id="achievement-list" style="max-height:400px;overflow-y:auto;">
+                    <!-- 成就列表由JS动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ==================== 游戏数据 ====================
         let playerData = { cards: [], gold: 5000, expCards: 20 };
@@ -258,13 +298,22 @@
 
         // ==================== 初始化 ====================
         function init() {
+            // 初始化成就系统
+            initAchievementSystem();
+            
             // 初始赠送3张卡牌
             for (let i = 0; i < 3; i++) {
                 playerData.cards.push(drawCardFromDatabase());
             }
             updateMainUI();
-            log('欢迎来到记忆回收者 v0.4 完整版！');
-            log('✨ 新增：完整技能系统、Buff/Debuff、养成系统');
+            log('欢迎来到记忆回收者 v0.6 成就版！');
+            log('✨ 新增：成就系统、587张卡牌、完整剧情');
+            
+            // 检查初始成就
+            if (achievementManager) {
+                achievementManager.updateProgress('first_login', 1);
+                achievementManager.updateProgress('card_count', playerData.cards.length);
+            }
         }
 
         // ==================== 界面控制 ====================
@@ -279,6 +328,7 @@
             if (screen === 'battle') initBattle();
             if (screen === 'collection') renderCollection();
             if (screen === 'upgrade') renderUpgrade();
+            if (screen === 'achievement') renderAchievements();
             if (screen === 'story') {
                 renderChapterList();
                 document.getElementById('chapter-select').classList.remove('hidden');
@@ -315,6 +365,19 @@
                 </div>
             `;
             log(`召唤获得 [${card.baseCard.rarity}] ${card.baseCard.name}`);
+            
+            // 检查抽卡成就
+            if (achievementManager) {
+                achievementManager.updateProgress('gacha_count', 1);
+                achievementManager.updateProgress('card_count', 1);
+                achievementManager.setProgress('total_gold', 10000); // 模拟累计金币
+                if (card.baseCard.rarity === 'SSR') {
+                    achievementManager.updateProgress('first_ssr', 1);
+                }
+                if (card.baseCard.rarity === 'UR') {
+                    achievementManager.updateProgress('first_ur', 1);
+                }
+            }
         }
 
         function getRarityColor(r) {
@@ -431,6 +494,57 @@ ${skillText || '无技能'}`);
             renderUpgrade();
             selectUpgradeCard(selectedCardForUpgrade);
             log(`${card.baseCard.name} 升星到 ${card.star}星！✨`);
+            
+            // 检查升星成就
+            if (achievementManager) {
+                achievementManager.setProgress('card_star', card.star);
+            }
+        }
+
+        // ==================== 成就系统 ====================
+        let currentAchCategory = 'all';
+
+        function renderAchievements() {
+            if (!achievementManager) return;
+            
+            const stats = achievementManager.getStats();
+            document.getElementById('ach-total').textContent = `${stats.unlocked}/${stats.total}`;
+            document.getElementById('ach-percent').textContent = `${stats.percentage}%`;
+            
+            const list = document.getElementById('achievement-list');
+            const achievements = achievementManager.getAllProgress();
+            
+            const filtered = currentAchCategory === 'all' 
+                ? achievements 
+                : achievements.filter(a => a.category === currentAchCategory);
+            
+            list.innerHTML = filtered.map(ach => {
+                const progressPercent = Math.min(100, (ach.progress / ach.target) * 100);
+                return `
+                    <div style="background:${ach.unlocked ? 'rgba(255,215,0,0.1)' : 'rgba(0,0,0,0.2)'};border:${ach.unlocked ? '1px solid rgba(255,215,0,0.5)' : '1px solid rgba(255,255,255,0.1)'};border-radius:8px;padding:12px;margin-bottom:10px;opacity:${ach.unlocked ? 1 : 0.7};">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="font-size:28px;">${ach.icon}</div>
+                            <div style="flex:1;">
+                                <div style="font-weight:bold;color:${ach.unlocked ? '#ffd700' : '#fff'};">${ach.name} ${ach.unlocked ? '✓' : ''}</div>
+                                <div style="font-size:11px;color:#888;">${ach.desc}</div>
+                            </div>                        </div>
+                        <div style="margin-top:8px;">
+                            <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;">
+                                <div style="width:${progressPercent}%;height:100%;background:${ach.unlocked ? '#ffd700' : '#4a9eff'};transition:width 0.3s;"></div>
+                            </div>
+                            <div style="font-size:10px;color:#888;margin-top:4px;display:flex;justify-content:space-between;">
+                                <span>进度: ${ach.progress}/${ach.target}</span>
+                                <span>${ach.reward.gold ? `💰${ach.reward.gold}` : ''} ${ach.reward.expCards ? `📖${ach.reward.expCards}` : ''} ${ach.reward.card ? '🎴' : ''}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showAchCategory(category) {
+            currentAchCategory = category;
+            renderAchievements();
         }
 
         // ==================== 战斗系统 ====================
@@ -929,6 +1043,18 @@ ${skillText || '无技能'}`);
             if (rewards.gold) playerData.gold += rewards.gold;
             if (rewards.expCards) playerData.expCards += rewards.expCards;
             updateMainUI();
+            
+            // 检查章节成就
+            if (achievementManager) {
+                const chapterNum = parseInt(currentChapterId.replace('chapter', ''));
+                achievementManager.updateProgress('chapter_clear', 1);
+                
+                // 检查是否完成所有章节
+                const completedCount = CHAPTERS.filter(c => c.completed).length;
+                if (completedCount >= 4) {
+                    achievementManager.updateProgress('all_chapters', 1);
+                }
+            }
             
             // 3秒后返回主菜单
             setTimeout(() => {
