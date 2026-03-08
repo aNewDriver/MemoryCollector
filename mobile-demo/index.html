@@ -9,6 +9,7 @@
     <script src="enemy-data.js"></script>
     <script src="story-system.js"></script>
     <script src="achievement-system.js"></script>
+    <script src="leaderboard-system.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f1a; min-height: 100vh; display: flex; flex-direction: column; color: #fff; }
@@ -72,6 +73,7 @@
             <button class="btn btn-secondary" onclick="showScreen('collection')">📚 卡牌收藏</button>
             <button class="btn btn-secondary" onclick="showScreen('story')">📖 剧情模式</button>
             <button class="btn btn-secondary" onclick="showScreen('achievement')">🏆 成就系统</button>
+            <button class="btn btn-secondary" onclick="showScreen('leaderboard')">📊 排行榜</button>
             <button class="btn btn-secondary" onclick="saveGame()">💾 保存游戏</button>
             
             <div class="section">
@@ -290,6 +292,46 @@
         </div>
     </div>
 
+    <!-- 排行榜界面 -->
+    <div id="leaderboard-screen" class="screen hidden">
+        <div style="background:#1a1a2e;padding:15px;text-align:center;border-bottom:2px solid #ffd700;">
+            <h2>📊 排行榜</h2>
+            <button onclick="showScreen('main')" style="position:absolute;left:15px;top:15px;background:none;border:none;color:#fff;font-size:20px;">←</button>
+        </div>
+        <div class="game-container">
+            <!-- 排行榜类型选择 -->
+            <div class="section">
+                <div style="display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap;">
+                    <button class="btn" style="flex:1;padding:8px;font-size:12px;" onclick="showLeaderboard('power')">⚔️战力</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showLeaderboard('collection')">📚收集</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showLeaderboard('battle')">🏆战斗</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showLeaderboard('story')">📖剧情</button>
+                    <button class="btn btn-secondary" style="flex:1;padding:8px;font-size:12px;" onclick="showLeaderboard('achievement')">🏅成就</button>
+                </div>
+
+                <!-- 我的排名 -->
+                <div style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);border-radius:8px;padding:15px;margin-bottom:15px;">
+                    <div style="text-align:center;font-size:14px;color:#888;margin-bottom:10px;">我的排名</div>
+                    <div style="display:flex;justify-content:space-around;text-align:center;">
+                        <div>
+                            <div style="font-size:28px;color:#ffd700;" id="my-rank">--</div>
+                            <div style="font-size:12px;color:#888;">当前排名</div>
+                        </div>
+                        <div>
+                            <div style="font-size:28px;color:#4ecdc4;" id="my-score">0</div>
+                            <div style="font-size:12px;color:#888;" id="my-score-label">战力值</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 排行榜列表 -->
+                <div id="leaderboard-list" style="max-height:350px;overflow-y:auto;">
+                    <!-- 排行榜列表由JS动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ==================== 游戏数据 ====================
         let playerData = { cards: [], gold: 5000, expCards: 20 };
@@ -300,6 +342,9 @@
         function init() {
             // 初始化成就系统
             initAchievementSystem();
+            
+            // 初始化排行榜系统
+            initLeaderboardSystem();
             
             // 初始赠送3张卡牌
             for (let i = 0; i < 3; i++) {
@@ -329,6 +374,7 @@
             if (screen === 'collection') renderCollection();
             if (screen === 'upgrade') renderUpgrade();
             if (screen === 'achievement') renderAchievements();
+            if (screen === 'leaderboard') renderLeaderboard();
             if (screen === 'story') {
                 renderChapterList();
                 document.getElementById('chapter-select').classList.remove('hidden');
@@ -545,6 +591,71 @@ ${skillText || '无技能'}`);
         function showAchCategory(category) {
             currentAchCategory = category;
             renderAchievements();
+        }
+
+        // ==================== 排行榜系统 ====================
+        let currentLeaderboardType = 'power';
+
+        function renderLeaderboard() {
+            if (!leaderboardManager) return;
+            
+            // 更新游戏数据到排行榜
+            leaderboardManager.updateFromGameData();
+            
+            // 获取当前类型的排行榜
+            const rankings = leaderboardManager.getLeaderboard(currentLeaderboardType);
+            const list = document.getElementById('leaderboard-list');
+            
+            // 定义每种类型的显示配置
+            const typeConfig = {
+                power: { label: '战力值', key: 'power', icon: '⚔️' },
+                collection: { label: '收集数', key: 'count', icon: '📚' },
+                battle: { label: '胜场', key: 'wins', icon: '🏆' },
+                story: { label: '章节', key: 'chapters', icon: '📖' },
+                achievement: { label: '成就数', key: 'count', icon: '🏅' }
+            };
+            
+            const config = typeConfig[currentLeaderboardType];
+            
+            // 更新我的排名显示
+            const myRank = leaderboardManager.getPlayerRank(currentLeaderboardType);
+            document.getElementById('my-rank').textContent = myRank;
+            document.getElementById('my-score-label').textContent = config.label;
+            
+            // 获取玩家分数
+            let myScore = 0;
+            const playerEntry = rankings.find(r => r.isPlayer);
+            if (playerEntry) {
+                myScore = playerEntry[config.key] || 0;
+            }
+            document.getElementById('my-score').textContent = myScore;
+            
+            // 渲染排行榜列表
+            list.innerHTML = rankings.map((entry, index) => {
+                const isTop3 = index < 3;
+                const rankColor = index === 0 ? '#ffd700' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : '#888';
+                const bgColor = entry.isPlayer ? 'rgba(255,215,0,0.15)' : 'rgba(0,0,0,0.2)';
+                const borderColor = entry.isPlayer ? 'rgba(255,215,0,0.5)' : 'rgba(255,255,255,0.1)';
+                
+                return `
+                    <div style="background:${bgColor};border:1px solid ${borderColor};border-radius:8px;padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
+                        <div style="font-size:24px;font-weight:bold;color:${rankColor};width:30px;text-align:center;">
+                            ${entry.rank}
+                        </div>
+                        <div style="font-size:32px;">${entry.avatar}</div>
+                        <div style="flex:1;">
+                            <div style="font-weight:bold;color:${entry.isPlayer ? '#ffd700' : '#fff'};">${entry.name} ${entry.isPlayer ? '(我)' : ''}</div>
+                            <div style="font-size:12px;color:#888;">${config.icon} ${entry[config.key]} ${config.label}</div>
+                        </div>
+                        ${isTop3 ? `<div style="font-size:20px;">${index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showLeaderboard(type) {
+            currentLeaderboardType = type;
+            renderLeaderboard();
         }
 
         // ==================== 战斗系统 ====================
