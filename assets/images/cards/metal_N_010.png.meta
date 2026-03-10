@@ -1,0 +1,42 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "c3fb8372-58fe-4e88-b2b8-6a4e9a54ea67",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "c3fb8372-58fe-4e88-b2b8-6a4e9a54ea67@6c48a",
+      "displayName": "metal_N_010",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c3fb8372-58fe-4e88-b2b8-6a4e9a54ea67",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": false,
+    "type": "texture",
+    "redirect": "c3fb8372-58fe-4e88-b2b8-6a4e9a54ea67@6c48a"
+  }
+}

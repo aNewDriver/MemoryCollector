@@ -1,0 +1,43 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "3343aecf-40c9-417b-ac99-f427345bd11b",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "3343aecf-40c9-417b-ac99-f427345bd11b@6c48a",
+      "displayName": "eq_accessory_rare",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "3343aecf-40c9-417b-ac99-f427345bd11b",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "isRGBE": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "3343aecf-40c9-417b-ac99-f427345bd11b@6c48a"
+  }
+}

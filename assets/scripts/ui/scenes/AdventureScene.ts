@@ -3,13 +3,13 @@
  */
 
 import { _decorator, Component, Node, Prefab, instantiate, ScrollView, Label } from 'cc';
-import { GameScene, sceneManager } from '../core/SceneManager';
+import { GameScene, sceneManager } from '../../core/SceneManager';
 import { 
     playerDataManager, 
     ChapterData, 
     LevelData, 
     LevelType 
-} from '../data/PlayerData.ts';
+} from '../../data/PlayerData.ts';
 
 const { ccclass, property } = _decorator;
 

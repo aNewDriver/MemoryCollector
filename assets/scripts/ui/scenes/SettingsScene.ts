@@ -4,7 +4,7 @@
  */
 
 import { _decorator, Component, Node, Slider, Toggle, Label } from 'cc';
-import { playerDataManager } from '../data/PlayerData.ts';
+import { playerDataManager } from '../../data/PlayerData.ts';
 
 const { ccclass, property } = _decorator;
 

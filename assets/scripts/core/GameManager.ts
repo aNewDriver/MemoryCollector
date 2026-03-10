@@ -4,18 +4,18 @@
  */
 
 import { _decorator, Component, Node, director, game } from 'cc';
-import { playerDataManager } from './data/PlayerData.ts';
-import { saveManager, GameSaveData } from './save/SaveManager';
-import { audioManager, BGMType } from './audio/AudioManager';
-import { sceneManager, GameScene } from './core/SceneManager';
-import { gachaSystem } from './gacha/GachaSystem';
-import { shopSystem } from './shop/ShopSystem';
-import { inventorySystem } from './inventory/InventorySystem';
-import { taskSystem } from './task/TaskSystem';
+import { playerDataManager } from '../data/PlayerData.ts';
+import { saveManager, GameSaveData } from '../save/SaveManager';
+import { audioManager, BGMType } from '../audio/AudioManager';
+import { sceneManager, GameScene } from './SceneManager';
+import { gachaSystem } from '../gacha/GachaSystem';
+import { shopSystem } from '../shop/ShopSystem';
+import { inventorySystem } from '../inventory/InventorySystem';
+import { taskSystem } from '../task/TaskSystem';
 
 const { ccclass, property } = _decorator;
 
-@ccclass('GameManager')
+@ccclass('cc.GameManager')
 export class GameManager extends Component {
     
     // 场景根节点

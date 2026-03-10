@@ -18,5 +18,6 @@
     "@cocos/build-engine": "^4.4.0",
     "sharp": "^0.34.5",
     "typescript": "^4.9.5"
-  }
+  },
+  "uuid": "92d0b82d-715f-4dc3-b574-f1a9f33fb8c1"
 }
