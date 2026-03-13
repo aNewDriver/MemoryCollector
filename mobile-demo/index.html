@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>记忆回收者 - 手机试玩版 v0.5 (50+卡牌)</title>
+    <title>记忆回收者 - 手机试玩版 v0.8 (800+卡牌)</title>
     <script src="card-data.js"></script>
+    <script src="card-image-generator.js"></script>
     <script src="save-system.js"></script>
     <script src="enemy-data.js"></script>
     <script src="story-system.js"></script>
@@ -226,7 +227,7 @@
     <div id="main-menu">
         <div class="header">
             <h1>🔮 记忆回收者</h1>
-            <div class="subtitle">v0.5 | 50+卡牌 | 技能系统 | 剧情模式</div>
+            <div class="subtitle">v0.8 | 800+卡牌 | 特效音效 | 完整战斗</div>
         </div>
         <div class="game-container">
             <div class="section">
@@ -1616,6 +1617,158 @@ ${skillText || '无技能'}`);
                 }
             }
         };
+        
+        // ==================== Canvas 战斗特效系统 ====================
+        const BattleEffects = {
+            canvas: null,
+            ctx: null,
+            particles: [],
+            
+            init() {
+                // 创建Canvas覆盖层
+                this.canvas = document.createElement('canvas');
+                this.canvas.id = 'battle-canvas';
+                this.canvas.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                `;
+                document.body.appendChild(this.canvas);
+                
+                this.ctx = this.canvas.getContext('2d');
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+                
+                // 启动动画循环
+                this.animate();
+            },
+            
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            },
+            
+            // 创建粒子
+            createParticle(x, y, color, type = 'normal') {
+                const particle = {
+                    x, y,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
+                    life: 1,
+                    decay: 0.02,
+                    color,
+                    size: Math.random() * 5 + 2,
+                    type
+                };
+                this.particles.push(particle);
+            },
+            
+            // 技能特效
+            skillEffect(x, y, element) {
+                const colors = {
+                    'gold': '#ffd700',
+                    'wood': '#6b8e23',
+                    'water': '#1e90ff',
+                    'fire': '#ff4500',
+                    'earth': '#8b4513',
+                    'light': '#ffffc0',
+                    'dark': '#4b0082'
+                };
+                const color = colors[element] || '#ffd700';
+                
+                // 爆炸粒子
+                for (let i = 0; i < 30; i++) {
+                    this.createParticle(x, y, color, 'explosion');
+                }
+                
+                // 冲击波
+                this.shockwave(x, y, color);
+            },
+            
+            // 冲击波
+            shockwave(x, y, color) {
+                const wave = {
+                    x, y,
+                    radius: 0,
+                    maxRadius: 100,
+                    alpha: 1,
+                    color
+                };
+                
+                const expand = () => {
+                    wave.radius += 5;
+                    wave.alpha -= 0.03;
+                    
+                    if (wave.alpha > 0) {
+                        this.ctx.save();
+                        this.ctx.beginPath();
+                        this.ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
+                        this.ctx.strokeStyle = wave.color;
+                        this.ctx.globalAlpha = wave.alpha;
+                        this.ctx.lineWidth = 3;
+                        this.ctx.stroke();
+                        this.ctx.restore();
+                        requestAnimationFrame(expand);
+                    }
+                };
+                expand();
+            },
+            
+            // 伤害飘字（Canvas版）
+            damageNumber(x, y, value, isCrit = false) {
+                const el = document.createElement('div');
+                el.className = `damage-number ${isCrit ? 'crit' : ''}`;
+                el.textContent = isCrit ? `-${value}!` : `-${value}`;
+                el.style.cssText = `
+                    position: fixed;
+                    left: ${x}px;
+                    top: ${y}px;
+                    color: ${isCrit ? '#ff6b6b' : '#fff'};
+                    font-size: ${isCrit ? '36px' : '28px'};
+                    font-weight: bold;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+                    pointer-events: none;
+                    z-index: 10000;
+                    animation: damageFloat 1s ease-out forwards;
+                `;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 1000);
+            },
+            
+            // 动画循环
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // 更新粒子
+                this.particles = this.particles.filter(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life -= p.decay;
+                    p.vy += 0.2; // 重力
+                    
+                    if (p.life > 0) {
+                        this.ctx.save();
+                        this.ctx.globalAlpha = p.life;
+                        this.ctx.fillStyle = p.color;
+                        this.ctx.beginPath();
+                        this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        this.ctx.fill();
+                        this.ctx.restore();
+                        return true;
+                    }
+                    return false;
+                });
+                
+                requestAnimationFrame(() => this.animate());
+            }
+        };
+        
+        // 启动Canvas特效系统
+        BattleEffects.init();
         
         // ==================== 启动 ====================
         init();
