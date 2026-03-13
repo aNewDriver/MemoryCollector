@@ -1,9 +1,12 @@
 /**
  * 战斗系统核心
  * 回合制战斗逻辑
+ * 集成音效和视觉特效
  */
 
 import { CardInstance, Stats, EffectType, TargetType, checkElementAdvantage, getTeamElementBonus, ElementType } from '../data/CardData';
+import { audioManager, SFXType } from '../audio/AudioManager';
+import { effectManager, EffectManager, FloatTextType } from '../effects/EffectManager';
 
 // 战斗单位（运行时的卡牌实例）
 export interface BattleUnit {
@@ -314,6 +317,19 @@ export class BattleSystem {
         unit.currentHp -= damage;
         unit.damageTaken += damage;
         
+        // ===== 音效和特效触发 =====
+        // 播放伤害音效
+        audioManager.playSFX(SFXType.DAMAGE_HIT);
+        
+        // 播放暴击音效（如果是暴击伤害）
+        if (source === 'crit') {
+            audioManager.playSFX(SFXType.DAMAGE_CRIT);
+        }
+        
+        // TODO: 调用EffectManager显示伤害数字和特效
+        // effectManager.showDamageNumber(...)
+        // effectManager.playHitEffect(...)
+        
         this.emit(BattleEventType.DAMAGE, {
             target: unit.instanceId,
             damage: damage,
@@ -332,6 +348,14 @@ export class BattleSystem {
     private applyHeal(unit: BattleUnit, amount: number, source: string): void {
         unit.currentHp = Math.min(unit.currentHp + amount, unit.maxHp);
         unit.healingDone += amount;
+        
+        // ===== 音效和特效触发 =====
+        // 播放治疗音效
+        audioManager.playSFX(SFXType.HEAL);
+        
+        // TODO: 调用EffectManager显示治疗数字和特效
+        // effectManager.showDamageNumber(..., FloatTextType.HEAL)
+        // effectManager.playHealEffect(...)
         
         this.emit(BattleEventType.HEAL, {
             target: unit.instanceId,
