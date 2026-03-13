@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "memory-collector-demo",
+  "builds": [
+    {
+      "src": "mobile-demo/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/mobile-demo/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/mobile-demo/index.html"
+    }
+  ]
+}
