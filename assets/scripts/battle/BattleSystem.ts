@@ -4,9 +4,11 @@
  * 集成音效和视觉特效
  */
 
-import { CardInstance, Stats, EffectType, TargetType, checkElementAdvantage, getTeamElementBonus, ElementType } from '../data/CardData';
+import { CardInstance, Stats, EffectType, TargetType, checkElementAdvantage, getTeamElementBonus, ElementType, SkillData } from '../data/CardData';
 import { audioManager, SFXType } from '../audio/AudioManager';
 import { effectManager, EffectManager, FloatTextType } from '../effects/EffectManager';
+import { SkillSystem, SkillResult } from '../skill/SkillSystem';
+import { getSkill } from '../skill/SkillDatabase';
 
 // 战斗单位（运行时的卡牌实例）
 export interface BattleUnit {
@@ -222,21 +224,45 @@ export class BattleSystem {
         }
     }
     
-    // 执行行动
-    public executeAction(unitId: string, skillId: string, targetIds: string[]): void {
+    // 执行行动（使用技能系统）
+    public executeAction(unitId: string, skillId: string, targetIds: string[]): SkillResult | null {
         const unit = this.units.find(u => u.instanceId === unitId);
-        if (!unit || unit.isDead || unit.isStunned) return;
+        if (!unit || unit.isDead || unit.isStunned) return null;
+        
+        // 获取技能数据
+        const skill = getSkill(skillId);
+        if (!skill) {
+            console.error(`[BattleSystem] 技能不存在: ${skillId}`);
+            return null;
+        }
+        
+        // 检查技能是否可用
+        if (!SkillSystem.isSkillAvailable(unit, skill)) {
+            console.warn(`[BattleSystem] 技能不可用: ${skillId}`);
+            return null;
+        }
         
         this.emit(BattleEventType.ACTION_START, { unit: unitId, skill: skillId });
         
-        // 获取技能数据并执行
-        // TODO: 从CardDatabase获取技能详情并处理效果
+        // 获取目标单位
+        const targets = this.units.filter(u => targetIds.includes(u.instanceId));
         
+        // 使用技能系统执行技能
+        const result = SkillSystem.executeSkill(unit, skill, targets, this.units);
+        
+        // 消耗能量
+        unit.currentEnergy -= skill.cost;
+        
+        // 触发事件
         this.emit(BattleEventType.SKILL_CAST, {
             caster: unitId,
             skill: skillId,
-            targets: targetIds
+            targets: targetIds,
+            result: result
         });
+        
+        // 播放特效和音效
+        this.playSkillEffects(result, targets);
         
         // 检查战斗是否结束
         this.checkBattleEnd();
@@ -244,6 +270,46 @@ export class BattleSystem {
         // 下一回合
         if (this.state === BattleState.IN_PROGRESS) {
             this.nextTurn();
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 播放技能特效
+     */
+    private playSkillEffects(result: SkillResult, targets: BattleUnit[]): void {
+        // 播放技能音效
+        audioManager.playSFX(SFXType.SKILL_CAST);
+        
+        // 处理每个目标的效果
+        for (const targetResult of result.targets) {
+            const target = targets.find(t => t.instanceId === targetResult.targetId);
+            if (!target) continue;
+            
+            // 伤害飘字
+            if (targetResult.damage && targetResult.damage > 0) {
+                if (targetResult.isCrit) {
+                    audioManager.playSFX(SFXType.DAMAGE_CRIT);
+                } else {
+                    audioManager.playSFX(SFXType.DAMAGE_HIT);
+                }
+                // TODO: 调用EffectManager显示伤害飘字
+            }
+            
+            // 治疗飘字
+            if (targetResult.heal && targetResult.heal > 0) {
+                audioManager.playSFX(SFXType.HEAL);
+                // TODO: 调用EffectManager显示治疗飘字
+            }
+            
+            // Buff/Debuff特效
+            if (targetResult.buffsApplied && targetResult.buffsApplied.length > 0) {
+                audioManager.playSFX(SFXType.BUFF);
+            }
+            if (targetResult.debuffsApplied && targetResult.debuffsApplied.length > 0) {
+                audioManager.playSFX(SFXType.DEBUFF);
+            }
         }
     }
     

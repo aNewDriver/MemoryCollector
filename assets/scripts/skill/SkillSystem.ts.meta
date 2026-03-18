@@ -1,0 +1,19 @@
+/**
+ * SkillSystem.ts.meta
+ * Cocos Creator 技能系统元数据文件
+ */
+
+export const meta = {
+    "ver": "1.0.0",
+    "importer": "typescript",
+    "imported": true,
+    "uuid": "skill-system-001",
+    "files": [
+        ".js",
+        ".trans"
+    ],
+    "subMetas": {},
+    "userData": {
+        "module": true
+    }
+};
